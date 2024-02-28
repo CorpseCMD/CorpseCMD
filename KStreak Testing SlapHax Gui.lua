@@ -14,7 +14,7 @@ local drop = Instance.new("TextButton")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
+ScreenGui.ResetOnSpawn = false
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(168, 168, 168)
 Frame.BackgroundTransparency = 0.750
@@ -120,13 +120,15 @@ local function BQOQVJO_fake_script() -- Frame.LocalScript
 				local char = plr.Character or plr.CharacterAdded:Wait()
 				if char and char:FindFirstChild("Head") then
 					task.wait(0.52)
-					local ogCF = char.HumanoidRootPart.CFrame
-					char:MoveTo(Vector3.new(0,999,9999))
-					task.wait(plr:GetNetworkPing()*1.1 + 0.5)
-					dropSlaps:FireServer(plr.leaderstats.Slaps.Value - math.random(120,15000))
-					task.wait(plr:GetNetworkPing()*1.1 + 0.5)
-					char:PivotTo(ogCF)
-					task.wait(1)
+					if slaps.Value > 50000 or slaps.Value < 10 then
+						local ogCF = char.HumanoidRootPart.CFrame
+						char:MoveTo(Vector3.new(0,999,9999))
+						task.wait(plr:GetNetworkPing()*1.1 + 0.5)
+						dropSlaps:FireServer(plr.leaderstats.Slaps.Value - math.random(120,15000))
+						task.wait(plr:GetNetworkPing()*1.1 + 0.5)
+						char:PivotTo(ogCF)
+						task.wait(1)
+					end
 				end
 			end
 		end
