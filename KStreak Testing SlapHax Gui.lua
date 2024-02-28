@@ -1,20 +1,14 @@
--- Gui to Lua
--- Version: 3.6
-
--- Instances:
-
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
 local set = Instance.new("TextButton")
 local auto = Instance.new("TextButton")
 local drop = Instance.new("TextButton")
-
--- Properties:
+local dropam = Instance.new("TextBox")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false
+
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(168, 168, 168)
 Frame.BackgroundTransparency = 0.750
@@ -28,7 +22,7 @@ TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextBox.BorderSizePixel = 0
 TextBox.Position = UDim2.new(0.0591900311, 0, 0.0714286193, 0)
-TextBox.Size = UDim2.new(0, 200, 0, 50)
+TextBox.Size = UDim2.new(0, 151, 0, 50)
 TextBox.Font = Enum.Font.SourceSans
 TextBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 TextBox.PlaceholderText = "Amount"
@@ -78,12 +72,29 @@ drop.TextScaled = true
 drop.TextSize = 14.000
 drop.TextWrapped = true
 
+dropam.Name = "dropam"
+dropam.Parent = Frame
+dropam.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+dropam.BorderColor3 = Color3.fromRGB(0, 0, 0)
+dropam.BorderSizePixel = 0
+dropam.Position = UDim2.new(0.557632387, 0, 0.0714286193, 0)
+dropam.Size = UDim2.new(0, 123, 0, 50)
+dropam.Font = Enum.Font.SourceSans
+dropam.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
+dropam.PlaceholderText = "How many bundles of slaps to drop? 2 bundles of 5 = 10 slaps total"
+dropam.Text = ""
+dropam.TextColor3 = Color3.fromRGB(0, 0, 0)
+dropam.TextScaled = true
+dropam.TextSize = 14.000
+dropam.TextWrapped = true
+
 -- Scripts:
 
-local function BQOQVJO_fake_script() -- Frame.LocalScript 
+local function XZWSVIC_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	local tb = script.Parent.TextBox
+	local amountToDrop = script.Parent.dropam
 	local dropSlaps:RemoteEvent = game.ReplicatedStorage:FindFirstChild("DropSlaps")
 	local plr = game.Players.LocalPlayer
 	if dropSlaps then
@@ -93,11 +104,13 @@ local function BQOQVJO_fake_script() -- Frame.LocalScript
 				local ogCF = char.HumanoidRootPart.CFrame
 				char:MoveTo(Vector3.new(0,999,9999))
 				task.wait(plr:GetNetworkPing()*1.1 + 0.5)
-				dropSlaps:FireServer((tonumber(tb.Text) or 0) * -1)
+				dropSlaps:FireServer((tonumber(tb.Text) or 0) * -1 * (tonumber(amountToDrop.Text) or 1))
 				task.wait(0.1)
 				char:PivotTo(ogCF)
 				task.wait(plr:GetNetworkPing()*1.1 + 0.4)
-				dropSlaps:FireServer(tonumber(tb.Text) or 0)
+				for i=1,tonumber(amountToDrop.Text) or 1 do
+					dropSlaps:FireServer(tonumber(tb.Text) or 0)
+				end
 			end
 		end)
 		script.Parent.set.MouseButton1Click:Connect(function()
@@ -119,7 +132,7 @@ local function BQOQVJO_fake_script() -- Frame.LocalScript
 			if slaps.Value > 50000 or slaps.Value < 10 then
 				local char = plr.Character or plr.CharacterAdded:Wait()
 				if char and char:FindFirstChild("Head") then
-					task.wait(0.52)
+					task.wait(0.55)
 					if slaps.Value > 50000 or slaps.Value < 10 then
 						local ogCF = char.HumanoidRootPart.CFrame
 						char:MoveTo(Vector3.new(0,999,9999))
@@ -134,4 +147,4 @@ local function BQOQVJO_fake_script() -- Frame.LocalScript
 		end
 	end
 end
-coroutine.wrap(BQOQVJO_fake_script)()
+coroutine.wrap(XZWSVIC_fake_script)()
