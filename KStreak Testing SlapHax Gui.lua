@@ -8,7 +8,7 @@ local dropam = Instance.new("TextBox")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
+ScreenGui.ResetOnSpawn = false
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(168, 168, 168)
 Frame.BackgroundTransparency = 0.750
