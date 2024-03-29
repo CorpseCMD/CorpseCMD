@@ -107,7 +107,7 @@ PingPongBallScriptGui.Frame.TextButton.MouseButton1Click:Connect(function()
 		local db = false
 		pingpongBall.CanCollide = true
 		game.Workspace.CurrentCamera.CameraSubject = pingpongBall
-		while pingpongBall and char and hum and hum.Health > 0 and hum.RootPart do
+		while enabled and pingpongBall and char and hum and hum.Sit and hum.Health > 0 and hum.RootPart do
 			local Direction = hum.RootPart.AssemblyLinearVelocity.Unit * Vector3.new(1,0,1)
 			hum.RootPart.AssemblyAngularVelocity = Vector3.new(math.random(-100,100),math.random(-100,100),math.random(-100,100)) * 5
 			hum.RootPart.AssemblyLinearVelocity = Direction * (tonumber(PingPongBallScriptGui.Frame.TextBox.Text) or 25)
