@@ -12,12 +12,13 @@ PingPongBallScriptGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui"
 PingPongBallScriptGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 PingPongBallScriptGui.ResetOnSpawn = false
 
+Frame.Draggable = true
 Frame.Parent = PingPongBallScriptGui
 Frame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.130937099, 0, 0.528384268, 0)
-Frame.Size = UDim2.new(0, 159, 0, 147)
+Frame.Size = UDim2.new(0, 159, 0, 177)
 
 TextButton.Parent = Frame
 TextButton.BackgroundColor3 = Color3.fromRGB(127, 127, 127)
@@ -32,7 +33,7 @@ TextButton.TextScaled = true
 TextButton.TextSize = 14.000
 TextButton.TextWrapped = true
 
-UICorner.CornerRadius = UDim.new(0.100000001, 0)
+UICorner.CornerRadius = UDim.new(0.1, 0)
 UICorner.Parent = TextButton
 
 TextBox.Parent = Frame
@@ -49,7 +50,7 @@ TextBox.TextScaled = true
 TextBox.TextSize = 14.000
 TextBox.TextWrapped = true
 
-UICorner_2.CornerRadius = UDim.new(0.100000001, 0)
+UICorner_2.CornerRadius = UDim.new(0.1, 0)
 UICorner_2.Parent = TextBox
 
 TextLabel.Parent = Frame
@@ -66,11 +67,8 @@ TextLabel.TextScaled = true
 TextLabel.TextSize = 14.000
 TextLabel.TextWrapped = true
 
-UICorner_3.CornerRadius = UDim.new(0.100000001, 0)
+UICorner_3.CornerRadius = UDim.new(0.1, 0)
 UICorner_3.Parent = Frame
-
-
-PingPongBallScriptGui.Frame.TextButton.Draggable = true
 
 local enabled = false
 
@@ -79,6 +77,7 @@ local OG_GRAVITY = game.Workspace.Gravity
 PingPongBallScriptGui.Frame.TextButton.MouseButton1Click:Connect(function()
 	enabled = not enabled
 	if enabled then
+		TextButton.Text = "Ping Pong Mode: On"
 		local char = plr.Character or plr.CharacterAdded:Wait()
 		local hum = char:FindFirstChildOfClass("Humanoid")
 		if not char or not hum or not hum.RootPart or hum.Health <= 0 then enabled = false return end
@@ -107,21 +106,33 @@ PingPongBallScriptGui.Frame.TextButton.MouseButton1Click:Connect(function()
 		local db = false
 		pingpongBall.CanCollide = true
 		game.Workspace.CurrentCamera.CameraSubject = pingpongBall
+		pingpongBall.Touched:Connect(function(hit)
+			local hitChar = hit.Parent
+			local hitHum = hitChar:FindFirstChildOfClass("Humanoid")
+			if hitChar and hitHum then
+				local dir = (hitHum.RootPart.Position - hum.RootPart.Position).Unit
+				hum.RootPart.AssemblyLinearVelocity = dir * (tonumber(PingPongBallScriptGui.Frame.TextBox.Text) or 25) * Vector3.new(-1,0,-1)
+			end
+		end)
 		while enabled and pingpongBall and char and hum and hum.Sit and hum.Health > 0 and hum.RootPart do
 			local Direction = hum.RootPart.AssemblyLinearVelocity.Unit * Vector3.new(1,0,1)
-			hum.RootPart.AssemblyAngularVelocity = Vector3.new(math.random(-100,100),math.random(-100,100),math.random(-100,100)) * 5
-			hum.RootPart.AssemblyLinearVelocity = Direction * (tonumber(PingPongBallScriptGui.Frame.TextBox.Text) or 25)
+			hum.RootPart.AssemblyAngularVelocity = Vector3.new(0,10,0)
+			hum.RootPart.AssemblyLinearVelocity = Direction * (tonumber(PingPongBallScriptGui.Frame.TextBox.Text) or 16)
 			task.wait(.05)
 		end
-		
+		hum.RootPart.AssemblyAngularVelocity = Vector3.zero
 	else
+		TextButton.Text = "Ping Pong Mode: Off"
 		local char = plr.Character or plr.CharacterAdded:Wait()
 		local hum = char:FindFirstChildOfClass("Humanoid")
 		local pingpongBall = char:FindFirstChild("pingpongBall_CorpseCMD")
 		if pingpongBall then pingpongBall:Destroy() game.Workspace.CurrentCamera.CameraSubject = hum end
 		game.Workspace.Gravity = OG_GRAVITY or 196.2
 		hum.Sit = false
-		hum:ChangeState(Enum.HumanoidStateType.Running)
+		for i=1,10 do
+			task.wait(0.1)
+			hum:ChangeState(Enum.HumanoidStateType.Running)
+		end
 	end
 end)
 
