@@ -16,7 +16,7 @@ local UIStroke = Instance.new("UIStroke")
 local HIDE = Instance.new("TextButton")
 
 SlapHax.Name = "SlapHax"
-SlapHax.Parent = game.StarterGui.Other stuff
+SlapHax.Parent = game.Players.LocalPlayer.PlayerGui
 SlapHax.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Frame.Parent = SlapHax
