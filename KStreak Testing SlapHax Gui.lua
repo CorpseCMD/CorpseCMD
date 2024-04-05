@@ -1,3 +1,8 @@
+--[[
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/main/KStreak%20Testing%20SlapHax%20Gui.lua"))()
+
+]]
 local SlapHax = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
