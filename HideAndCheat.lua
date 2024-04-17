@@ -53,7 +53,7 @@ local function code()
 	elseif GetChar() and GetChar():FindFirstChildOfClass("Model") then
 		local char = GetChar()
 		char.PrimaryPart.Position += Vector3.new(0,40,0)
-		game:GetService("TweenService"):Create(char.PrimaryPart,TweenInfo.new(0.4,Enum.EasingStyle.Linear,Enum.EasingDirection.In,-1,true),{Position = char.PrimaryPart.Position + Vector3.new(50,0,0)}):Play()
+		game:GetService("TweenService"):Create(char.PrimaryPart,TweenInfo.new(0.25,Enum.EasingStyle.Linear,Enum.EasingDirection.In,-1,true),{Position = char.PrimaryPart.Position + Vector3.new(150,0,0)}):Play()
 		local part = Instance.new("Part")
 		part.Size = Vector3.new(1000,1,1000)
 		part.Parent = workspace
