@@ -111,6 +111,7 @@ task.spawn(function()
 	while true do
 		task.wait(0.255)
 		if GiveSlapAuraEnabled then
+			print("yezzers")
 			local tplr:Player = gplr(SlapTarget or 'me') or plr
 			local tchar:Model = tplr and tplr.Character
 			if tchar then
@@ -123,7 +124,6 @@ task.spawn(function()
 						local hrp2 = hum and hum.RootPart
 						if not hrp2 then task.wait() continue end
 						local dist = (hrp.Position - hrp2.Position).Magnitude
-						print(tchar2.Name .. " Distance: " .. dist)
 						if dist <= SlapAuraRange then
 							slap(tplr2.Name)
 						end
