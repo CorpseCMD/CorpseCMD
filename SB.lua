@@ -109,6 +109,7 @@ end
 task.spawn(function()
 	while true do
 		task.wait(0.255)
+		print(tostring(GiveSlapAuraEnabled).." ENABLED | RANGE "..tostring(SlapAuraRange))
 		if GiveSlapAuraEnabled then
 			local tplr:Player = gplr(SlapTarget or 'me') or plr
 			local tchar:Model = tplr and tplr.Character
@@ -182,7 +183,7 @@ Tab1:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		GiveSlapAuraEnabled = Value
-		print("SLAP AURA:"..GiveSlapAuraEnabled)
+		print("SLAP AURA:"..tostring(GiveSlapAuraEnabled))
 	end    
 })
 
@@ -205,7 +206,7 @@ Tab1:AddSlider({
 	ValueName = "target's slap aura range",
 	Callback = function(Value)
 		SlapAuraRange = Value
-		print("Range: "..SlapAuraRange)
+		print("Range: "..tostring(SlapAuraRange))
 	end    
 })
 
