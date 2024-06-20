@@ -111,7 +111,8 @@ task.spawn(function()
 		task.wait(0.255)
 		print(tostring(GiveSlapAuraEnabled).." ENABLED | RANGE "..tostring(SlapAuraRange))
 		if GiveSlapAuraEnabled then
-			local tplr:Player = gplr(SlapTarget or 'me') or plr
+			local tplr:Player = gplr(SlapTarget)
+			print(tplr and tplr.Name or "No player found!")
 			local tchar:Model = tplr and tplr.Character
 			if tchar then
 				print("character found!!!!!")
