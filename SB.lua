@@ -41,7 +41,6 @@ local function gplr(Name)
 		warn("Plyer not found")
 		RESULT = {plr};
 	end
-	print("[Plr Search] Input: "..Name..". Output: ",RESULT)
 	return RESULT
 end
 
@@ -111,7 +110,6 @@ task.spawn(function()
 	while true do
 		task.wait(0.255)
 		if GiveSlapAuraEnabled then
-			print("yezzers")
 			local tplr:Player = gplr(SlapTarget or 'me') or plr
 			local tchar:Model = tplr and tplr.Character
 			if tchar then
@@ -144,7 +142,7 @@ local KickSection = Tab1:AddSection({
 })
 
 local KickTextbox = Tab1:AddTextbox({
-	Name = "Player to kick (others, all, and random work)",
+	Name = "Player to kick",
 	Default = "others",
 	TextDisappear = false,
 	Callback = function(Value)
@@ -165,8 +163,8 @@ local SlapSection = Tab1:AddSection({
 })
 
 Tab1:AddTextbox({
-	Name = "Player to slap / Target slap to give slap aura (others, all, and random work)",
-	Default = "others",
+	Name = "Player to slap / Target slap to give slap aura",
+	Default = "",
 	TextDisappear = false,
 	Callback = function(Value)
 		SlapTarget = Value
@@ -184,6 +182,7 @@ Tab1:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		GiveSlapAuraEnabled = Value
+		print("SLAP AURA:"..GiveSlapAuraEnabled)
 	end    
 })
 
@@ -206,6 +205,7 @@ Tab1:AddSlider({
 	ValueName = "target's slap aura range",
 	Callback = function(Value)
 		SlapAuraRange = Value
+		print("Range: "..SlapAuraRange)
 	end    
 })
 
