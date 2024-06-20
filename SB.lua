@@ -115,9 +115,9 @@ task.spawn(function()
 				local hrp = hum.RootPart
 				for i,tplr2 in Players:GetPlayers() do
 					local tchar2 = tplr2.Character
-					if tchar2 and tplr2 ~= tplr then
+					if tchar2 and tplr2 ~= tplr and tplr2 ~= plr then
 						local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
-						local hrp2 = hum and hum.RootPart
+						local hrp2 = hum2 and hum2.RootPart
 						if not hrp2 then task.wait() continue end
 						local dist = (hrp.Position - hrp2.Position).Magnitude
 						print("DISTANCE BETWEEN ".. tchar2.Name .. " AND "..tchar.Name..": "..dist)
