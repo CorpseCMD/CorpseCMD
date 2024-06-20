@@ -120,7 +120,7 @@ task.spawn(function()
 						if dist <= SlapAuraRange then
 							local lchar = plr.Character
 							if lchar then
-								lchar:PivotTo(lchar:GetPivot().Position * tchar:GetPivot().Rotation)
+								lchar:PivotTo(CFrame.new(lchar:GetPivot().Position) * tchar:GetPivot().Rotation)
 							end
 							slap(tplr2.Name)
 						end
