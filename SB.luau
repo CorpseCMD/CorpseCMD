@@ -1,9 +1,8 @@
-
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Skibidi Sigma menu Slap battles", HidePremium = false, SaveConfig = true, ConfigFolder = "CorpseCMD_SB"})
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB"})
 local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
-
+task.wait()
 local KickTarget = ""
 local SlapTarget = ""
 
