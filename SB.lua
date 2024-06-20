@@ -38,7 +38,6 @@ local function gplr(Name)
 
 
 	else
-		warn("Plyer not found")
 		RESULT = {plr};
 	end
 	return RESULT
@@ -118,8 +117,11 @@ task.spawn(function()
 						local hrp2 = hum2 and hum2.RootPart
 						if not hrp2 then task.wait() continue end
 						local dist = (hrp.Position - hrp2.Position).Magnitude
-						print("DISTANCE BETWEEN ".. tchar2.Name .. " AND "..tchar.Name..": "..dist)
 						if dist <= SlapAuraRange then
+							local lchar = plr.Character
+							if lchar then
+								lchar:PivotTo(lchar:GetPivot().Position * tchar:GetPivot().Rotation)
+							end
 							slap(tplr2.Name)
 						end
 					end
@@ -179,7 +181,6 @@ Tab1:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		GiveSlapAuraEnabled = Value
-		print("SLAP AURA:"..tostring(GiveSlapAuraEnabled))
 	end    
 })
 
@@ -202,7 +203,6 @@ Tab1:AddSlider({
 	ValueName = "target's slap aura range",
 	Callback = function(Value)
 		SlapAuraRange = Value
-		print("Range: "..tostring(SlapAuraRange))
 	end    
 })
 
