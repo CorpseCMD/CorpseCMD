@@ -179,7 +179,7 @@ Tab1:AddToggle({
 	Name = "Give target Slap aura",
 	Default = false,
 	Callback = function(Value)
-		
+		GiveSlapAuraEnabled = Value
 	end    
 })
 
