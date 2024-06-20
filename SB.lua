@@ -105,7 +105,8 @@ task.spawn(function()
 	while OrionLib do
 		task.wait(0.255)
 		if GiveSlapAuraEnabled then
-			local tplr:Player = gplr(SlapTarget)
+			local tplrLIST:Player = gplr(SlapTarget)
+			local tplr = tplrLIST and tplrLIST[1]
 			print(tplr and tplr.Name or "No player found! TARGET NAME: "..SlapTarget)
 			local tchar:Model = tplr and tplr.Character
 			if tchar then
