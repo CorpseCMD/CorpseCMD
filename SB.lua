@@ -107,13 +107,14 @@ local function kick(targetName)
 end
 
 task.spawn(function()
-	while true do
+	while OrionLib do
 		task.wait(0.255)
 		print(tostring(GiveSlapAuraEnabled).." ENABLED | RANGE "..tostring(SlapAuraRange))
 		if GiveSlapAuraEnabled then
 			local tplr:Player = gplr(SlapTarget or 'me') or plr
 			local tchar:Model = tplr and tplr.Character
 			if tchar then
+				print("character found!!!!!")
 				local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
 				local hrp = hum.RootPart
 				for i,tplr2 in Players:GetPlayers() do
@@ -123,6 +124,7 @@ task.spawn(function()
 						local hrp2 = hum and hum.RootPart
 						if not hrp2 then task.wait() continue end
 						local dist = (hrp.Position - hrp2.Position).Magnitude
+						print("DISTANCE BETWEEN ".. tchar2.Name .. " AND "..tchar.Name..": "..dist)
 						if dist <= SlapAuraRange then
 							slap(tplr2.Name)
 						end
@@ -208,6 +210,13 @@ Tab1:AddSlider({
 		SlapAuraRange = Value
 		print("Range: "..tostring(SlapAuraRange))
 	end    
+})
+
+Tab1:AddButton({
+	Name = "Destroy GUI",
+	Callback = function()
+		OrionLib:Destroy()
+	end
 })
 
 
