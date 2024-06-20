@@ -47,6 +47,7 @@ end
 
 local SlapDebounce = false
 local function slap(targetName)
+	if game.Players.LocalPlayer.leaderstats.Glove.Value ~= "Slapstick" then return end
 	if SlapDebounce then return end
 	if game:GetService("RunService"):IsStudio() then
 		warn("hit "..targetName)
@@ -79,6 +80,7 @@ end
 
 local kickDebounce = false
 local function kick(targetName)
+	if game.Players.LocalPlayer.leaderstats.Glove.Value ~= "Grab" then return end
 	if kickDebounce then return end
 	game.Workspace.Lobby.Teleport3.CanTouch = false
 	local cf = CFrame.new(
@@ -118,9 +120,11 @@ task.spawn(function()
 					local tchar2 = tplr2.Character
 					if tchar2 and tplr2 ~= tplr then
 						local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
-						local hrp2 = hum.RootPart
+						local hrp2 = hum and hum.RootPart
+						if not hrp2 then task.wait() continue end
 						local dist = (hrp.Position - hrp2.Position).Magnitude
-						if dist < SlapAuraRange then
+						print(tchar2.Name .. " Distance: " .. dist)
+						if dist <= SlapAuraRange then
 							slap(tplr2.Name)
 						end
 					end
