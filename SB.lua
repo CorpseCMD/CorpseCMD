@@ -5,7 +5,8 @@ local plr = Players.LocalPlayer
 task.wait()
 local KickTarget = ""
 local SlapTarget = ""
-
+local SlapAuraRange = 5
+local GiveSlapAuraEnabled = false
 local function gplr(Name)	
 	Name = string.lower(Name)
 	local RESULT = {}
@@ -47,7 +48,11 @@ end
 local SlapDebounce = false
 local function slap(targetName)
 	if SlapDebounce then return end
-	game.Workspace.Lobby.Teleport3.CanTouch = false
+	if game:GetService("RunService"):IsStudio() then
+		warn("hit "..targetName)
+		return
+	end
+ 	game.Workspace.Lobby.Teleport3.CanTouch = false
 	local cf = CFrame.new(
 		-802.534302, 329.025208, -15.8892279, 0.826691329, 0.00422354275, 0.562639832, -1.31318484e-05, 0.999971986, -0.00748713268, -0.562655687, 0.00618215278, 0.826668262	)
 	local char = plr.Character
@@ -100,6 +105,28 @@ local function kick(targetName)
 	end
 end
 
+while true do
+	task.wait(0.255)
+	if GiveSlapAuraEnabled then
+		local tplr:Player = gplr(SlapTarget or 'me') or plr
+		local tchar:Model = tplr and tplr.Character
+		if tchar then
+			local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
+			local hrp = hum.RootPart
+			for i,tplr2 in Players:GetPlayers() do
+				local tchar2 = tplr2.Character
+				if tchar2 and tplr2 ~= tplr then
+					local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
+					local hrp2 = hum.RootPart
+					local dist = (hrp.Position - hrp2.Position).Magnitude
+					if dist < SlapAuraRange then
+						slap(tplr2.Name)
+					end
+				end
+			end
+		end
+	end
+end
 
 local Tab1 = Window:MakeTab({
 	Name = "Specific gloves",
@@ -132,7 +159,7 @@ local SlapSection = Tab1:AddSection({
 })
 
 Tab1:AddTextbox({
-	Name = "Player to slap (others, all, and random work)",
+	Name = "Player to slap / Target slap to give slap aura (others, all, and random work)",
 	Default = "others",
 	TextDisappear = false,
 	Callback = function(Value)
@@ -145,6 +172,15 @@ Tab1:AddButton({
 		slap(SlapTarget)
 	end    
 })
+
+Tab1:AddToggle({
+	Name = "Give target Slap aura",
+	Default = false,
+	Callback = function(Value)
+		
+	end    
+})
+
 Tab1:AddBind({
 	Name = "Slap player Keybind",
 	Default = Enum.KeyCode.Q,
@@ -154,6 +190,18 @@ Tab1:AddBind({
 	end    
 })
 
+Tab1:AddSlider({
+	Name = "Slap aura range",
+	Min = 5,
+	Max = 50,
+	Default = 5,
+	Color = Color3.fromRGB(0, 175, 255),
+	Increment = 1,
+	ValueName = "target's slap aura range",
+	Callback = function(Value)
+		SlapAuraRange = Value
+	end    
+})
 
 
 OrionLib:Init()
