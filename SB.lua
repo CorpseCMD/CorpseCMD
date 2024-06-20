@@ -107,10 +107,8 @@ task.spawn(function()
 		if GiveSlapAuraEnabled then
 			local tplrLIST = gplr(SlapTarget) or {nil}
 			local tplr:Player = tplrLIST[1]
-			print(tplr and tplr.Name or "No player found! LIST: "..tplrLIST)
 			local tchar:Model = tplr and tplr.Character
 			if tchar then
-				print("character found!!!!!")
 				local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
 				local hrp = hum.RootPart
 				for i,tplr2 in Players:GetPlayers() do
