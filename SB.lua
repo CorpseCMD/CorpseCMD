@@ -105,6 +105,31 @@ local function kick(targetName)
 	end
 end
 
+task.spawn(function()
+	while true do
+		task.wait(0.255)
+		if GiveSlapAuraEnabled then
+			local tplr:Player = gplr(SlapTarget or 'me') or plr
+			local tchar:Model = tplr and tplr.Character
+			if tchar then
+				local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
+				local hrp = hum.RootPart
+				for i,tplr2 in Players:GetPlayers() do
+					local tchar2 = tplr2.Character
+					if tchar2 and tplr2 ~= tplr then
+						local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
+						local hrp2 = hum.RootPart
+						local dist = (hrp.Position - hrp2.Position).Magnitude
+						if dist < SlapAuraRange then
+							slap(tplr2.Name)
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+
 local Tab1 = Window:MakeTab({
 	Name = "Specific gloves",
 	Icon = "rbxassetid://15395916398",
@@ -182,26 +207,3 @@ Tab1:AddSlider({
 
 
 OrionLib:Init()
-
-while true do
-	task.wait(0.255)
-	if GiveSlapAuraEnabled then
-		local tplr:Player = gplr(SlapTarget or 'me') or plr
-		local tchar:Model = tplr and tplr.Character
-		if tchar then
-			local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
-			local hrp = hum.RootPart
-			for i,tplr2 in Players:GetPlayers() do
-				local tchar2 = tplr2.Character
-				if tchar2 and tplr2 ~= tplr then
-					local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
-					local hrp2 = hum.RootPart
-					local dist = (hrp.Position - hrp2.Position).Magnitude
-					if dist < SlapAuraRange then
-						slap(tplr2.Name)
-					end
-				end
-			end
-		end
-	end
-end
