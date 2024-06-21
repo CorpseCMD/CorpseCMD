@@ -148,7 +148,7 @@ Tab1:AddButton({
 	Callback = function()
 		local char:Model = plr.Character
 		local isInArena = char and char:FindFirstChild("isInArena")
-		if char and (not isInArena and not isInArena.Value) then
+		if char and (not isInArena or not isInArena.Value) then
 			local OGlove = game.Players.LocalPlayer.leaderstats.Glove.Value
 			fireclickdetector(workspace.Lobby.Ghost.ClickDetector)
 			game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
@@ -175,7 +175,7 @@ Tab1:AddButton({
 	Callback = function()
 		local char:Model = plr.Character
 		local isInArena = char and char:FindFirstChild("isInArena")
-		if char and (not isInArena and not isInArena.Value) then
+		if char and (not isInArena or not isInArena.Value) then
 			fireclickdetector(workspace.Lobby["Grab"].ClickDetector)
 		end
 	end    
@@ -242,7 +242,7 @@ Tab1:AddButton({
 	Callback = function()
 		local char:Model = plr.Character
 		local isInArena = char and char:FindFirstChild("isInArena")
-		if char and (not isInArena and not isInArena.Value) then
+		if char and (not isInArena or not isInArena.Value) then
 			fireclickdetector(workspace.Lobby["Slapstick"].ClickDetector)
 		end
 	end    
