@@ -1,5 +1,9 @@
+local DISABLE_SCRIPT = false
 local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB"})
+local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
+	DISABLE_SCRIPT = true
+	OrionLib:Destroy()
+end,})
 local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
 task.wait()
@@ -7,7 +11,8 @@ local KickTarget = ""
 local SlapTarget = ""
 local SlapAuraRange = 5
 local GiveSlapAuraEnabled = false
-local function gplr(Name)	
+local function gplr(Name)
+	if DISABLE_SCRIPT then return end
 	Name = string.lower(Name)
 	local RESULT = {}
 	if Name == "all" or Name == "others" then
@@ -46,7 +51,7 @@ end
 local SlapDebounce = false
 local function slap(targetName)
 	if game.Players.LocalPlayer.leaderstats.Glove.Value ~= "Slapstick" then return end
-	if SlapDebounce then return end
+	if SlapDebounce or DISABLE_SCRIPT then return end
 	local cf = CFrame.new(
 		-802.534302, 329.025208, -15.8892279, 0.826691329, 0.00422354275, 0.562639832, -1.31318484e-05, 0.999971986, -0.00748713268, -0.562655687, 0.00618215278, 0.826668262	)
 	local char = plr.Character
@@ -74,7 +79,7 @@ end
 local kickDebounce = false
 local function kick(targetName)
 	if game.Players.LocalPlayer.leaderstats.Glove.Value ~= "Grab" then return end
-	if kickDebounce then return end
+	if kickDebounce or DISABLE_SCRIPT then return end
 	game.Workspace.Lobby.Teleport3.CanTouch = false
 	local cf = CFrame.new(
 		-802.534302, 329.025208, -15.8892279, 0.826691329, 0.00422354275, 0.562639832, -1.31318484e-05, 0.999971986, -0.00748713268, -0.562655687, 0.00618215278, 0.826668262	)
@@ -101,25 +106,26 @@ local function kick(targetName)
 end
 
 task.spawn(function()
-	while OrionLib do
+	while not DISABLE_SCRIPT do
 		task.wait(0.255)
 		if GiveSlapAuraEnabled then
 			local tplrLIST = gplr(SlapTarget) or {nil}
 			local tplr:Player = tplrLIST[1]
 			local tchar:Model = tplr and tplr.Character
-			if tchar then
+			local isInArena = tchar and tchar:FindFirstChild("isInArena")
+			if tchar and isInArena and isInArena.Value then
 				local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
-				local hrp = hum.RootPart
+				local hrp = hum and hum.RootPart
 				for i,tplr2 in Players:GetPlayers() do
 					local tchar2 = tplr2.Character
-					if tchar2 and tplr2 ~= tplr and tplr2 ~= plr then
+					if tchar2 and tplr2 ~= tplr and tplr2 ~= plr and hrp then
 						local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
 						local hrp2 = hum2 and hum2.RootPart
 						if not hrp2 then task.wait() continue end
 						local dist = (hrp.Position - hrp2.Position).Magnitude
 						if dist <= SlapAuraRange then
 							local lchar = plr.Character
-							if lchar then
+							if lchar and tchar:GetPivot() then
 								lchar:PivotTo(CFrame.new(lchar:GetPivot().Position) * tchar:GetPivot().Rotation)
 							end
 							slap(tplr2.Name)
@@ -136,6 +142,21 @@ local Tab1 = Window:MakeTab({
 	Icon = "rbxassetid://15395916398",
 	PremiumOnly = false
 })
+
+Tab1:AddButton({
+	Name = "Become Invisible [Lobby]",
+	Callback = function()
+		local char:Model = plr.Character
+		local isInArena = char and char:FindFirstChild("isInArena")
+		if char and (not isInArena and not isInArena.Value) then
+			local OGlove = game.Players.LocalPlayer.leaderstats.Glove.Value
+			fireclickdetector(workspace.Lobby.Ghost.ClickDetector)
+			game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
+			fireclickdetector(workspace.Lobby[OGlove].ClickDetector)
+		end
+	end    
+})
+
 local KickSection = Tab1:AddSection({
 	Name = "1.5 cooldown | Kick [Grab glove]"
 })
@@ -149,6 +170,16 @@ local KickTextbox = Tab1:AddTextbox({
 	end	  
 })
 
+Tab1:AddButton({
+	Name = "Equip Grab [Lobby]",
+	Callback = function()
+		local char:Model = plr.Character
+		local isInArena = char and char:FindFirstChild("isInArena")
+		if char and (not isInArena and not isInArena.Value) then
+			fireclickdetector(workspace.Lobby["Grab"].ClickDetector)
+		end
+	end    
+})
 
 
 Tab1:AddButton({
@@ -196,7 +227,7 @@ Tab1:AddBind({
 Tab1:AddSlider({
 	Name = "Slap aura range",
 	Min = 5,
-	Max = 50,
+	Max = 150,
 	Default = 5,
 	Color = Color3.fromRGB(0, 175, 255),
 	Increment = 1,
@@ -207,8 +238,21 @@ Tab1:AddSlider({
 })
 
 Tab1:AddButton({
+	Name = "Equip SlapStick [Lobby]",
+	Callback = function()
+		local char:Model = plr.Character
+		local isInArena = char and char:FindFirstChild("isInArena")
+		if char and (not isInArena and not isInArena.Value) then
+			fireclickdetector(workspace.Lobby["Slapstick"].ClickDetector)
+		end
+	end    
+})
+
+
+Tab1:AddButton({
 	Name = "Destroy GUI",
 	Callback = function()
+		DISABLE_SCRIPT = true
 		OrionLib:Destroy()
 	end
 })
