@@ -93,13 +93,14 @@ local function kick(targetName)
 	for i, target in targets do
 		local targetChar = target.Character or target.CharacterAdded:Wait()
 		local tpp = targetChar.PrimaryPart
-		if hrp then
+		local tHum = targetChar:FindFirstChildOfClass("Humanoid")
+		if hrp and tpp and tHum and hum then
 			local ogCF = char.PrimaryPart.CFrame
-			char:PivotTo(CFrame.new((tpp.Position - Vector3.new(0,4,0)),tpp.Position + Vector3.new(0,2,0)))
+			char:PivotTo(
+				CFrame.new(tpp.Position + tpp.CFrame.LookVector + tHum.MoveDirection * tHum.WalkSpeed / 6,tpp.Position)
+			)
 			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
-			hrp.Anchored = true
 			task.wait(0.25)
-			hrp.Anchored = false
 			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
 			char:PivotTo(cf)
 			task.wait(0.09)
