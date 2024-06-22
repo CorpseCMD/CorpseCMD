@@ -1,8 +1,11 @@
 local DISABLE_SCRIPT = false
 local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
-	DISABLE_SCRIPT = true
-	OrionLib:Destroy()
+	task.spawn(function()
+		task.wait(1.5)
+		DISABLE_SCRIPT = true
+		OrionLib:Destroy()
+	end)
 end,})
 local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
@@ -86,23 +89,29 @@ local function kick(targetName)
 	local char = plr.Character
 	local hum = char and char:FindFirstChildOfClass("Humanoid")
 	local hrp = hum and hum.RootPart
-	local targets = gplr(targetName or "me") or plr
+	local targets = gplr(KickTarget) or plr
 	for i, target in targets do
-		kickDebounce = true
-		local targetChar:Model = target.Character
-		local isInArena = targetChar:FindFirstChild("isInArena")
-		local la = targetChar:FindFirstChild("Left Arm")
-		if hrp and la and isInArena and isInArena.Value then
-			local args = {
-				[1] = la
-			}
-
-			game:GetService("ReplicatedStorage").GeneralHit:FireServer(unpack(args))
-
+		local targetChar = target.Character or target.CharacterAdded:Wait()
+		local tpp = targetChar.PrimaryPart
+		if hrp then
+			local ogCF = char.PrimaryPart.CFrame
+			char:PivotTo(CFrame.new((tpp.Position - Vector3.new(0,4,0)),tpp.Position + Vector3.new(0,2,0)))
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+			hrp.Anchored = true
+			task.wait(0.25)
+			hrp.Anchored = false
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+			char:PivotTo(cf)
+			task.wait(0.09)
+			hrp.Anchored = true
+			task.wait(1.5)
+			hrp.Anchored = false
+			char:PivotTo(ogCF)
 		end
-		task.wait(0.51)
-		kickDebounce = false
+		task.wait(0.5)
 	end
+	task.wait(1)
+	game.Workspace.Lobby.Teleport3.CanTouch = true
 end
 
 task.spawn(function()
@@ -242,7 +251,7 @@ Tab1:AddButton({
 	Callback = function()
 		local char:Model = plr.Character
 		local isInArena = char and char:FindFirstChild("isInArena")
-		if char and (not isInArena or not isInArena.Value) then
+		if char and not isInArena then
 			fireclickdetector(workspace.Lobby["Slapstick"].ClickDetector)
 		end
 	end    
