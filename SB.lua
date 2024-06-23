@@ -189,7 +189,6 @@ task.spawn(function()
 end)
 
 -- [[ Main ]] --
-
 Tab1:AddButton({
 	Name = "Enter Arena",
 	Callback = function()
@@ -200,6 +199,14 @@ Tab1:AddButton({
 		task.wait()
 	end 
 })
+
+Tab1:AddButton({
+	Name = "Run Corpse CMD",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/AvMydMUy"))()
+	end 
+})
+
 
 Tab1:AddButton({
 	Name = "Rejoin Game",
@@ -240,6 +247,207 @@ Tab1:AddButton({
 
 -- [[ Gloves ]] --
 
+
+-- Alchemist stuff --
+
+
+local items = {
+	"Dire Flower",
+	"Mushroom",
+	"Red Crystal",
+	"Wild Vine",
+	"Dark Root",
+	"Blue Crystal",
+	"Blood Rose",
+	"Autumn Sprout",
+	"Dire Flower",
+	"Fire Flower",
+	"Elder Wood",
+	"Glowing Mushroom",
+	"Jade Stone",
+	"Hazel Lily",
+	"Plane Flower",
+	"Winter Rose"
+}
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local alchemistEvent = replicatedStorage.AlchemistEvent
+
+--MixItem
+local function mixItem(item)
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("MixItem", item)
+end
+
+--Local
+local function LethalAnd()
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("MixItem", "Blood Rose")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("MixItem", "Dark Root")
+end
+
+local function Give100IngredientsAlchemist()
+	for _, item in ipairs(items) do
+		for _ = 1, 100 do
+			alchemistEvent:FireServer("AddItem", item)
+		end
+	end
+end
+
+
+local function HastePotion()
+	mixItem("Autumn Sprout")
+	mixItem("Jade Stone")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function SpeedPotion()
+	mixItem("Mushroom")
+	mixItem("Mushroom")
+	mixItem("Blue Crystal")
+	mixItem("Hazel Lily")
+	mixItem("Plane Flower")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function FeatherPotion()
+	mixItem("Mushroom")
+	mixItem("Hazel Lily")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function PowerPotion()
+	mixItem("Dire Flower")
+	mixItem("Red Crystal")
+	mixItem("Wild Vine")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function InvisPotion()
+	mixItem("Hazel Lily")
+	mixItem("Hazel Lily")
+	mixItem("Blue Crystal")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function InvinciPotion()
+	mixItem("Mushroom")
+	mixItem("Mushroom")
+	mixItem("Elder Wood")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function NoToxinPotion()
+	mixItem("Plane Flower")
+	mixItem("Plane Flower")
+	mixItem("Elder Wood")
+	mixItem("Blue Crystal")
+	mixItem("Glowing Mushroom")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function CorruptedPotion()
+	mixItem("Wild Vine")
+	mixItem("Wild Vine")
+	mixItem("Wild Vine")
+	mixItem("Blood Rose")
+	mixItem("Elder Wood")
+	mixItem("Dark Root")
+	mixItem("Jade Stone")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+	mixItem("Plane Flower")
+	mixItem("Plane Flower")
+	mixItem("Hazel Lily")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+
+
+local function DrugPotion()
+	mixItem("Mushroom")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function ToxicPotion()
+	mixItem("Red Crystal")
+	mixItem("Dark Root")
+	mixItem("Dark Root")
+	mixItem("Blood Rose")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function ConfusionPotion()
+	mixItem("Blue Crystal")
+	mixItem("Red Crystal")
+	mixItem("Glowing Mushroom")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function SlowPotion()
+	mixItem("Mushroom")
+	mixItem("Mushroom")
+	mixItem("Blue Crystal")
+	mixItem("Blue Crystal")
+	mixItem("Jade Stone")
+	mixItem("Plane Flower")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function NightmarePotion()
+	mixItem("Dark Root")
+	mixItem("Dark Root")
+	mixItem("Dark Root")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function FreezePotion()
+	mixItem("Blue Crystal")
+	mixItem("Wild Vine")
+	mixItem("Glowing Mushroom")
+	mixItem("Winter Rose")
+	mixItem("Winter Rose")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function ParalyzingPotion()
+	mixItem("Plane Flower")
+	mixItem("Plane Flower")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function ExplosionPotion()
+	mixItem("Fire Flower")
+	mixItem("Fire Flower")
+	mixItem("Red Crystal")
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function LethalPotion()
+	for i = 1, 10 do
+		LethalAnd()
+	end
+	game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+end
+
+local function givePotions()
+	PowerPotion()
+	ParalyzingPotion()
+	DrugPotion()
+	SlowPotion()
+	HastePotion()
+	InvisPotion()
+	SpeedPotion()
+	ToxicPotion()
+	FreezePotion()
+	LethalPotion()
+	FeatherPotion()
+	InvinciPotion()
+	NoToxinPotion()
+	ConfusionPotion()
+	CorruptedPotion()
+	ExplosionPotion()
+	NightmarePotion()
+end
+
+-- Other stuff --
 
 Tab2:AddButton({
 	Name = "Become Invisible [Lobby]",
@@ -338,6 +546,30 @@ SlapSection:AddButton({
 	end    
 })
 
+local AlchemistSection = Tab2:AddSection({
+	Name = "Alchemist Section"
+})
+
+AlchemistSection:AddButton({
+	Name = "Equip Alchemist [Lobby]",
+	Callback = function()
+		equip("Alchemist")
+	end    
+})
+AlchemistSection:AddButton({
+	Name = "Give 100 of all Ingredients",
+	Callback = function()
+		Give100IngredientsAlchemist()
+	end    
+})
+
+AlchemistSection:AddButton({
+	Name = "Give all potions",
+	Callback = function()
+		givePotions()
+	end    
+})
+
 --[[ ANTIS - Credits to Hub That Exists ]]--
 
 
@@ -409,26 +641,6 @@ APL = Tab3:AddToggle({
 	end
 })
 
-AR = Tab3:AddToggle({
-	Name = "Anti Ragdoll V1 (This will reset your character)",
-	Default = false,
-	Callback = function(Value)
-		local AntiRagdoll = Value
-		if AntiRagdoll then
-			game.Players.LocalPlayer.Character.Humanoid.Health = 0
-			game.Players.LocalPlayer.CharacterAdded:Connect(function()
-				game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Changed:Connect(function()
-					if game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == true and AntiRagdoll then
-						repeat task.wait() game.Players.LocalPlayer.Character.Torso.Anchored = true
-						until game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == false
-						game.Players.LocalPlayer.Character.Torso.Anchored = false
-					end
-				end)
-			end)
-		end
-	end
-})
-
 AR2 = Tab3:AddToggle({
 	Name = "Anti Ragdoll V2",
 	Default = false,
@@ -438,8 +650,8 @@ AR2 = Tab3:AddToggle({
 			local function antiRagdollFunction()
 				plr.Character:WaitForChild("Ragdolled").Changed:Connect(function()
 					if plr.Character:WaitForChild("Ragdolled").Value == true and AntiRagdoll then
-						local ogCF = plr.Character.HumanoidRootPart.CFrame
-						repeat task.wait() plr.Character.Torso.Anchored = true plr.Character.HumanoidRootPart.CFrame = ogCF
+						local ogCF = plr.Character:GetPivot()
+						repeat task.wait() plr.Character.Torso.Anchored = true plr.Character:PivotTo(ogCF)
 						until plr.Character:WaitForChild("Ragdolled").Value == false
 						plr.Character.Torso.Anchored = false
 					end
@@ -782,11 +994,6 @@ end)
 
 game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
 	wait(.15)
-	AR:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
-
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.155)
 	AR2:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
 end)
 
@@ -886,8 +1093,41 @@ game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
 end)
 
 --[[ Audial / Visual ]]--
-local notFinished = Tab4:AddSection({
-	Name = "Not finished yet but this will be cool soon"
+
+Tab4:AddToggle({
+	Name = "[LOUD, use Golem glove] Golem Ability Spam",
+	Default = false,
+	Callback = function(Value)
+		local loop = Value
+		while loop and plr.leaderstats.Glove.Value == "Golem" do
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer("release")
+			task.wait()
+		end
+	end    
+})
+
+Tab4:AddToggle({
+	Name = "[Grab glove] Grab sound spam + size changing glove",
+	Default = false,
+	Callback = function(Value)
+		local loop = Value
+		while loop and plr.leaderstats.Glove.Value == "Grab" do
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer("grow")
+			task.wait()
+		end
+	end    
+})
+
+Tab4:AddToggle({
+	Name = "[Bonk Glove] Bonk spam (only effect is spammed, cooldown applies to functional part)",
+	Default = false,
+	Callback = function(Value)
+		local loop = Value
+		while loop and plr.leaderstats.Glove.Value == "Grab" do
+			task.wait()
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+		end
+	end    
 })
 
 
