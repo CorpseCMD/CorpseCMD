@@ -165,23 +165,28 @@ task.spawn(function()
 			local tchar:Model = tplr and tplr.Character
 			local isInArena = tchar and tchar:FindFirstChild("isInArena")
 			if tchar and isInArena and isInArena.Value then
-				local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
-				local hrp = hum and hum.RootPart
-				for i,tplr2 in Players:GetPlayers() do
-					local tchar2 = tplr2.Character
-					if tchar2 and tplr2 ~= tplr and tplr2 ~= plr and hrp then
-						local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
-						local hrp2 = hum2 and hum2.RootPart
-						if not hrp2 then task.wait() continue end
-						local dist = (hrp.Position - hrp2.Position).Magnitude
-						if dist <= SlapAuraRange then
-							local lchar = plr.Character
-							if lchar and tchar:GetPivot() then
-								lchar:PivotTo(CFrame.new(lchar:GetPivot().Position) * tchar:GetPivot().Rotation)
+				local success, err = pcall(function()
+					local hum:Humanoid = tchar:FindFirstChildOfClass("Humanoid")
+					local hrp = hum and hum.RootPart
+					for i,tplr2 in Players:GetPlayers() do
+						local tchar2 = tplr2.Character
+						if tchar2 and tplr2 ~= tplr and tplr2 ~= plr and hrp then
+							local hum2:Humanoid = tchar2:FindFirstChildOfClass("Humanoid")
+							local hrp2 = hum2 and hum2.RootPart
+							if not hrp2 then task.wait() continue end
+							local dist = (hrp.Position - hrp2.Position).Magnitude
+							if dist <= SlapAuraRange then
+								local lchar = plr.Character
+								if lchar and tchar:GetPivot() then
+									lchar:PivotTo(CFrame.new(lchar:GetPivot().Position) * tchar:GetPivot().Rotation)
+								end
+								slapstickSlap(tplr2.Name)
 							end
-							slapstickSlap(tplr2.Name)
 						end
 					end
+				end)
+				if not success then
+					warn(err)
 				end
 			end
 		end
@@ -547,7 +552,7 @@ SlapSection:AddButton({
 })
 
 local AlchemistSection = Tab2:AddSection({
-	Name = "Alchemist Section"
+	Name = "Alchemist Section [Needs alchemist glove]"
 })
 
 AlchemistSection:AddButton({
@@ -559,6 +564,8 @@ AlchemistSection:AddButton({
 AlchemistSection:AddButton({
 	Name = "Give 100 of all Ingredients",
 	Callback = function()
+		game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+
 		Give100IngredientsAlchemist()
 	end    
 })
@@ -566,6 +573,8 @@ AlchemistSection:AddButton({
 AlchemistSection:AddButton({
 	Name = "Give all potions [small lag]",
 	Callback = function()
+		game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+
 		givePotions()
 	end    
 })
@@ -573,17 +582,9 @@ task.wait()
 AlchemistSection:AddButton({
 	Name = "Give all potions X10 [LAG]",
 	Callback = function()
+		game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+
 		for i=1,10 do
-			givePotions()
-			task.wait(0.1)
-		end
-	end    
-})
-task.wait()
-AlchemistSection:AddButton({
-	Name = "Give all potions X50 [MEGA LAG]",
-	Callback = function()
-		for i=1,50 do
 			givePotions()
 			task.wait(0.1)
 		end
