@@ -1,3 +1,11 @@
+--[[ LOADSTRING ]]--
+
+--	loadstring(game:HttpGet('https://github.com/CorpseCMD/CorpseCMD/raw/main/SB.lua'))()
+
+--[[ CODE ]]--
+
+if game:GetService("RunService"):IsStudio() then return end
+
 local DISABLE_SCRIPT = false
 local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
@@ -16,7 +24,7 @@ local SlapAuraRange = 5
 local GiveSlapAuraEnabled = false
 
 local Tab1 = Window:MakeTab({
-	Name = "Main / Gui",
+	Name = "Misc / Gui settings",
 	Icon = "rbxassetid://15395916398",
 	PremiumOnly = false
 })
@@ -77,7 +85,7 @@ local function gplr(Name)
 end
 
 local SlapDebounce = false
-local function slap(targetName)
+local function slapstickSlap(targetName)
 	if plr.leaderstats.Glove.Value ~= "Slapstick" then return end
 	if SlapDebounce or DISABLE_SCRIPT then return end
 	local cf = CFrame.new(
@@ -171,7 +179,7 @@ task.spawn(function()
 							if lchar and tchar:GetPivot() then
 								lchar:PivotTo(CFrame.new(lchar:GetPivot().Position) * tchar:GetPivot().Rotation)
 							end
-							slap(tplr2.Name)
+							slapstickSlap(tplr2.Name)
 						end
 					end
 				end
@@ -179,6 +187,8 @@ task.spawn(function()
 		end
 	end
 end)
+
+-- [[ Main ]] --
 
 Tab1:AddButton({
 	Name = "Enter Arena",
@@ -192,18 +202,31 @@ Tab1:AddButton({
 })
 
 Tab1:AddButton({
-	Name = "Become Invisible [Lobby]",
-	Callback = function()
-		local char:Model = plr.Character
-		local isInArena = char and char:FindFirstChild("isInArena")
-		if char and (not isInArena or not isInArena.Value) then
-			local OGlove = plr.leaderstats.Glove.Value
-			equip("Ghost")
-			game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
-			equip(OGlove)
+	Name = "Rejoin Game",
+	Callback = function()	
+		local TeleportService = game:GetService("TeleportService")
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		local Success, ErrorMessage = pcall(function()
+			local PrivateServerId = game.PrivateServerId
+			if #Players:GetPlayers() > 1 then
+				if PrivateServerId ~= "" then
+					TeleportService:TeleportToPrivateServer(game.PlaceId, PrivateServerId, {LocalPlayer})
+				else
+					TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
+				end
+			else
+				TeleportService:Teleport(game.PlaceId, LocalPlayer)
+			end
+		end)
+
+		if ErrorMessage and not Success then
+			warn(ErrorMessage)
 		end
-	end    
+	end 
 })
+
+
 
 
 
@@ -217,11 +240,26 @@ Tab1:AddButton({
 
 -- [[ Gloves ]] --
 
+
+Tab2:AddButton({
+	Name = "Become Invisible [Lobby]",
+	Callback = function()
+		local char:Model = plr.Character
+		local isInArena = char and char:FindFirstChild("isInArena")
+		if char and (not isInArena or not isInArena.Value) then
+			local OGlove = plr.leaderstats.Glove.Value
+			equip("Ghost")
+			game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
+			equip(OGlove)
+		end
+	end    
+})
+
 local KickSection = Tab2:AddSection({
 	Name = "1.5 cooldown | Kick [Grab glove]"
 })
 
-local KickTextbox = Tab2:AddTextbox({
+KickSection:AddTextbox({
 	Name = "Player to kick",
 	Default = "others",
 	TextDisappear = false,
@@ -230,7 +268,7 @@ local KickTextbox = Tab2:AddTextbox({
 	end	  
 })
 
-Tab2:AddButton({
+KickSection:AddButton({
 	Name = "Equip Grab [Lobby]",
 	Callback = function()
 		equip("Grab")
@@ -238,7 +276,7 @@ Tab2:AddButton({
 })
 
 
-Tab2:AddButton({
+KickSection:AddButton({
 	Name = "Kick Player",
 	Callback = function()
 		kick(KickTarget)
@@ -248,7 +286,7 @@ local SlapSection = Tab2:AddSection({
 	Name = "0.5 cooldown | Slap from anywhere [SlapStick glove]"
 })
 
-Tab2:AddTextbox({
+SlapSection:AddTextbox({
 	Name = "Player to slap / Target slap to give slap aura",
 	Default = "",
 	TextDisappear = false,
@@ -256,14 +294,14 @@ Tab2:AddTextbox({
 		SlapTarget = Value
 	end	  
 })
-Tab2:AddButton({
+SlapSection:AddButton({
 	Name = "Slap Player",
 	Callback = function()
-		slap(SlapTarget)
+		slapstickSlap(SlapTarget)
 	end    
 })
 
-Tab2:AddToggle({
+SlapSection:AddToggle({
 	Name = "Give target Slap aura",
 	Default = false,
 	Callback = function(Value)
@@ -271,16 +309,16 @@ Tab2:AddToggle({
 	end    
 })
 
-Tab2:AddBind({
+SlapSection:AddBind({
 	Name = "Slap player Keybind",
 	Default = Enum.KeyCode.Q,
 	Hold = false,
 	Callback = function()
-		slap(SlapTarget)
+		slapstickSlap(SlapTarget)
 	end    
 })
 
-Tab2:AddSlider({
+SlapSection:AddSlider({
 	Name = "Slap aura range",
 	Min = 10,
 	Max = 300,
@@ -293,24 +331,15 @@ Tab2:AddSlider({
 	end    
 })
 
-Tab2:AddButton({
+SlapSection:AddButton({
 	Name = "Equip SlapStick [Lobby]",
 	Callback = function()
 		equip("Slapstick")
 	end    
 })
-
-
-
-Tab2:AddButton({
-	Name = "Equip SlapStick [Lobby]",
-	Callback = function()
-		equip("Slapstick")
-	end    
-})
-
 
 --[[ ANTIS - Credits to Hub That Exists ]]--
+
 
 if game.Workspace:FindFirstChild("ToggleAllAntisCORPSECMD_SB") == nil then
 	local ToggleAllAntisCORPSECMD_SB = Instance.new("BoolValue", workspace)
@@ -330,11 +359,11 @@ AA = Tab3:AddToggle({
 	Callback = function(Value)
 		local AntiAdmins = Value
 		while AntiAdmins do
-			for i,v in pairs(Players:GetChildren()) do
+			for i,v in pairs(Players:GetPlayers()) do
 				if v:GetRankInGroup(9950771) >= 2 then
 					OrionLib:MakeNotification({
 						Name = "High rank player detected!",
-						Content = "Player " .. v.Name .. " Has a high rank in the Slap battles Group",
+						Content = "Player " .. v.Name .. " Has a higher rank in the Slap battles Group",
 						Image = "rbxassetid://14895383047",
 						Time = 6
 					})
@@ -423,6 +452,15 @@ AR2 = Tab3:AddToggle({
 		end
 	end    
 })
+if workspace:FindFirstChild("TAntiVoid") == nil then
+	local TournamentAntiVoid = Instance.new("Part", workspace)
+	TournamentAntiVoid.Name = "TAntiVoid"
+	TournamentAntiVoid.Size = Vector3.new(2048, 15, 2048)
+	TournamentAntiVoid.Position = Vector3.new(3420, 70, 3)
+	TournamentAntiVoid.CanCollide = false
+	TournamentAntiVoid.Transparency = 1
+	TournamentAntiVoid.Anchored = true
+end
 
 game.Workspace.dedBarrier.Position =  Vector3.new(15, -17, 41.5)
 AV = Tab3:AddToggle({
@@ -848,5 +886,9 @@ game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
 end)
 
 --[[ Audial / Visual ]]--
+local notFinished = Tab4:AddSection({
+	Name = "Not finished yet but this will be cool soon"
+})
+
 
 OrionLib:Init()
