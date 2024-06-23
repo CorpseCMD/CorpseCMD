@@ -564,12 +564,30 @@ AlchemistSection:AddButton({
 })
 
 AlchemistSection:AddButton({
-	Name = "Give all potions",
+	Name = "Give all potions [small lag]",
 	Callback = function()
 		givePotions()
 	end    
 })
 
+AlchemistSection:AddButton({
+	Name = "Give all potions X10 [LAG]",
+	Callback = function()
+		for i=1,10 do
+			givePotions()
+			task.wait(0.1)
+		end
+	end    
+})
+AlchemistSection:AddButton({
+	Name = "Give all potions X50 [MEGA LAG]",
+	Callback = function()
+		for i=1,50 do
+			givePotions()
+			task.wait(0.1)
+		end
+	end    
+})
 --[[ ANTIS - Credits to Hub That Exists ]]--
 
 
