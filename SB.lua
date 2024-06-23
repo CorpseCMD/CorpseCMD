@@ -569,7 +569,7 @@ AlchemistSection:AddButton({
 		givePotions()
 	end    
 })
-
+task.wait()
 AlchemistSection:AddButton({
 	Name = "Give all potions X10 [LAG]",
 	Callback = function()
@@ -579,6 +579,7 @@ AlchemistSection:AddButton({
 		end
 	end    
 })
+task.wait()
 AlchemistSection:AddButton({
 	Name = "Give all potions X50 [MEGA LAG]",
 	Callback = function()
