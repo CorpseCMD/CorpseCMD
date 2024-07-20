@@ -1289,11 +1289,13 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 				weld.Part1 = potatolord.PrimaryPart
 				hum.Jump = true
 				task.wait(0.5)
-				char:PivotTo(CFrame.new(1791, -19, 847) * CFrame.Angles(0, 0, 0, -0.126703247, -0.000655995449, 0.991940439, -1.62005801e-06, 0.999999881, 0.000661116617, -0.991940796, 8.21441572e-05, -0.126703203))
+				potatolord:FindFirstChildOfClass("Humanoid").PlatformStand = true
 				task.wait(0.5)
-				weld:Destroy()
+				weld.Enabled = false
 				task.wait(0.15)
 				lantern:Activate()
+				task.wait(0.4)
+				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * 1.5)
 				task.wait(6)
 				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -2)
 				lantern:Activate()
@@ -1305,17 +1307,38 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	Tab2:AddButton({
 		Name = "potatolord42 hat",
 		Callback = function()
+			getChar():PivotTo(CFrame.new(1823, -29, 891))
+			task.wait(0.25)
 			local potatolord:Model = game:GetService("Workspace"):FindFirstChild("PotatoLord")
 			local char = getChar()
 			local hum = char and char:FindFirstChildOfClass("Humanoid")
 			if char and potatolord and hum and hum.Health > 0 then
-				while potatolord.PrimaryPart do
-					if plr:DistanceFromCharacter(potatolord.PrimaryPart.Position) > 7 then
-						potatolord:PivotTo(char:GetPivot() + Vector3.new(0,5,0))
-					end
-					task.wait()
-					potatolord.PrimaryPart.AssemblyLinearVelocity = (char.PrimaryPart.Position - (potatolord.PrimaryPart.Position + Vector3.new(0,3,0))) / 1.5
+				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -1)
+				local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
+				if not lantern then
+					lantern = char:FindFirstChild("Lantern")
+					if not lantern then warn("Lantern not found!") return end
 				end
+				if lantern.Parent:IsA('Backpack') then
+					hum:EquipTool(lantern)
+				end
+				task.wait(0.5)
+				local weld = Instance.new("WeldConstraint")
+				weld.Parent = potatolord.PrimaryPart
+				weld.Part0 = char.PrimaryPart
+				weld.Part1 = potatolord.PrimaryPart
+				task.wait(0.1)
+				for i, p in potatolord:GetChildren() do
+					if p:IsA("BasePart") then
+						p.CanCollide = false
+						p:GetPropertyChangedSignal("CanCollide"):Connect(function()
+							if p.CanCollide then
+								p.CanCollide = false
+							end
+						end)
+					end
+				end
+				potatolord:PivotTo(CFrame.new(char.PrimaryPart.Position + Vector3.new(0,2,0),char.PrimaryPart.Position))
 			end
 		end,
 	})
@@ -1323,3 +1346,24 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 end
 
 OrionLib:Init()
+
+--[[
+
+
+
+if game.CoreGui:FindFirstChild("shrekmanfartcopyposition") then game.CoreGui:FindFirstChild("shrekmanfartcopyposition"):Destroy() end
+task.wait(0.05)
+local gui = Instance.new("ScreenGui")
+gui.Name = "shrekmanfartcopyposition"
+gui.Parent = game.CoreGui
+local button = Instance.new("TextButton")
+button.Parent = gui
+button.Size = UDim2.new(0.1,0,0.1,0)
+button.Position = UDim2.new(0.2,0,0.45,0)
+button.MouseButton1Click:Connect(function()
+	setclipboard(tostring(game.Players.LocalPlayer.Character:GetPivot().Position))
+end)
+
+
+
+]]
