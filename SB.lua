@@ -7,7 +7,7 @@
 local DISABLE_SCRIPT = false
 local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 
-if game.PlaceId == 6403373529 then
+if game.PlaceId == 6403373529 and game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit") then
 	local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
 		task.spawn(function()
 			task.wait(1.5)
@@ -1145,7 +1145,7 @@ if game.PlaceId == 6403373529 then
 			end
 		end    
 	})
-elseif game.PlaceId == 18550498098 then
+elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChild("PotatoLord") then
 	local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
 		task.spawn(function()
 			task.wait(1.5)
