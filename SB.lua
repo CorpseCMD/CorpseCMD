@@ -1163,14 +1163,23 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	})
 	local Tab2 = Window:MakeTab({
 		Name = "Progression",
-		Icon = "rbxassetid://15395916398",
+		Icon = "rbxassetid://18402077412",
+		PremiumOnly = false
+	})
+	
+	local Tab3 = Window:MakeTab({
+		Name = "Funnies",
+		Icon = "rbxassetid://18215499099",
 		PremiumOnly = false
 	})
 
 	local Section1 = Tab2:AddSection({
-		Name = "Skips"
+		Name = "Skip parts / make parts easier"
 	})
 
+	local Section2 = Tab3:AddSection({
+		Name = "Potatolord42 funnies"
+	})
 	local function getChar()
 		if plr.Character then
 			return plr.Character
@@ -1219,7 +1228,7 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 		end
 	})
 	
-	Tab2:AddButton({
+	Section1:AddButton({
 		Name = "Activate / complete chase in starting room.",
 		Callback = function()
 			local g1l = game.Workspace:WaitForChild("Gate1Lever")
@@ -1232,13 +1241,21 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 		end
 	})
 	
-	Tab2:AddButton({
+	Section1:AddButton({
 		Name = "Teleport to Sbeve parkour room.",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(684, 0, 716))
+			local screengui = Instance.new('ScreenGui')
+			screengui.Parent = game.CoreGui
+			local p = Instance.new("ImageLabel")
+			p.Parent = screengui
+			p.Size = UDim2.new(1,0,1,0)
+			p.Image = "rbxassetid://17382692880"
+			task.wait(0.5)
+			screengui:Destroy()
 		end
 	})
-	Tab2:AddButton({
+	Section1:AddButton({
 		Name = "Anti sbeve parkour fall",
 		Callback = function()
 			local sbeveAntiFallPart = Instance.new("Part")
@@ -1253,21 +1270,21 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	
 	-- game:GetService("Workspace")["pls organize"].Flamethrowers
 	
-	Tab2:AddButton({
+	Section1:AddButton({
 		Name = "Teleport to Flame Throwers area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1052, -34, 716))
 		end,
 	})
 	
-	Tab2:AddButton({
+	Section1:AddButton({
 		Name = "Teleport to potatolord42 area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1823, -29, 891))
 		end,
 	})
 	
-	Tab2:AddButton({
+	Section1:AddButton({
 		Name = "Defeat potatolord42",
 		Callback = function()
 			local potatolord:Model = game:GetService("Workspace"):FindFirstChild("PotatoLord")
@@ -1304,7 +1321,7 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 			end
 		end,
 	})
-	Tab2:AddButton({
+	Section2:AddButton({
 		Name = "potatolord42 hat",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1823, -29, 891))
@@ -1328,7 +1345,10 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 				weld.Part0 = char.PrimaryPart
 				weld.Part1 = potatolord.PrimaryPart
 				task.wait(0.1)
+				potatolord:FindFirstChildOfClass("Humanoid").PlatformStand = false
+				potatolord:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
 				for i, p in potatolord:GetChildren() do
+					potatolord:PivotTo(CFrame.new(char.PrimaryPart.Position + Vector3.new(0,2,0),char.PrimaryPart.Position + Vector3.new(0,1000,0)))
 					if p:IsA("BasePart") then
 						p.CanCollide = false
 						p:GetPropertyChangedSignal("CanCollide"):Connect(function()
@@ -1338,10 +1358,10 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 						end)
 					end
 				end
-				potatolord:PivotTo(CFrame.new(char.PrimaryPart.Position + Vector3.new(0,2,0),char.PrimaryPart.Position))
 			end
 		end,
 	})
+	
 	
 end
 
