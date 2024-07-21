@@ -1236,7 +1236,7 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 			if cd then
 				fireclickdetector(cd)
 				task.wait(0.1)
-				getChar():PivotTo(CFrame.new(535, 13, 153))
+				getChar():PivotTo(CFrame.new(570, 7, 302))
 			end
 		end
 	})
@@ -1291,7 +1291,8 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 			local char = getChar()
 			local hum = char and char:FindFirstChildOfClass("Humanoid")
 			if char and potatolord and hum and hum.Health > 0 then
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -2)
+				potatolord.HumanoidRootPart.Size += Vector3.new(20,20,20)
+				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -4)
 				local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
 				if not lantern then
 					lantern = char:FindFirstChild("Lantern")
@@ -1304,23 +1305,82 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 				weld.Parent = potatolord.PrimaryPart
 				weld.Part0 = char.PrimaryPart
 				weld.Part1 = potatolord.PrimaryPart
-				hum.Jump = true
-				task.wait(0.5)
-				potatolord:FindFirstChildOfClass("Humanoid").PlatformStand = true
 				task.wait(0.5)
 				weld.Enabled = false
 				task.wait(0.15)
-				lantern:Activate()
-				task.wait(0.4)
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * 1.5)
-				task.wait(6)
 				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -2)
 				lantern:Activate()
+				task.wait(0.35)
+				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * 1.5)
+				task.wait(7)
+				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -6)
+				lantern:Activate()
 				task.wait(0.1)
-				char:PivotTo(CFrame.new(1891, -29, 894))
+				char:PivotTo(CFrame.new(2045, -29, 893))
 			end
 		end,
 	})
+	
+	Section1:AddButton({
+		Name = "Teleport to AFTER potato lord arena",
+		Callback = function()
+			getChar():PivotTo(CFrame.new(2045, -29, 893))
+		end,
+	})
+	
+	Section1:AddButton({
+		Name = "Teleport to end of maze",
+		Callback = function()
+			getChar():PivotTo(CFrame.new(2772, -28, 821))
+		end,
+	})
+	
+	Section1:AddButton({
+		Name = "Unlock Regen",
+		Callback = function()
+			if game.Workspace.ActivateStuffValues.SetupCubeOfLife.Value then
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["the cube of life"].TouchInterest,0)
+				task.wait(0.1)
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["the cube of life"].TouchInterest,1)
+			else
+				OrionLib:MakeNotification({
+					Name = "Error!",
+					Content = "'workspace.the cube of life' Sequence trigger has not been activated, please progress more.",
+					Image = "rbxassetid://17431402266",
+					Time = 5
+				})
+			end
+			
+		end,
+	})
+	
+	Section1:AddButton({
+		Name = "Unlock Extra Heart",
+		Callback = function()
+			if game.Workspace.ActivateStuffValues.SetupHeart.Value then
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["Big Heart"].TouchInterest,0)
+				task.wait(0.1)
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["Big Heart"].TouchInterest,1)
+			else
+				OrionLib:MakeNotification({
+					Name = "Error!",
+					Content = "'workspace.Big Heart' Sequence trigger has not been activated, please progress more.",
+					Image = "rbxassetid://17431402266",
+					Time = 5
+				})
+			end
+		end,
+	})
+
+	Section1:AddButton({
+		Name = "Start bossfight [Complete potato lord first!]",
+		Callback = function()
+			getChar():PivotTo(CFrame.new(3275, -73, 822))
+			fireclickdetector(game.Workspace.ShackLever.ClickDetector)
+		end,
+	})
+
+	
 	Section2:AddButton({
 		Name = "potatolord42 hat",
 		Callback = function()
