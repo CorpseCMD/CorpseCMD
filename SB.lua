@@ -1145,8 +1145,17 @@ if game.PlaceId == 6403373529 and game:GetService("ReplicatedStorage"):FindFirst
 			end
 		end    
 	})
+	
+	
+	
+	
+	
 elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChild("PotatoLord") then
-	local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
+
+
+
+
+local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
 		task.spawn(function()
 			task.wait(1.5)
 			DISABLE_SCRIPT = true
@@ -1168,23 +1177,61 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	})
 	
 	local Tab3 = Window:MakeTab({
+		Name = "Guide Bossfight",
+		Icon = "rbxassetid://18584222941",
+		PremiumOnly = false
+	})
+	
+	local Tab3 = Window:MakeTab({
 		Name = "Funnies",
 		Icon = "rbxassetid://18215499099",
 		PremiumOnly = false
 	})
 
-	local Section1 = Tab2:AddSection({
-		Name = "Skip parts / make parts easier"
+	local Section11 = Tab2:AddSection({
+		Name = "Teleports"
+	})
+	local Section12 = Tab2:AddSection({
+		Name = "Antis"
+	})
+	local Section13 = Tab2:AddSection({
+		Name = "Auto completes / skips"
 	})
 
-	local Section2 = Tab3:AddSection({
+
+	local Section21 = Tab2:AddSection({
+		Name = "Guide's Attacks [Phase 1]"
+	})
+	
+	local Section22 = Tab2:AddSection({
+		Name = "Guide Himself [Phase 2]"
+	})
+	
+	
+	local Section31 = Tab3:AddSection({
 		Name = "Potatolord42 funnies"
 	})
+
+	
+	
 	local function getChar()
 		if plr.Character then
 			return plr.Character
 		else
 			return plr.CharacterAdded:Wait()
+		end
+	end
+	
+	local function getLantern(equip)
+		local char = getChar()
+		local hum = char:FindFirstChildOfClass("Humanoid")
+		local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
+		if not lantern then
+			lantern = char:FindFirstChild("Lantern")
+			if not lantern then warn("Lantern not found!") return end
+		end
+		if lantern.Parent:IsA('Backpack') and equip then
+			hum:EquipTool(lantern)
 		end
 	end
 
@@ -1228,8 +1275,8 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 		end
 	})
 	
-	Section1:AddButton({
-		Name = "Activate / complete chase in starting room.",
+	Section11:AddButton({
+		Name = "Activate / teleprot to end of chase in starting room.",
 		Callback = function()
 			local g1l = game.Workspace:WaitForChild("Gate1Lever")
 			local cd = g1l:FindFirstChildOfClass("ClickDetector")
@@ -1241,7 +1288,7 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 		end
 	})
 	
-	Section1:AddButton({
+	Section11:AddButton({
 		Name = "Teleport to Sbeve parkour room.",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(684, 0, 716))
@@ -1250,12 +1297,14 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 			local p = Instance.new("ImageLabel")
 			p.Parent = screengui
 			p.Size = UDim2.new(1,0,1,0)
+			p.BackgroundTransparency = 1
+			p.ImageTransparency = 0.9
 			p.Image = "rbxassetid://17382692880"
 			task.wait(0.5)
 			screengui:Destroy()
 		end
 	})
-	Section1:AddButton({
+	Section12:AddButton({
 		Name = "Anti sbeve parkour fall",
 		Callback = function()
 			local sbeveAntiFallPart = Instance.new("Part")
@@ -1270,33 +1319,33 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	
 	-- game:GetService("Workspace")["pls organize"].Flamethrowers
 
-	Section1:AddButton({
+	Section11:AddButton({
 		Name = "Teleport to Flame Throwers area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1052, -34, 716))
 		end,
 	})	
-	Section1:AddButton({
+	Section11:AddButton({
 		Name = "Teleport to Train area [Easiest]",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(910, -2, 853))
 		end,
 	})	
-	Section1:AddButton({
+	Section11:AddButton({
 		Name = "Teleport to Laser area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1069, -28, 572))
 		end,
 	})
 	
-	Section1:AddButton({
+	Section11:AddButton({
 		Name = "Teleport to potatolord42 area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1823, -29, 891))
 		end,
 	})
 	
-	Section1:AddButton({
+	Section13:AddButton({
 		Name = "Defeat potatolord42",
 		Callback = function()
 			local potatolord:Model = game:GetService("Workspace"):FindFirstChild("PotatoLord")
@@ -1305,36 +1354,30 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 			if char and potatolord and hum and hum.Health > 0 then
 				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -2)
 				task.wait(0.1)
-				local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
-				if not lantern then
-					lantern = char:FindFirstChild("Lantern")
-					if not lantern then warn("Lantern not found!") return end
-				end
-				if lantern.Parent:IsA('Backpack') then
-					hum:EquipTool(lantern)
-				end
+				local lantern:Tool = getLantern(true)
 				task.wait(0.1)
 				lantern:Activate()
-				
+				task.wait(0.1)
+				char:PivotTo()
 			end
 		end,
 	})
 	
-	Section1:AddButton({
+	Section11:AddButton({
 		Name = "Teleport to AFTER potato lord arena",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(2045, -29, 893))
 		end,
 	})
 	
-	Section1:AddButton({
+	Section11:AddButton({
 		Name = "Teleport to end of maze",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(2772, -28, 821))
 		end,
 	})
 	
-	Section1:AddButton({
+	Section13:AddButton({
 		Name = "Unlock Regen [if it's not loaded, it will TP you there and then back]",
 		Callback = function()
 			if game.Workspace:FindFirstChild("the cube of life") then
@@ -1352,7 +1395,7 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 		end,
 	})
 	
-	Section1:AddButton({
+	Section13:AddButton({
 		Name = "Unlock Extra Heart [if it's not loaded, it will TP you there and then back]",
 		Callback = function()
 			if game.Workspace:FindFirstChild("Big Heart") then
@@ -1368,12 +1411,11 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 		end,
 	})
 
-	Section1:AddButton({
-		Name = "Start bossfight [Complete potato lord first!]",
+	Section13:AddButton({
+		Name = "Start bossfight [skip everything lol] (everyone else might die unless they are in the house)",
 		Callback = function()
-			getChar():PivotTo(CFrame.new(3275, -73, 822))
 			local cd:Instance = game.Workspace:FindFirstChild("ShackLever") and game.Workspace.ShackLever:FindFirstChildOfClass("ClickDetector")
-			if cd then fireclickdetector(cd) end
+			if cd then getChar():PivotTo(CFrame.new(3275, -73, 822)) fireclickdetector(cd) end
 		end,
 	})
 	
@@ -1383,11 +1425,12 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	-- [[ Section 2 ]] --
 	
 	local potatoHat = false
-	Section2:AddButton({
+	Section21:AddButton({
 		Name = "potatolord42 hat TOGGLE",
 		Callback = function()
 			local char = getChar()
 			if not char then return end
+			local ogPivot = char:GetPivot()
 			char:PivotTo(CFrame.new(1823, -29, 891))
 			task.wait(0.25)
 			local potatolord:Model = game:GetService("Workspace"):FindFirstChild("PotatoLord")
@@ -1397,14 +1440,7 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 				potatoHat = not potatoHat
 				if potatoHat then
 					char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -1)
-					local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
-					if not lantern then
-						lantern = char:FindFirstChild("Lantern")
-						if not lantern then warn("Lantern not found!") return end
-					end
-					if lantern.Parent:IsA('Backpack') then
-						hum:EquipTool(lantern)
-					end
+					local lantern = getLantern(true)
 					task.wait(0.5)
 					local weld = Instance.new("WeldConstraint")
 					weld.Parent = potatolord.PrimaryPart
@@ -1424,6 +1460,7 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 							end)
 						end
 					end
+					char:PivotTo(ogPivot)
 					while potatoHat do
 						task.wait(0.025)
 						potatolord.PrimaryPart.AssemblyAngularVelocity = potatolord.PrimaryPart.AssemblyAngularVelocity:Lerp(Vector3.new(0,40,0),0.4)
@@ -1442,27 +1479,76 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	})
 	
 	
+	-- [[ Section 3 ]] --
+	
+	Section31:AddButton({
+		Name = "teleport to bossfight safe zone",
+		Callback = function()
+			if not game.Workspace:FindFirstChild("SafezoneBossfight_259") then
+				local SF = Instance.new("Part", workspace)
+				SF.Size = Vector3.new(15,5,15)
+				SF.Transparency = 0.75
+				SF.Color = Color3.new(0.5,0.5,1)
+				SF.Anchored = true
+				SF.CanCollide = true
+				SF.Position = Vector3.new(595, 146, -330)
+			end
+			game.Players.LocalPlayer.Character:PivotTo(595, 150, -330)
+		end,
+	})
+	
+	local Autoslap = false
+	local function autoslapfunction(c)
+		if not Autoslap then return end
+		local lantern = getLantern(true)
+		task.wait(0.05)
+		if c and c.Name == "TrackGloveMissile" then
+			local args = {
+				[1] = "Hit",
+				[2] = c
+			}
+			lantern.Network:FireServer(unpack(args))
+		elseif c and c.Name == "ReplicaNPC" then
+			local args = {
+				[1] = "Hit",
+				[2] = c:FindFirstChild("HumanoidRootPart")
+			}
+			lantern.Network:FireServer(unpack(args))
+		elseif c and c.Name == "golem" then
+			while c and c:FindFirstChild("Hitbox") do
+				task.wait(0.1)
+				local args = {
+					[1] = "Hit",
+					[2] = c:FindFirstChild("Hitbox")
+				}
+
+				lantern.Network:FireServer(unpack(args))
+			end
+		elseif c and c.Name == "Guide" then
+			while c and c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 do
+				task.wait(0.1)
+				local args = {
+					[1] = "Hit",
+					[2] = c:FindFirstChild("HumanoidRootPart")
+				}
+				lantern.Network:FireServer(unpack(args))
+			end
+		
+		end
+	end
+	game.Workspace.ChildAdded:Connect(autoslapfunction)
+	Section31:AddToggle({
+		Name = "Toggle Auto slap Guide / Track / Golem / Replicas",
+		Default = false,
+		Callback = function(Value)
+			for i, c in game.Workspace:GetChildren() do
+				autoslapfunction(c)
+				task.wait()
+			end
+			Autoslap = Value
+		end    
+	})
+	
 end
 
 OrionLib:Init()
-
---[[
-
-
-
-if game.CoreGui:FindFirstChild("shrekmanfartcopyposition") then game.CoreGui:FindFirstChild("shrekmanfartcopyposition"):Destroy() end
-task.wait(0.05)
-local gui = Instance.new("ScreenGui")
-gui.Name = "shrekmanfartcopyposition"
-gui.Parent = game.CoreGui
-local button = Instance.new("TextButton")
-button.Parent = gui
-button.Size = UDim2.new(0.1,0,0.1,0)
-button.Position = UDim2.new(0.2,0,0.45,0)
-button.MouseButton1Click:Connect(function()
-	setclipboard(tostring(game.Players.LocalPlayer.Character:GetPivot().Position))
-end)
-
-
-
-]]
