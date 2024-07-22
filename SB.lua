@@ -10,7 +10,7 @@ local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shle
 if game.PlaceId == 6403373529 and game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit") then
 	local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
 		task.spawn(function()
-			task.wait(1.5)
+			task.wait(0.05)
 			DISABLE_SCRIPT = true
 			OrionLib:Destroy()
 		end)
@@ -1269,11 +1269,23 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	})
 	
 	-- game:GetService("Workspace")["pls organize"].Flamethrowers
-	
+
 	Section1:AddButton({
 		Name = "Teleport to Flame Throwers area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1052, -34, 716))
+		end,
+	})	
+	Section1:AddButton({
+		Name = "Teleport to Train area [Easiest]",
+		Callback = function()
+			getChar():PivotTo(CFrame.new(910, -2, 853))
+		end,
+	})	
+	Section1:AddButton({
+		Name = "Teleport to Laser area",
+		Callback = function()
+			getChar():PivotTo(CFrame.new(1069, -28, 572))
 		end,
 	})
 	
@@ -1291,8 +1303,8 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 			local char = getChar()
 			local hum = char and char:FindFirstChildOfClass("Humanoid")
 			if char and potatolord and hum and hum.Health > 0 then
-				potatolord.HumanoidRootPart.Size += Vector3.new(20,20,20)
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -4)
+				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -2)
+				task.wait(0.1)
 				local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
 				if not lantern then
 					lantern = char:FindFirstChild("Lantern")
@@ -1301,22 +1313,9 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 				if lantern.Parent:IsA('Backpack') then
 					hum:EquipTool(lantern)
 				end
-				local weld = Instance.new("WeldConstraint")
-				weld.Parent = potatolord.PrimaryPart
-				weld.Part0 = char.PrimaryPart
-				weld.Part1 = potatolord.PrimaryPart
-				task.wait(0.5)
-				weld.Enabled = false
-				task.wait(0.15)
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -2)
-				lantern:Activate()
-				task.wait(0.35)
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * 1.5)
-				task.wait(7)
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -6)
-				lantern:Activate()
 				task.wait(0.1)
-				char:PivotTo(CFrame.new(2045, -29, 893))
+				lantern:Activate()
+				
 			end
 		end,
 	})
@@ -1336,38 +1335,35 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 	})
 	
 	Section1:AddButton({
-		Name = "Unlock Regen",
+		Name = "Unlock Regen [if it's not loaded, it will TP you there and then back]",
 		Callback = function()
-			if game.Workspace.ActivateStuffValues.SetupCubeOfLife.Value then
-				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["the cube of life"].TouchInterest,0)
+			if game.Workspace:FindFirstChild("the cube of life") then
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["the cube of life"],0)
 				task.wait(0.1)
-				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["the cube of life"].TouchInterest,1)
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["the cube of life"],1)
+				
 			else
-				OrionLib:MakeNotification({
-					Name = "Error!",
-					Content = "'workspace.the cube of life' Sequence trigger has not been activated, please progress more.",
-					Image = "rbxassetid://17431402266",
-					Time = 5
-				})
+				local ogP = getChar():GetPivot()
+				getChar():PivotTo(CFrame.new(3286.2, -68.1, 822.5))
+				task.wait(1.25)
+				getChar():PivotTo(ogP)
 			end
 			
 		end,
 	})
 	
 	Section1:AddButton({
-		Name = "Unlock Extra Heart",
+		Name = "Unlock Extra Heart [if it's not loaded, it will TP you there and then back]",
 		Callback = function()
-			if game.Workspace.ActivateStuffValues.SetupHeart.Value then
-				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["Big Heart"].TouchInterest,0)
+			if game.Workspace:FindFirstChild("Big Heart") then
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["Big Heart"],0)
 				task.wait(0.1)
-				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["Big Heart"].TouchInterest,1)
+				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["Big Heart"],1)
 			else
-				OrionLib:MakeNotification({
-					Name = "Error!",
-					Content = "'workspace.Big Heart' Sequence trigger has not been activated, please progress more.",
-					Image = "rbxassetid://17431402266",
-					Time = 5
-				})
+				local ogP = getChar():GetPivot()
+				getChar():PivotTo(CFrame.new(3270.81, -213, 823.89))
+				task.wait(1.25)
+				getChar():PivotTo(ogP)
 			end
 		end,
 	})
@@ -1376,48 +1372,71 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 		Name = "Start bossfight [Complete potato lord first!]",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(3275, -73, 822))
-			fireclickdetector(game.Workspace.ShackLever.ClickDetector)
+			local cd:Instance = game.Workspace:FindFirstChild("ShackLever") and game.Workspace.ShackLever:FindFirstChildOfClass("ClickDetector")
+			if cd then fireclickdetector(cd) end
 		end,
 	})
-
 	
+	
+	
+	
+	-- [[ Section 2 ]] --
+	
+	local potatoHat = false
 	Section2:AddButton({
-		Name = "potatolord42 hat",
+		Name = "potatolord42 hat TOGGLE",
 		Callback = function()
-			getChar():PivotTo(CFrame.new(1823, -29, 891))
+			local char = getChar()
+			if not char then return end
+			char:PivotTo(CFrame.new(1823, -29, 891))
 			task.wait(0.25)
 			local potatolord:Model = game:GetService("Workspace"):FindFirstChild("PotatoLord")
-			local char = getChar()
-			local hum = char and char:FindFirstChildOfClass("Humanoid")
-			if char and potatolord and hum and hum.Health > 0 then
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -1)
-				local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
-				if not lantern then
-					lantern = char:FindFirstChild("Lantern")
-					if not lantern then warn("Lantern not found!") return end
-				end
-				if lantern.Parent:IsA('Backpack') then
-					hum:EquipTool(lantern)
-				end
-				task.wait(0.5)
-				local weld = Instance.new("WeldConstraint")
-				weld.Parent = potatolord.PrimaryPart
-				weld.Part0 = char.PrimaryPart
-				weld.Part1 = potatolord.PrimaryPart
-				task.wait(0.1)
-				potatolord:FindFirstChildOfClass("Humanoid").PlatformStand = false
-				potatolord:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
-				for i, p in potatolord:GetChildren() do
-					potatolord:PivotTo(CFrame.new(char.PrimaryPart.Position + Vector3.new(0,2,0),char.PrimaryPart.Position + Vector3.new(0,1000,0)))
-					if p:IsA("BasePart") then
-						p.CanCollide = false
-						p:GetPropertyChangedSignal("CanCollide"):Connect(function()
-							if p.CanCollide then
-								p.CanCollide = false
-							end
-						end)
+			
+			local hum = char:FindFirstChildOfClass("Humanoid")
+			if potatolord and hum and hum.Health > 0 then
+				potatoHat = not potatoHat
+				if potatoHat then
+					char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -1)
+					local lantern:Tool = plr.Backpack:FindFirstChild("Lantern")
+					if not lantern then
+						lantern = char:FindFirstChild("Lantern")
+						if not lantern then warn("Lantern not found!") return end
 					end
+					if lantern.Parent:IsA('Backpack') then
+						hum:EquipTool(lantern)
+					end
+					task.wait(0.5)
+					local weld = Instance.new("WeldConstraint")
+					weld.Parent = potatolord.PrimaryPart
+					weld.Part0 = char.PrimaryPart
+					weld.Part1 = potatolord.PrimaryPart
+					task.wait(0.1)
+					potatolord:FindFirstChildOfClass("Humanoid").PlatformStand = true
+					potatolord:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+					for i, p in potatolord:GetChildren() do
+						potatolord:PivotTo(CFrame.new(char.PrimaryPart.Position + Vector3.new(0,2,0),char.PrimaryPart.Position + Vector3.new(0,1000,0)))
+						if p:IsA("BasePart") then
+							p.CanCollide = false
+							p:GetPropertyChangedSignal("CanCollide"):Connect(function()
+								if p.CanCollide then
+									p.CanCollide = false
+								end
+							end)
+						end
+					end
+					while potatoHat do
+						task.wait(0.025)
+						potatolord.PrimaryPart.AssemblyAngularVelocity = potatolord.PrimaryPart.AssemblyAngularVelocity:Lerp(Vector3.new(0,40,0),0.4)
+						if plr:DistanceFromCharacter(potatolord.PrimaryPart.Position) > 6 then
+							potatolord:PivotTo(CFrame.new(char.PrimaryPart.Position + Vector3.new(0,2,0),char.PrimaryPart.Position + Vector3.new(0,1000,0)))
+						end
+					end
+					potatolord:FindFirstChildOfClass("Humanoid").PlatformStand = false
+					potatolord:FindFirstChildOfClass("Humanoid").WalkSpeed = 10
+					weld:Destroy()
+					
 				end
+				
 			end
 		end,
 	})
