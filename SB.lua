@@ -1494,8 +1494,9 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 				SF.Anchored = true
 				SF.CanCollide = true
 				SF.Position = Vector3.new(595, 146, -330)
+				SF.Name = "SafezoneBossfight_259"
 			end
-			game.Players.LocalPlayer.Character:PivotTo(595, 150, -330)
+			getChar():PivotTo(CFrame.new(595, 150, -330))
 		end,
 	})
 	
@@ -1504,19 +1505,27 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		if not Autoslap then return end
 		local lantern = getLantern(true)
 		task.wait(0.05)
-		if not getChar():FindFirstChild("Lantern") then return end
+		print(c and c.Name)
 		if c and c.Name == "TrackGloveMissile" then
 			local args = {
 				[1] = "Hit",
 				[2] = c
 			}
-			lantern.Network:FireServer(unpack(args))
+			if lantern:FindFirstChild("Network") then
+				lantern.Network:FireServer(unpack(args))
+			else
+				warn("Network Remote not found!!!!")
+			end
 		elseif c and c.Name == "ReplicaNPC" then
 			local args = {
 				[1] = "Hit",
 				[2] = c:FindFirstChild("HumanoidRootPart")
 			}
-			lantern.Network:FireServer(unpack(args))
+			if lantern:FindFirstChild("Network") then
+				lantern.Network:FireServer(unpack(args))
+			else
+				warn("Network Remote not found!!!!")
+			end
 		elseif c and c.Name == "golem" then
 			while c and c:FindFirstChild("Hitbox") do
 				task.wait(0)
@@ -1525,7 +1534,11 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 					[2] = c:FindFirstChild("Hitbox")
 				}
 
-				lantern.Network:FireServer(unpack(args))
+				if lantern:FindFirstChild("Network") then
+					lantern.Network:FireServer(unpack(args))
+				else
+					warn("Network Remote not found!!!!")
+				end
 			end
 		elseif c and c.Name == "Guide" then
 			while c and c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 do
@@ -1534,7 +1547,11 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 					[1] = "Hit",
 					[2] = c:FindFirstChild("HumanoidRootPart")
 				}
-				lantern.Network:FireServer(unpack(args))
+				if lantern:FindFirstChild("Network") then
+					lantern.Network:FireServer(unpack(args))
+				else
+					warn("Network Remote not found!!!!")
+				end
 			end
 		
 		end
@@ -1545,9 +1562,11 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		Default = false,
 		Callback = function(Value)
 			Autoslap = Value
-			for i, c in game.Workspace:GetChildren() do
-				autoslapfunction(c)
-				task.wait()
+			if Autoslap then
+				for i, b in game.Workspace:GetChildren() do
+					autoslapfunction(b)
+					task.wait()
+				end
 			end
 		end    
 	})
