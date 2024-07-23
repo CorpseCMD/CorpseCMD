@@ -1182,33 +1182,33 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		PremiumOnly = false
 	})
 	
-	local Tab3 = Window:MakeTab({
+	local Tab4 = Window:MakeTab({
 		Name = "Funnies",
 		Icon = "rbxassetid://18215499099",
 		PremiumOnly = false
 	})
 
-	local Section11 = Tab2:AddSection({
+	local Section21 = Tab2:AddSection({
 		Name = "Teleports"
 	})
-	local Section12 = Tab2:AddSection({
+	local Section22 = Tab2:AddSection({
 		Name = "Antis"
 	})
-	local Section13 = Tab2:AddSection({
+	local Section23 = Tab2:AddSection({
 		Name = "Auto completes / skips"
 	})
 
 
-	local Section21 = Tab2:AddSection({
+	local Section31 = Tab2:AddSection({
 		Name = "Guide's Attacks [Phase 1]"
 	})
 	
-	local Section22 = Tab2:AddSection({
+	local Section32 = Tab2:AddSection({
 		Name = "Guide Himself [Phase 2]"
 	})
 	
 	
-	local Section31 = Tab3:AddSection({
+	local Section41 = Tab4:AddSection({
 		Name = "Potatolord42 funnies"
 	})
 
@@ -1233,6 +1233,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		if lantern.Parent:IsA('Backpack') and equip then
 			hum:EquipTool(lantern)
 		end
+		return lantern
 	end
 
 	Tab1:AddButton({
@@ -1275,7 +1276,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		end
 	})
 	
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Activate / teleprot to end of chase in starting room.",
 		Callback = function()
 			local g1l = game.Workspace:WaitForChild("Gate1Lever")
@@ -1288,7 +1289,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		end
 	})
 	
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Teleport to Sbeve parkour room.",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(684, 0, 716))
@@ -1304,7 +1305,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 			screengui:Destroy()
 		end
 	})
-	Section12:AddButton({
+	Section22:AddButton({
 		Name = "Anti sbeve parkour fall",
 		Callback = function()
 			local sbeveAntiFallPart = Instance.new("Part")
@@ -1319,33 +1320,33 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	
 	-- game:GetService("Workspace")["pls organize"].Flamethrowers
 
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Teleport to Flame Throwers area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1052, -34, 716))
 		end,
 	})	
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Teleport to Train area [Easiest]",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(910, -2, 853))
 		end,
 	})	
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Teleport to Laser area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1069, -28, 572))
 		end,
 	})
 	
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Teleport to potatolord42 area",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(1823, -29, 891))
 		end,
 	})
 	
-	Section13:AddButton({
+	Section22:AddButton({
 		Name = "Defeat potatolord42",
 		Callback = function()
 			local potatolord:Model = game:GetService("Workspace"):FindFirstChild("PotatoLord")
@@ -1358,26 +1359,27 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 				task.wait(0.1)
 				lantern:Activate()
 				task.wait(0.1)
-				char:PivotTo()
+				-- gate after potato lord position with rotation
+				char:PivotTo(2011.45593, -29.4999981, 894.959961, 0.00398066267, -5.17179055e-09, 0.999992073, -9.49315204e-09, 1, 5.20962118e-09, -0.999992073, -9.51381462e-09, 0.00398066267)
 			end
 		end,
 	})
 	
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Teleport to AFTER potato lord arena",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(2045, -29, 893))
 		end,
 	})
 	
-	Section11:AddButton({
+	Section21:AddButton({
 		Name = "Teleport to end of maze",
 		Callback = function()
 			getChar():PivotTo(CFrame.new(2772, -28, 821))
 		end,
 	})
 	
-	Section13:AddButton({
+	Section23:AddButton({
 		Name = "Unlock Regen [if it's not loaded, it will TP you there and then back]",
 		Callback = function()
 			if game.Workspace:FindFirstChild("the cube of life") then
@@ -1395,7 +1397,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		end,
 	})
 	
-	Section13:AddButton({
+	Section23:AddButton({
 		Name = "Unlock Extra Heart [if it's not loaded, it will TP you there and then back]",
 		Callback = function()
 			if game.Workspace:FindFirstChild("Big Heart") then
@@ -1411,7 +1413,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		end,
 	})
 
-	Section13:AddButton({
+	Section23:AddButton({
 		Name = "Start bossfight [skip everything lol] (everyone else might die unless they are in the house)",
 		Callback = function()
 			local cd:Instance = game.Workspace:FindFirstChild("ShackLever") and game.Workspace.ShackLever:FindFirstChildOfClass("ClickDetector")
@@ -1425,7 +1427,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	-- [[ Section 2 ]] --
 	
 	local potatoHat = false
-	Section21:AddButton({
+	Section23:AddButton({
 		Name = "potatolord42 hat TOGGLE",
 		Callback = function()
 			local char = getChar()
@@ -1502,6 +1504,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		if not Autoslap then return end
 		local lantern = getLantern(true)
 		task.wait(0.05)
+		if not getChar():FindFirstChild("Lantern") then return end
 		if c and c.Name == "TrackGloveMissile" then
 			local args = {
 				[1] = "Hit",
@@ -1516,7 +1519,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 			lantern.Network:FireServer(unpack(args))
 		elseif c and c.Name == "golem" then
 			while c and c:FindFirstChild("Hitbox") do
-				task.wait(0.1)
+				task.wait(0)
 				local args = {
 					[1] = "Hit",
 					[2] = c:FindFirstChild("Hitbox")
@@ -1526,7 +1529,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 			end
 		elseif c and c.Name == "Guide" then
 			while c and c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 do
-				task.wait(0.1)
+				task.wait(0)
 				local args = {
 					[1] = "Hit",
 					[2] = c:FindFirstChild("HumanoidRootPart")
@@ -1541,14 +1544,35 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		Name = "Toggle Auto slap Guide / Track / Golem / Replicas",
 		Default = false,
 		Callback = function(Value)
+			Autoslap = Value
 			for i, c in game.Workspace:GetChildren() do
 				autoslapfunction(c)
 				task.wait()
 			end
-			Autoslap = Value
 		end    
 	})
 	
 end
 
 OrionLib:Init()
+
+--[[
+
+
+
+if game.CoreGui:FindFirstChild("shrekmanfartcopyposition") then game.CoreGui:FindFirstChild("shrekmanfartcopyposition"):Destroy() end
+task.wait(0.05)
+local gui = Instance.new("ScreenGui")
+gui.Name = "shrekmanfartcopyposition"
+gui.Parent = game.CoreGui
+local button = Instance.new("TextButton")
+button.Parent = gui
+button.Size = UDim2.new(0.1,0,0.1,0)
+button.Position = UDim2.new(0.2,0,0.45,0)
+button.MouseButton1Click:Connect(function()
+	setclipboard(tostring(game.Players.LocalPlayer.Character:GetPivot()))
+end)
+
+
+
+]]
