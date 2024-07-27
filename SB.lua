@@ -1357,14 +1357,14 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 			local char = getChar()
 			local hum = char and char:FindFirstChildOfClass("Humanoid")
 			if char and potatolord and hum and hum.Health > 0 then
-				char:PivotTo(potatolord:GetPivot() + potatolord:GetPivot().LookVector * -2)
-				task.wait(0.1)
+				local args = {
+					[1] = "Hit",
+					[2] = workspace.PotatoLord:FindFirstChild("Right Arm")
+				}
 				local lantern:Tool = getLantern(true)
-				task.wait(0.1)
 				lantern:Activate()
-				task.wait(0.1)
-				-- gate after potato lord position with rotation
-				char:PivotTo(2011.45593, -29.4999981, 894.959961, 0.00398066267, -5.17179055e-09, 0.999992073, -9.49315204e-09, 1, 5.20962118e-09, -0.999992073, -9.51381462e-09, 0.00398066267)
+				task.wait(0.2)
+				lantern.Network:FireServer(unpack(args))
 			end
 		end,
 	})
@@ -1393,7 +1393,8 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 				
 			else
 				local ogP = getChar():GetPivot()
-				getChar():PivotTo(CFrame.new(3286.2, -68.1, 822.5))
+				task.wait(0.05)
+				getChar():PivotTo(CFrame.new(3286.2, -70, 822.5))
 				task.wait(1.25)
 				getChar():PivotTo(ogP)
 			end
@@ -1410,7 +1411,8 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 				firetouchinterest(getChar().PrimaryPart,game:GetService("Workspace")["Big Heart"],1)
 			else
 				local ogP = getChar():GetPivot()
-				getChar():PivotTo(CFrame.new(3270.81, -213, 823.89))
+				task.wait(0.05)
+				getChar():PivotTo(CFrame.new(3270.81, -214, 823.89))
 				task.wait(1.25)
 				getChar():PivotTo(ogP)
 			end
@@ -1492,12 +1494,12 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	SF.Color = Color3.new(0.5,0.5,1)
 	SF.Anchored = true
 	SF.CanCollide = true
-	SF.Position = Vector3.new(595, 146, -330)
+	SF.Position = Vector3.new(595, 145, -330)
 	SF.Name = "SafezoneBossfight_259"
 	Section31:AddButton({
 		Name = "teleport to bossfight safe zone",
 		Callback = function()
-			getChar():PivotTo(CFrame.new(595, 148, -330))
+			getChar():PivotTo(CFrame.new(595, 150, -330))
 		end,
 	})
 	
@@ -1508,7 +1510,6 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		task.wait(0.05)
 		lantern:Activate()
 		task.wait(0.05)
-		print(c and c.Name)
 		if c and c.Name == "TrackGloveMissile" then
 			local args = {
 				[1] = "Hit",
@@ -1530,37 +1531,54 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 				warn("Network Remote not found!!!!")
 			end
 		elseif c and c.Name == "golem" then
-			while c and c:FindFirstChild("Hitbox") do
-				task.wait(0)
-				local args = {
-					[1] = "Hit",
-					[2] = c:FindFirstChild("Hitbox")
-				}
+			task.spawn(function()
+				while c and c:FindFirstChild("Hitbox") do
+					task.wait(0)
+					local args = {
+						[1] = "Hit",
+						[2] = c:FindFirstChild("Hitbox")
+					}
 
-				if lantern:FindFirstChild("Network") then
-					lantern.Network:FireServer(unpack(args))
-				else
-					warn("Network Remote not found!!!!")
-				end
-			end
-		elseif c and c.Name == "Guide" then
-			local args = {
-				[1] = "Hit",
-				[2] = c:FindFirstChild("HumanoidRootPart")
-			}
-			while c and c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 do
-				task.wait(0)
-				for i=1,20 do
 					if lantern:FindFirstChild("Network") then
 						lantern.Network:FireServer(unpack(args))
 					else
 						warn("Network Remote not found!!!!")
 					end
 				end
-			end
-		
+			end)
+		elseif c and c.Name == "Guide" then
+			local args = {
+				[1] = "Hit",
+				[2] = c:FindFirstChild("HumanoidRootPart")
+			}
+			task.spawn(function()
+				while c and c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 do
+					task.wait(0)
+					for i=1,20 do
+						if lantern:FindFirstChild("Network") then
+							lantern.Network:FireServer(unpack(args))
+						else
+							warn("Network Remote not found!!!!")
+						end
+					end
+				end
+			end)
+		else
+			return "notfound"
 		end
 	end
+	game.Workspace.ChildAdded:Connect(autoslapfunction)
+	task.spawn(function()
+		while true do
+			task.wait(0.3)
+			for i, b in game.Workspace:GetChildren() do
+				local success = autoslapfunction(b)
+				if success ~= "notfound" then
+					task.wait(0.01)
+				end
+			end
+		end
+	end)
 	Section31:AddToggle({
 		Name = "Toggle Auto slap Guide / Track / Golem / Replicas",
 		Default = false,
@@ -1572,15 +1590,6 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	
 	
 	
-	while true do
-		task.wait(0.05)
-		for i, b in game.Workspace:GetChildren() do
-			task.spawn(function()
-				autoslapfunction(b)
-			end)
-			task.wait(0.01)
-		end
-	end -- END OF SCRIPT LOOP
 end
 
 OrionLib:Init()
