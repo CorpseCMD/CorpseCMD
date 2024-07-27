@@ -1561,6 +1561,17 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 		
 		end
 	end
+	Section31:AddToggle({
+		Name = "Toggle Auto slap Guide / Track / Golem / Replicas",
+		Default = false,
+		Callback = function(Value)
+			Autoslap = Value
+		end    
+	})
+	
+	
+	
+	
 	while true do
 		task.wait(0.05)
 		for i, b in game.Workspace:GetChildren() do
@@ -1569,21 +1580,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 			end)
 			task.wait(0.01)
 		end
-	end
-	Section31:AddToggle({
-		Name = "Toggle Auto slap Guide / Track / Golem / Replicas",
-		Default = false,
-		Callback = function(Value)
-			Autoslap = Value
-			if Autoslap then
-				for i, b in game.Workspace:GetChildren() do
-					autoslapfunction(b)
-					task.wait()
-				end
-			end
-		end    
-	})
-	
+	end -- END OF SCRIPT LOOP
 end
 
 OrionLib:Init()
