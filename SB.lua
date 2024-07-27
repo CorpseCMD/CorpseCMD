@@ -1155,6 +1155,10 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 
 
 
+
+
+
+
 local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", HidePremium = false, SaveConfig = false, ConfigFolder = "CorpseCMD_SB", CloseCallback = function()
 		task.spawn(function()
 			task.wait(1.5)
@@ -1199,11 +1203,11 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	})
 
 
-	local Section31 = Tab2:AddSection({
+	local Section31 = Tab3:AddSection({
 		Name = "Guide's Attacks [Phase 1]"
 	})
 	
-	local Section32 = Tab2:AddSection({
+	local Section32 = Tab3:AddSection({
 		Name = "Guide Himself [Phase 2]"
 	})
 	
@@ -1427,7 +1431,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	-- [[ Section 2 ]] --
 	
 	local potatoHat = false
-	Section23:AddButton({
+	Section41:AddButton({
 		Name = "potatolord42 hat TOGGLE",
 		Callback = function()
 			local char = getChar()
