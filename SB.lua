@@ -1487,7 +1487,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	
 	-- [[ Section 3 ]] --
 	local SF = Instance.new("Part", workspace)
-	SF.Size = Vector3.new(15,5,15)
+	SF.Size = Vector3.new(50,1,50)
 	SF.Transparency = 0.75
 	SF.Color = Color3.new(0.5,0.5,1)
 	SF.Anchored = true
@@ -1497,7 +1497,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	Section31:AddButton({
 		Name = "teleport to bossfight safe zone",
 		Callback = function()
-			getChar():PivotTo(SF.CFrame + Vector3.new(0,SF.Size/2+1,0))
+			getChar():PivotTo(CFrame.new(595, 148, -330))
 		end,
 	})
 	
