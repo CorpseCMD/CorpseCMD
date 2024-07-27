@@ -1482,28 +1482,27 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	
 	
 	-- [[ Section 3 ]] --
-	
+	local SF = Instance.new("Part", workspace)
+	SF.Size = Vector3.new(15,5,15)
+	SF.Transparency = 0.75
+	SF.Color = Color3.new(0.5,0.5,1)
+	SF.Anchored = true
+	SF.CanCollide = true
+	SF.Position = Vector3.new(595, 146, -330)
+	SF.Name = "SafezoneBossfight_259"
 	Section31:AddButton({
 		Name = "teleport to bossfight safe zone",
 		Callback = function()
-			if not game.Workspace:FindFirstChild("SafezoneBossfight_259") then
-				local SF = Instance.new("Part", workspace)
-				SF.Size = Vector3.new(15,5,15)
-				SF.Transparency = 0.75
-				SF.Color = Color3.new(0.5,0.5,1)
-				SF.Anchored = true
-				SF.CanCollide = true
-				SF.Position = Vector3.new(595, 146, -330)
-				SF.Name = "SafezoneBossfight_259"
-			end
-			getChar():PivotTo(CFrame.new(595, 150, -330))
+			getChar():PivotTo(SF.CFrame + Vector3.new(0,SF.Size/2+1,0))
 		end,
 	})
 	
 	local Autoslap = false
 	local function autoslapfunction(c)
 		if not Autoslap then return end
-		local lantern = getLantern(true)
+		local lantern:Tool = getLantern(true)
+		task.wait(0.05)
+		lantern:Activate()
 		task.wait(0.05)
 		print(c and c.Name)
 		if c and c.Name == "TrackGloveMissile" then
