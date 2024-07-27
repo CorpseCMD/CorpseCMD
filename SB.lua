@@ -1544,22 +1544,32 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 				end
 			end
 		elseif c and c.Name == "Guide" then
+			local args = {
+				[1] = "Hit",
+				[2] = c:FindFirstChild("HumanoidRootPart")
+			}
 			while c and c:FindFirstChild("Humanoid") and c.Humanoid.Health > 0 do
 				task.wait(0)
-				local args = {
-					[1] = "Hit",
-					[2] = c:FindFirstChild("HumanoidRootPart")
-				}
-				if lantern:FindFirstChild("Network") then
-					lantern.Network:FireServer(unpack(args))
-				else
-					warn("Network Remote not found!!!!")
+				for i=1,20 do
+					if lantern:FindFirstChild("Network") then
+						lantern.Network:FireServer(unpack(args))
+					else
+						warn("Network Remote not found!!!!")
+					end
 				end
 			end
 		
 		end
 	end
-	game.Workspace.ChildAdded:Connect(autoslapfunction)
+	while true do
+		task.wait(0.05)
+		for i, b in game.Workspace:GetChildren() do
+			task.spawn(function()
+				autoslapfunction(b)
+			end)
+			task.wait(0.01)
+		end
+	end
 	Section31:AddToggle({
 		Name = "Toggle Auto slap Guide / Track / Golem / Replicas",
 		Default = false,
