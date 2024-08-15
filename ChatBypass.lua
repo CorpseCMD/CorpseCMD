@@ -1,4 +1,4 @@
-
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/main/ChatBypass.lua'))()
 pcall(function()loadstring(game:HttpGet('https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua'))()end)
 
 local function initui()
