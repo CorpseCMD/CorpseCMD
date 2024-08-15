@@ -1,385 +1,444 @@
 
-local SpecialMessage = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local Message = Instance.new("TextBox")
-local Target = Instance.new("TextBox")
-local Send = Instance.new("TextButton")
-local AntiChatLogger = Instance.new("TextButton")
-local ChatView = Instance.new("TextLabel")
-local WordsList = Instance.new("TextButton")
-local List = Instance.new("ScrollingFrame")
-local Word = Instance.new("TextButton")
-local UIStroke = Instance.new("UIStroke")
-local UIListLayout = Instance.new("UIListLayout")
-local Word_2 = Instance.new("TextButton")
-local UIStroke_2 = Instance.new("UIStroke")
-local Word_3 = Instance.new("TextButton")
-local UIStroke_3 = Instance.new("UIStroke")
-local Word_4 = Instance.new("TextButton")
-local UIStroke_4 = Instance.new("UIStroke")
-local Word_5 = Instance.new("TextButton")
-local UIStroke_5 = Instance.new("UIStroke")
-local Word_6 = Instance.new("TextButton")
-local UIStroke_6 = Instance.new("UIStroke")
-local Word_7 = Instance.new("TextButton")
-local UIStroke_7 = Instance.new("UIStroke")
-local Word_8 = Instance.new("TextButton")
-local UIStroke_8 = Instance.new("UIStroke")
+pcall(function()loadstring(game:HttpGet('https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua'))()end)
 
-SpecialMessage.Name = "SpecialMessage"
-SpecialMessage.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-SpecialMessage.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local function initui()
+	-- Instances: 29 | Scripts: 0 | Modules: 0
+	local G2L = {};
 
-Frame.Parent = SpecialMessage
-Frame.BackgroundColor3 = Color3.fromRGB(125, 125, 125)
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.191, 0, 0.268999994, 0)
-Frame.Size = UDim2.new(0.190474585, 0, 0.461417913, 0)
+	-- StarterGui.CorpseCMDChatBypass
+	G2L["1"] = Instance.new("ScreenGui", game.CoreGui);
+	G2L["1"]["Name"] = [[CC.ChatBypasser]];
 
-Message.Name = "Message"
-Message.Parent = Frame
-Message.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Message.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Message.BorderSizePixel = 0
-Message.Position = UDim2.new(0.120999828, 0, 0.267996937, 0)
-Message.Size = UDim2.new(0.757000029, 0, 0.218999997, 0)
-Message.ClearTextOnFocus = false
-Message.Font = Enum.Font.SourceSans
-Message.MultiLine = true
-Message.PlaceholderText = "Message"
-Message.Text = ""
-Message.TextColor3 = Color3.fromRGB(0, 0, 0)
-Message.TextScaled = true
-Message.TextSize = 14.000
-Message.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI
+	G2L["2"] = Instance.new("Frame", G2L["1"]);
+	G2L["2"]["BorderSizePixel"] = 0;
+	G2L["2"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+	G2L["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+	G2L["2"]["Size"] = UDim2.new(0, 47, 0, 83);
+	G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["2"]["Position"] = UDim2.new(0.10000000149011612, 0, 0.49300000071525574, 0);
+	G2L["2"]["Name"] = [[UI]];
 
-Target.Name = "Target"
-Target.Parent = Frame
-Target.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Target.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Target.BorderSizePixel = 0
-Target.Position = UDim2.new(0.120999932, 0, 0.51438123, 0)
-Target.Size = UDim2.new(0.757000029, 0, 0.218999997, 0)
-Target.Font = Enum.Font.SourceSans
-Target.PlaceholderText = "Target User (leave blank for no private chat)"
-Target.Text = ""
-Target.TextColor3 = Color3.fromRGB(0, 0, 0)
-Target.TextScaled = true
-Target.TextSize = 14.000
-Target.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.UICorner
+	G2L["3"] = Instance.new("UICorner", G2L["2"]);
+	G2L["3"]["CornerRadius"] = UDim.new(0, 17);
 
-Send.Name = "Send"
-Send.Parent = Frame
-Send.BackgroundColor3 = Color3.fromRGB(136, 255, 0)
-Send.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Send.BorderSizePixel = 0
-Send.Position = UDim2.new(0.0491999984, 0, 0.788999975, 0)
-Send.Size = UDim2.new(0.363000005, 0, 0.140000001, 0)
-Send.Font = Enum.Font.SourceSans
-Send.Text = "Send Message"
-Send.TextColor3 = Color3.fromRGB(0, 0, 0)
-Send.TextScaled = true
-Send.TextSize = 14.000
-Send.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.UIStroke
+	G2L["4"] = Instance.new("UIStroke", G2L["2"]);
+	G2L["4"]["Color"] = Color3.fromRGB(255, 255, 255);
+	G2L["4"]["Thickness"] = 4;
+	G2L["4"]["Transparency"] = 0.800000011920929;
 
-AntiChatLogger.Name = "AntiChatLogger"
-AntiChatLogger.Parent = Frame
-AntiChatLogger.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-AntiChatLogger.BorderColor3 = Color3.fromRGB(0, 0, 0)
-AntiChatLogger.BorderSizePixel = 0
-AntiChatLogger.Position = UDim2.new(0.772852004, 0, 0.788999915, 0)
-AntiChatLogger.Size = UDim2.new(0.188591763, 0, 0.140000001, 0)
-AntiChatLogger.Font = Enum.Font.SourceSans
-AntiChatLogger.Text = "Load AntiChatLogger"
-AntiChatLogger.TextColor3 = Color3.fromRGB(0, 0, 0)
-AntiChatLogger.TextScaled = true
-AntiChatLogger.TextSize = 14.000
-AntiChatLogger.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.logo
+	G2L["5"] = Instance.new("ImageLabel", G2L["2"]);
+	G2L["5"]["BorderSizePixel"] = 0;
+	G2L["5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["5"]["AnchorPoint"] = Vector2.new(0.5, 0);
+	G2L["5"]["Image"] = [[rbxassetid://428258251]];
+	G2L["5"]["Size"] = UDim2.new(0, 27, 0, 27);
+	G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["5"]["Name"] = [[logo]];
+	G2L["5"]["BackgroundTransparency"] = 1;
+	G2L["5"]["Position"] = UDim2.new(0.5, 0, 0, 10);
 
-ChatView.Name = "ChatView"
-ChatView.Parent = Frame
-ChatView.BackgroundTransparency = 1.000
-ChatView.ClipsDescendants = true
-ChatView.Position = UDim2.new(0, 8, 0, 8)
-ChatView.Size = UDim2.new(0.925999999, 0, 0.200000003, 0)
-ChatView.Font = Enum.Font.SourceSansBold
-ChatView.Text = ""
-ChatView.TextColor3 = Color3.fromRGB(255, 255, 255)
-ChatView.TextSize = 18.000
-ChatView.TextStrokeTransparency = 0.750
-ChatView.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.maximize
+	G2L["6"] = Instance.new("ImageButton", G2L["2"]);
+	G2L["6"]["BorderSizePixel"] = 0;
+	G2L["6"]["AutoButtonColor"] = false;
+	G2L["6"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+	G2L["6"]["AnchorPoint"] = Vector2.new(0.5, 0);
+	G2L["6"]["Size"] = UDim2.new(0, 37, 0, 37);
+	G2L["6"]["Name"] = [[maximize]];
+	G2L["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["6"]["Position"] = UDim2.new(0.5, 0, 1, -42);
 
-WordsList.Name = "WordsList"
-WordsList.Parent = Frame
-WordsList.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-WordsList.BorderColor3 = Color3.fromRGB(0, 0, 0)
-WordsList.BorderSizePixel = 0
-WordsList.Position = UDim2.new(0.448950976, 0, 0.788999915, 0)
-WordsList.Size = UDim2.new(0.284694284, 0, 0.140000001, 0)
-WordsList.Font = Enum.Font.SourceSans
-WordsList.Text = "Words List"
-WordsList.TextColor3 = Color3.fromRGB(0, 0, 0)
-WordsList.TextScaled = true
-WordsList.TextSize = 14.000
-WordsList.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.maximize.UICorner
+	G2L["7"] = Instance.new("UICorner", G2L["6"]);
+	G2L["7"]["CornerRadius"] = UDim.new(1, 0);
 
-List.Name = "List"
-List.Parent = Frame
-List.Active = true
-List.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-List.BorderColor3 = Color3.fromRGB(0, 0, 0)
-List.BorderSizePixel = 0
-List.Position = UDim2.new(1.05000877, 0, 0, 0)
-List.Size = UDim2.new(0, 169, 0, 247)
-List.Visible = false
-List.CanvasSize = UDim2.new(0, 0, 3, 0)
-List.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+	-- StarterGui.CorpseCMDChatBypass.UI.maximize.ImageLabel
+	G2L["8"] = Instance.new("ImageLabel", G2L["6"]);
+	G2L["8"]["BorderSizePixel"] = 0;
+	G2L["8"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["8"]["ImageColor3"] = Color3.fromRGB(171, 171, 171);
+	G2L["8"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+	G2L["8"]["Image"] = [[rbxassetid://7072718683]];
+	G2L["8"]["Size"] = UDim2.new(0.5, 0, 0.5, 0);
+	G2L["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["8"]["BackgroundTransparency"] = 1;
+	G2L["8"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 
-Word.Name = "Word"
-Word.Parent = List
-Word.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word.BorderSizePixel = 0
-Word.Size = UDim2.new(1, 0, 0, 50)
-Word.Font = Enum.Font.SourceSans
-Word.Text = "аѕѕһоlе"
-Word.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word.TextScaled = true
-Word.TextSize = 14.000
-Word.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar
+	G2L["a"] = Instance.new("Frame", G2L["2"]);
+	G2L["a"]["BorderSizePixel"] = 0;
+	G2L["a"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
+	G2L["a"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+	G2L["a"]["BackgroundTransparency"] = 1;
+	G2L["a"]["Size"] = UDim2.new(1, -30, 0, 30);
+	G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["a"]["Position"] = UDim2.new(0.5, 0, 0, 30);
+	G2L["a"]["Visible"] = false;
+	G2L["a"]["Name"] = [[upperbar]];
 
-UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke.Parent = Word
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.logo
+	G2L["b"] = Instance.new("ImageLabel", G2L["a"]);
+	G2L["b"]["BorderSizePixel"] = 0;
+	G2L["b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["b"]["AnchorPoint"] = Vector2.new(0, 0.5);
+	G2L["b"]["Image"] = [[rbxassetid://18481362660]];
+	G2L["b"]["Size"] = UDim2.new(0, 30, 0, 30);
+	G2L["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["b"]["Name"] = [[logo]];
+	G2L["b"]["BackgroundTransparency"] = 1;
+	G2L["b"]["Position"] = UDim2.new(0, 0, 0.5, 0);
 
-UIListLayout.Parent = List
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 3)
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.header
+	G2L["c"] = Instance.new("TextLabel", G2L["a"]);
+	G2L["c"]["BorderSizePixel"] = 0;
+	G2L["c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["c"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+	G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
+	G2L["c"]["TextSize"] = 15;
+	G2L["c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["c"]["Size"] = UDim2.new(0.8493150472640991, -33, 1, 0);
+	G2L["c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["c"]["Text"] = [[Corpse CMD - Bypasser]];
+	G2L["c"]["Name"] = [[header]];
+	G2L["c"]["BackgroundTransparency"] = 1;
+	G2L["c"]["Position"] = UDim2.new(0, 33, 0, 2);
 
-Word_2.Name = "Word"
-Word_2.Parent = List
-Word_2.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word_2.BorderSizePixel = 0
-Word_2.Size = UDim2.new(1, 0, 0, 50)
-Word_2.Font = Enum.Font.SourceSans
-Word_2.Text = "с⁥⁥⁥о⁥⁥⁥с⁥⁥⁥k"
-Word_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word_2.TextScaled = true
-Word_2.TextSize = 14.000
-Word_2.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.minimize
+	G2L["d"] = Instance.new("ImageButton", G2L["a"]);
+	G2L["d"]["BorderSizePixel"] = 0;
+	G2L["d"]["AutoButtonColor"] = false;
+	G2L["d"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+	G2L["d"]["Size"] = UDim2.new(0, 30, 0, 30);
+	G2L["d"]["Name"] = [[minimize]];
+	G2L["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["d"]["Position"] = UDim2.new(1, -30, 0, 0);
 
-UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_2.Parent = Word_2
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.minimize.UICorner
+	G2L["e"] = Instance.new("UICorner", G2L["d"]);
+	G2L["e"]["CornerRadius"] = UDim.new(0, 6);
 
-Word_3.Name = "Word"
-Word_3.Parent = List
-Word_3.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word_3.BorderSizePixel = 0
-Word_3.Size = UDim2.new(1, 0, 0, 50)
-Word_3.Font = Enum.Font.SourceSans
-Word_3.Text = "с⁥⁥⁥u⁥⁥⁥m"
-Word_3.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word_3.TextScaled = true
-Word_3.TextSize = 14.000
-Word_3.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.minimize.ImageLabel
+	G2L["f"] = Instance.new("ImageLabel", G2L["d"]);
+	G2L["f"]["BorderSizePixel"] = 0;
+	G2L["f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["f"]["ImageColor3"] = Color3.fromRGB(171, 171, 171);
+	G2L["f"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+	G2L["f"]["Image"] = [[rbxassetid://7072719125]];
+	G2L["f"]["Size"] = UDim2.new(0.6399999856948853, 0, 0.6399999856948853, 0);
+	G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["f"]["BackgroundTransparency"] = 1;
+	G2L["f"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 
-UIStroke_3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_3.Parent = Word_3
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.settings
+	G2L["10"] = Instance.new("ImageButton", G2L["a"]);
+	G2L["10"]["BorderSizePixel"] = 0;
+	G2L["10"]["AutoButtonColor"] = false;
+	G2L["10"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+	G2L["10"]["Size"] = UDim2.new(0, 30, 0, 30);
+	G2L["10"]["Name"] = [[settings]];
+	G2L["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["10"]["Position"] = UDim2.new(1, -65, 0, 0);
 
-Word_4.Name = "Word"
-Word_4.Parent = List
-Word_4.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word_4.BorderSizePixel = 0
-Word_4.Size = UDim2.new(1, 0, 0, 50)
-Word_4.Font = Enum.Font.SourceSans
-Word_4.Text = "ѕ⁥⁥⁥е⁥⁥⁥х"
-Word_4.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word_4.TextScaled = true
-Word_4.TextSize = 14.000
-Word_4.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.settings.UICorner
+	G2L["11"] = Instance.new("UICorner", G2L["10"]);
+	G2L["11"]["CornerRadius"] = UDim.new(0, 6);
 
-UIStroke_4.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_4.Parent = Word_4
+	-- StarterGui.CorpseCMDChatBypass.UI.upperbar.settings.ImageLabel
+	G2L["12"] = Instance.new("ImageLabel", G2L["10"]);
+	G2L["12"]["BorderSizePixel"] = 0;
+	G2L["12"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["12"]["ImageColor3"] = Color3.fromRGB(171, 171, 171);
+	G2L["12"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+	G2L["12"]["Image"] = [[rbxassetid://18151015259]];
+	G2L["12"]["Size"] = UDim2.new(0.6399999856948853, 0, 0.6399999856948853, 0);
+	G2L["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["12"]["BackgroundTransparency"] = 1;
+	G2L["12"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 
-Word_5.Name = "Word"
-Word_5.Parent = List
-Word_5.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word_5.BorderSizePixel = 0
-Word_5.Size = UDim2.new(1, 0, 0, 50)
-Word_5.Font = Enum.Font.SourceSans
-Word_5.Text = "һ⁥⁥⁥⁥⁥⁥⁥о⁥⁥⁥⁥⁥⁥⁥е⁥⁥⁥⁥⁥⁥"
-Word_5.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word_5.TextScaled = true
-Word_5.TextSize = 14.000
-Word_5.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.bar
+	G2L["13"] = Instance.new("Frame", G2L["2"]);
+	G2L["13"]["BorderSizePixel"] = 0;
+	G2L["13"]["BackgroundColor3"] = Color3.fromRGB(32, 32, 32);
+	G2L["13"]["AnchorPoint"] = Vector2.new(0.5, 0);
+	G2L["13"]["Size"] = UDim2.new(1, -30, 0, 40);
+	G2L["13"]["ClipsDescendants"] = true;
+	G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["13"]["Position"] = UDim2.new(0.5, 0, 1, -50);
+	G2L["13"]["AutomaticSize"] = Enum.AutomaticSize.Y;
+	G2L["13"]["Visible"] = false;
+	G2L["13"]["Name"] = [[bar]];
 
-UIStroke_5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_5.Parent = Word_5
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.UICorner
+	G2L["14"] = Instance.new("UICorner", G2L["13"]);
 
-Word_6.Name = "Word"
-Word_6.Parent = List
-Word_6.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word_6.BorderSizePixel = 0
-Word_6.Size = UDim2.new(1, 0, 0, 50)
-Word_6.Font = Enum.Font.SourceSans
-Word_6.Text = "⁥⁥⁥р⁥⁥⁥е⁥⁥⁥n⁥⁥⁥i⁥⁥⁥ѕ"
-Word_6.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word_6.TextScaled = true
-Word_6.TextSize = 14.000
-Word_6.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.messagebox
+	G2L["15"] = Instance.new("TextBox", G2L["13"]);
+	G2L["15"]["PlaceholderColor3"] = Color3.fromRGB(179, 179, 179);
+	G2L["15"]["BorderSizePixel"] = 0;
+	G2L["15"]["TextSize"] = 15;
+	G2L["15"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+	G2L["15"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["15"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["15"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Medium, Enum.FontStyle.Normal);
+	G2L["15"]["BackgroundTransparency"] = 1;
+	G2L["15"]["PlaceholderText"] = [[Message here]];
+	G2L["15"]["Size"] = UDim2.new(1, -82, 1, 0);
+	G2L["15"]["ClipsDescendants"] = true;
+	G2L["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["15"]["Text"] = [[]];
+	G2L["15"]["Name"] = [[messagebox]];
+	G2L["15"]["ClearTextOnFocus"] = false;
 
-UIStroke_6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_6.Parent = Word_6
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.messagebox.UIPadding
+	G2L["16"] = Instance.new("UIPadding", G2L["15"]);
+	G2L["16"]["PaddingTop"] = UDim.new(0, 6);
+	G2L["16"]["PaddingBottom"] = UDim.new(0, 6);
+	G2L["16"]["PaddingLeft"] = UDim.new(0, 10);
 
-Word_7.Name = "Word"
-Word_7.Parent = List
-Word_7.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word_7.BorderSizePixel = 0
-Word_7.Size = UDim2.new(1, 0, 0, 50)
-Word_7.Font = Enum.Font.SourceSans
-Word_7.Text = "ѕ⁥⁥⁥m⁥⁥⁥а⁥⁥⁥ӏ⁥⁥⁥ӏ ⁥⁥⁥р⁥⁥⁥е⁥⁥⁥n⁥⁥⁥i⁥⁥⁥ѕ"
-Word_7.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word_7.TextScaled = true
-Word_7.TextSize = 14.000
-Word_7.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.send
+	G2L["17"] = Instance.new("ImageButton", G2L["13"]);
+	G2L["17"]["BorderSizePixel"] = 0;
+	G2L["17"]["AutoButtonColor"] = false;
+	G2L["17"]["BackgroundColor3"] = Color3.fromRGB(32, 32, 32);
+	G2L["17"]["Size"] = UDim2.new(0, 40, 0, 40);
+	G2L["17"]["Name"] = [[send]];
+	G2L["17"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["17"]["Position"] = UDim2.new(1, -40, 0, 0);
 
-UIStroke_7.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_7.Parent = Word_7
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.send.UICorner
+	G2L["18"] = Instance.new("UICorner", G2L["17"]);
 
-Word_8.Name = "Word"
-Word_8.Parent = List
-Word_8.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
-Word_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Word_8.BorderSizePixel = 0
-Word_8.Size = UDim2.new(1, 0, 0, 50)
-Word_8.Font = Enum.Font.SourceSans
-Word_8.Text = "������ a������������ ������ s������ ѕ"
-Word_8.TextColor3 = Color3.fromRGB(0, 0, 0)
-Word_8.TextScaled = true
-Word_8.TextSize = 14.000
-Word_8.TextWrapped = true
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.send.Frame
+	G2L["19"] = Instance.new("Frame", G2L["17"]);
+	G2L["19"]["BorderSizePixel"] = 0;
+	G2L["19"]["BackgroundColor3"] = Color3.fromRGB(32, 32, 32);
+	G2L["19"]["Size"] = UDim2.new(0, 4, 1, 0);
+	G2L["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 
-UIStroke_8.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke_8.Parent = Word_8
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.send.ImageLabel
+	G2L["1a"] = Instance.new("ImageLabel", G2L["17"]);
+	G2L["1a"]["BorderSizePixel"] = 0;
+	G2L["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["1a"]["ImageColor3"] = Color3.fromRGB(131, 131, 131);
+	G2L["1a"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+	G2L["1a"]["Image"] = [[rbxassetid://18150985605]];
+	G2L["1a"]["Size"] = UDim2.new(0, 20, 0, 20);
+	G2L["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["1a"]["BackgroundTransparency"] = 1;
+	G2L["1a"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.clear
+	G2L["1b"] = Instance.new("ImageButton", G2L["13"]);
+	G2L["1b"]["BorderSizePixel"] = 0;
+	G2L["1b"]["AutoButtonColor"] = false;
+	G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(32, 32, 32);
+	G2L["1b"]["Size"] = UDim2.new(0, 40, 0, 40);
+	G2L["1b"]["Name"] = [[clear]];
+	G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["1b"]["Position"] = UDim2.new(1, -80, 0, 0);
 
-local function plrchat(message,privateChatTarget)
-	if game:GetService("TextChatService"):FindFirstChild("TextChannels") then
-		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message)
-	else
-		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message,privateChatTarget or "All")
-	end
+	-- StarterGui.CorpseCMDChatBypass.UI.bar.clear.ImageLabel
+	G2L["1c"] = Instance.new("ImageLabel", G2L["1b"]);
+	G2L["1c"]["BorderSizePixel"] = 0;
+	G2L["1c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["1c"]["ImageColor3"] = Color3.fromRGB(131, 131, 131);
+	G2L["1c"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+	G2L["1c"]["Image"] = [[rbxassetid://17746544452]];
+	G2L["1c"]["Size"] = UDim2.new(0, 20, 0, 20);
+	G2L["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["1c"]["BackgroundTransparency"] = 1;
+	G2L["1c"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+	return G2L["1"];
 end
-local specialLetters = {
-	["a"] = "а",
-	["b"] = "b",
-	["c"] = "с",
-	["d"] = "d",
-	["e"] = "⁥⁥⁥е",
-	["f"] = "f",
-	["g"] = "g",
-	["h"] = "һ",
-	["i"] = "і",
-	["j"] = "j",
-	["k"] = "k",
-	["l"] = "ӏ", 
-	["m"] = "m",
-	["n"] = "n",
-	["o"] = "ο",
-	["p"] = "р",
-	["q"] = "q", 
-	["r"] = "r",
-	["s"] = "ѕ", 
-	["t"] = "t",
-	["u"] = "υ",
-	["v"] = "ν",
-	["w"] = "w",
-	["x"] = "х",
-	["y"] = "у",
-	["z"] = "z",
-	["A"] = "Α",
-	["B"] = "Β",
-	["C"] = "С",
-	["D"] = "D",
-	["E"] = "Ε",
-	["F"] = "F",
-	["G"] = "G",
-	["H"] = "Η",
-	["I"] = "І",
-	["J"] = "J",
-	["K"] = "Κ",
-	["L"] = "L", 
-	["M"] = "M",
-	["N"] = "N",
-	["O"] = "О",
-	["P"] = "Р",
-	["Q"] = "Q",
-	["R"] = "R",
-	["S"] = "Ѕ",
-	["T"] = "T",
-	["U"] = "U",
-	["V"] = "V",
-	["W"] = "W",
-	["X"] = "Х",
-	["Y"] = "Y",
-	["Z"] = "Z",
-	["!"] = "ǃ",
-	["$"] = "＄",
-	["1"] = "１",
-	["2"] = "２",
-	["3"] = "３",
-	["4"] = "４",
-	["5"] = "５",
-	["6"] = "６",
-	["7"] = "７",
-	["8"] = "৪",
-	["9"] = "９",
-	["0"] = "０",
-}
+spawn(function()
+	local function a()
+		local ts = game:GetService("TweenService")
+		local ti = TweenInfo.new(0.1, Enum.EasingStyle.Linear)
+		local ui = initui().UI
 
-Frame.Message:GetPropertyChangedSignal("Text"):Connect(function()
-	local targetMessage = Frame.Message.Text
-	local MessageToSend = string.sub(targetMessage,1,1)
-	for i = 2, #targetMessage do
-		MessageToSend..= specialLetters[string.sub(targetMessage,i,i)] or string.sub(targetMessage,i,i)
-	end
-	Frame.ChatView.Text = MessageToSend
-end)
+		local upperbar = ui.upperbar
+		local bar = ui.bar
+		local max = ui.maximize
+		local mini = upperbar.minimize
+		local settings = upperbar.settings
+		local send = bar.send
+		local clearlogs = bar.clear
+		local box = bar.messagebox
 
-if not game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents") then
-	Frame.Target.Visible = false
-end
+		-- Animations setup
+		local function expand()
+			ts:Create(ui, ti, { Size = UDim2.new(0, 322, 0, 109) }):Play()
+			ts:Create(ui, ti, { Position = UDim2.new(ui.Position.X.Scale, ui.Position.X.Offset + 140, ui.Position.Y.Scale, ui.Position.Y.Offset) }):Play()
+			upperbar.Visible = true
+			bar.Visible = true
+			max.Visible = false
+			ui.logo.Visible = false
+		end
 
+		local function minimize()
+			ts:Create(ui, ti, { Size = UDim2.new(0, 47, 0, 83) }):Play()
+			ts:Create(ui, ti, { Position = UDim2.new(ui.Position.X.Scale, ui.Position.X.Offset - 140, ui.Position.Y.Scale, ui.Position.Y.Offset) }):Play()
+			upperbar.Visible = false
+			bar.Visible = false
+			max.Visible = true
+			ui.logo.Visible = true
+		end
 
-for i, button in Frame.List:GetChildren() do
-	if button:IsA("TextButton") then
-		button.MouseButton1Click:Connect(function()
-			Frame.Message.Text..=button.Text
+		max.MouseButton1Click:Connect(expand)
+		mini.MouseButton1Click:Connect(minimize)
+
+		-- Event handling for settings, clearlogs, send button interactions
+		settings.MouseEnter:Connect(function()
+			settings.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+		end)
+		settings.MouseLeave:Connect(function()
+			settings.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+		end)
+
+		clearlogs.MouseEnter:Connect(function()
+			clearlogs.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+			clearlogs.ImageLabel.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		end)
+		clearlogs.MouseLeave:Connect(function()
+			clearlogs.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+			clearlogs.ImageLabel.ImageColor3 = Color3.fromRGB(131,131,131)
+		end)
+
+		send.MouseEnter:Connect(function()
+			send.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+			send.Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+		end)
+		send.MouseLeave:Connect(function()
+			send.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+			send.Frame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+		end)
+
+		-- Dragging functionality
+		local function update(input)
+			local delta = input.Position - dragStart
+			ui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		end
+
+		ui.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = ui.Position
+
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+					end
+				end)
+			end
+		end)
+
+		ui.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+
+		game:GetService("UserInputService").InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				update(input)
+			end
+		end)
+
+		pcall(function()
+			local tcs = game:GetService("TextChatService")
+			local chat = tcs.ChatInputBarConfiguration.TargetTextChannel
+
+			local letters = {
+				["A"] = "\208\144", ["a"] = "\208\176",
+				["B"] = "Β", ["b"] = "b",
+				["C"] = "С", ["c"] = "\209\129",
+				["D"] = "D", ["d"] = "d",
+				["E"] = "Ε", ["e"] = "\208\181",
+				["F"] = "Ғ", ["f"] = "f",
+				["G"] = "ԍ", ["g"] = "g",
+				["H"] = "Η", ["h"] = "\210\187",
+				["I"] = "I", ["i"] = "\209\150",
+				["J"] = "Ј", ["j"] = "ј",
+				["K"] = "Κ", ["k"] = "k",
+				["L"] = "L", ["l"] = "\211\143",
+				["M"] = "Μ", ["m"] = "m",
+				["N"] = "Ν", ["n"] = "n",
+				["O"] = "Ο", ["o"] = "\208\190",
+				["P"] = "Ρ", ["p"] = "р",
+				["Q"] = "Ԛ", ["q"] = "ԛ",
+				["R"] = "R", ["r"] = "r",
+				["S"] = "Ṡ", ["s"] = "ѕ",
+				["T"] = "Τ", ["t"] = "t",
+				["U"] = "ᴜ", ["u"] = "u",
+				["V"] = "Ѵ", ["v"] = "ѵ",
+				["W"] = "W", ["w"] = "w",
+				["X"] = "Χ", ["x"] = "\209\133",
+				["Y"] = "Υ", ["y"] = "\209\131",
+				["Z"] = "Ζ", ["z"] = "ᴢ",
+
+				[" "] = ""
+			}
+
+			local function filter(message)
+				local actual_string = ""
+				for i, v in pairs(message:split("")) do
+					if letters[v] then
+						actual_string = actual_string .. letters[v]
+					else
+						actual_string = actual_string .. v
+					end
+				end
+				actual_string = actual_string:gsub("'", "")
+				warn(actual_string)
+				return actual_string
+			end
+
+			local function clearlogsf()
+				for i = 1, 19 do
+					chat:SendAsync("")
+				end
+			end
+
+			clearlogs.MouseButton1Click:Connect(function()
+				clearlogsf()
+			end)
+
+			box:GetPropertyChangedSignal("Text"):Connect(function()
+				if #box.Text > 0 then
+					bar.send.ImageLabel.ImageColor3 = Color3.fromRGB(255, 255, 255)
+				elseif #box.Text > 200 or #box.Text == 0 then
+					bar.send.ImageLabel.ImageColor3 = Color3.fromRGB(131, 131, 131)
+				end
+			end)
+			
+			local function sendchat(msg, original_msg)
+				local tagged = game.Chat:FilterStringForBroadcast(msg, game.Players.LocalPlayer) ~= msg -- means it tagged
+				if tagged then
+					game.StarterGui:SetCore("SendNotification", {
+						Title = "Corpse CMD Chat BYPASSER",
+						Text = "It got tagged. 😭"
+					})
+					return
+				end
+				if tcs.ChatVersion == Enum.ChatVersion.LegacyChatService then
+					game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:FireServer(msg,"All")
+				else
+					chat:SendAsync(msg)
+				end
+			end
+			box.FocusLost:Connect(function(enterPressed)
+				if enterPressed then
+					sendchat(filter(box.Text), box.Text)
+					box.Text = ""
+				end
+			end)
 		end)
 	end
-end
-Frame.WordsList.MouseButton1Click:Connect(function()
-	Frame.List.Visible = not Frame.List.Visible
+	a()
 end)
-
-Frame.Send.MouseButton1Click:Connect(function()
-	local targetMessage = Frame.Message.Text
-	local targetPlr = #Frame.Target.Text > 3 and Frame.Target.Text or "All"
-	local MessageToSend = string.sub(targetMessage,1,1)
-	for i = 2, #targetMessage do
-		MessageToSend..= specialLetters[string.sub(targetMessage,i,i)] or string.sub(targetMessage,i,i)
-	end
-	plrchat(MessageToSend,targetPlr or "All")
-end)
-
-Frame.AntiChatLogger.MouseButton1Click:Wait()
-Frame.AntiChatLogger:Destroy()
-local httpService = game:GetService("HttpService")
-local scriptUrl = "https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/AntiChatLogger.lua"
-loadstring(httpService:GetAsync(scriptUrl))()
