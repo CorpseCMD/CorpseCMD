@@ -13,7 +13,6 @@ Effect_1.Material = Enum.Material.Glass
 Effect_1.Size = Vector3.new(4.00, 4.00, 4.00)
 Effect_1.BrickColor = BrickColor.new("Really black")
 Effect_1.Position = Vector3.new(-26.75, 3.00, -9.55)
-Effect_1.CFrame = CFrame.new(-26.75, 3.00, -9.55, -0.00, -0.00, -1.00)
 Effect_1.Parent = game:GetService("ReplicatedStorage")
 
 local Highlight = Instance.new("Highlight")
@@ -35,7 +34,6 @@ Effect_2.Size = Vector3.new(4.00, 4.00, 4.00)
 Effect_2.Rotation = Vector3.new(-19.37, 32.96, 10.83)
 Effect_2.BrickColor = BrickColor.new("Really black")
 Effect_2.Position = Vector3.new(36.41, 6.88, 35.57)
-Effect_2.CFrame = CFrame.new(36.41, 6.88, 35.57, -0.54, -0.28, -0.79)
 Effect_2.Parent = game:GetService("ReplicatedStorage")
 
 local Highlight = Instance.new("Highlight")
@@ -57,7 +55,6 @@ Effect_3.Size = Vector3.new(4.00, 4.00, 4.00)
 Effect_3.Rotation = Vector3.new(-170.36, 4.44, 179.25)
 Effect_3.BrickColor = BrickColor.new("Really black")
 Effect_3.Position = Vector3.new(-28.09, 5.72, -40.52)
-Effect_3.CFrame = CFrame.new(-28.09, 5.72, -40.52, -0.08, -0.17, 0.98)
 Effect_3.Parent = game:GetService("ReplicatedStorage")
 
 local Highlight = Instance.new("Highlight")
