@@ -66,15 +66,22 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
 	m += 1
 	if m == 4 then m = 1 end
 	if m == 1 then
+		Effect_2.Parent=game:GetService("ReplicatedStorage")
+		Effect_3.Parent=game:GetService("ReplicatedStorage")
 		CurrentEffect = Effect_1
 	elseif m == 2 then
+		Effect_1.Parent=game:GetService("ReplicatedStorage")
+		Effect_3.Parent=game:GetService("ReplicatedStorage")
 		CurrentEffect = Effect_2
 	else
+		Effect_1.Parent=game:GetService("ReplicatedStorage")
+		Effect_2.Parent=game:GetService("ReplicatedStorage")
 		CurrentEffect = Effect_3
 	end
 end)
 
 workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function()
 	if CurrentEffect == nil then return end
+	CurrentEffect.Parent = workspace
 	CurrentEffect.CFrame = workspace.CurrentCamera.CFrame
 end)
