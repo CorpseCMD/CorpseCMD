@@ -15,6 +15,13 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 			OrionLib:Destroy()
 		end)
 	end,})
+	OrionLib:MakeNotification({
+		Name = "Corpse CMD | SB",
+		Content = "Loaded SB GUI | Updated for Bind glove",
+		Image = "rbxassetid://4483345998",
+		Time = 5
+	})
+
 	local Players = game:GetService("Players")
 	local plr = Players.LocalPlayer
 	task.wait()
@@ -305,6 +312,15 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 		game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
 	end
 
+	local function LostPotion()
+		mixItem("Elder Wood")
+		mixItem("Elder Wood")
+		mixItem("Elder Wood")
+		mixItem("Blue Crystal")
+		mixItem("Red Crystal")
+		game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
+	end
+
 	local function SpeedPotion()
 		mixItem("Mushroom")
 		mixItem("Mushroom")
@@ -451,6 +467,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 		CorruptedPotion()
 		ExplosionPotion()
 		NightmarePotion()
+		LostPotion()
 	end
 
 	-- Other stuff --
@@ -551,7 +568,100 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 			equip("Slapstick")
 		end    
 	})
-
+	local LagSection = Tab2:AddSection({
+		Name = "LAG / CRASH Section (boxer lag lags other people way more than you)"
+	})
+			
+	LagSection:AddButton({
+		Name = "LVL 1 - Boxer Lag | (no requirements :D)",
+		Callback = function()
+			local level = 0.3
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+			    if b.Name == "BoxingGlove" then
+			        b:Destroy()
+			    end
+			end end)
+			for i=1,level * 20 do
+			    for i=1,30 do
+			        game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+			
+			    end
+			    task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 2 - Boxer Lag | (no requirements :D)",
+		Callback = function()
+			local level = 0.6
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+			    if b.Name == "BoxingGlove" then
+			        b:Destroy()
+			    end
+			end end)
+			for i=1,level * 20 do
+			    for i=1,30 do
+			        game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+			
+			    end
+			    task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 3 - Boxer Lag | (no requirements :D)",
+		Callback = function()
+			local level = 1.25
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+			    if b.Name == "BoxingGlove" then
+			        b:Destroy()
+			    end
+			end end)
+			for i=1,level * 20 do
+			    for i=1,30 do
+			        game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+			
+			    end
+			    task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 4 - Boxer Lag | DISCONNECTS PEOPLE (no requirements :D)",
+		Callback = function()
+			local level = 2.75
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+			    if b.Name == "BoxingGlove" then
+			        b:Destroy()
+			    end
+			end end)
+			for i=1,level * 20 do
+			    for i=1,30 do
+			        game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+			
+			    end
+			    task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 5 - Boxer Lag | CRASH SERVER (no requirements :D)",
+		Callback = function()
+			local level = 4.5
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+			    if b.Name == "BoxingGlove" then
+			        b:Destroy()
+			    end
+			end end)
+			for i=1,level * 20 do
+			    for i=1,30 do
+			        game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+			
+			    end
+			    task.wait()
+			end
+		end,
+	})
 	local AlchemistSection = Tab2:AddSection({
 		Name = "Alchemist Section [Needs alchemist glove]"
 	})
