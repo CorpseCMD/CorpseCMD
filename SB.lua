@@ -629,7 +629,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 					[1] = target,
 					[2] = true
 				}
-				ReplicatedStorage:FindFirstChild("BoxingEvent"):FireServer(unpack(args))
+				BoxingEvent:FireServer(unpack(args))
 			end
 			
 			local Glitcheffect = Instance.new("ParticleEmitter")
@@ -757,7 +757,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 				local hum = char and char:FindFirstChildOfClass("Humanoid")
 				if not hum then return end
 				if hum and hum.MoveDirection.Magnitude > 0.2 then
-					char:TranslateBy(hum.MoveDirection * 4)
+					char:TranslateBy(hum.MoveDirection * 0.8)
 				end
 			end
 			lplr.leaderstats.Glove.Value = ogGlove
