@@ -17,7 +17,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 	end,})
 	OrionLib:MakeNotification({
 		Name = "Corpse CMD | SB",
-		Content = "Loaded SB GUI | Updated for Bind glove",
+		Content = "Loaded ⛓️Slap battles GUI | Ver 1.1.3",
 		Image = "rbxassetid://4483345998",
 		Time = 5
 	})
@@ -133,7 +133,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 		if kickDebounce or DISABLE_SCRIPT then return end
 		game.Workspace.Lobby.Teleport3.CanTouch = false
 		local cf = CFrame.new(
-			-720.534058, 314.735168, 0.705005825, 0.178254008, -0.547166348, 0.817822993, 3.79947096e-08, 0.831134021, 0.556072116, -0.98398453, -0.0991220549, 0.148152992	)
+			-720.534058, 317.735168, 0.705005825, 0.178254008, -0.547166348, 0.817822993, 3.79947096e-08, 0.831134021, 0.556072116, -0.98398453, -0.0991220549, 0.148152992	)
 		local char = plr.Character
 		local hum = char and char:FindFirstChildOfClass("Humanoid")
 		local hrp = hum and hum.RootPart
@@ -301,11 +301,6 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 	end
 
 
-	local function HastePotion()
-		mixItem("Autumn Sprout")
-		mixItem("Jade Stone")
-		game:GetService("ReplicatedStorage").AlchemistEvent:FireServer("BrewPotion")
-	end
 	local function HastePotion()
 		mixItem("Autumn Sprout")
 		mixItem("Jade Stone")
@@ -724,749 +719,749 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 							if (target_hrp.Position - hrp.Position).Magnitude <= 40 and dotProduct > 0.6 then
 
 								if ogGlove == "slapstick" then slapstickSlap(v) elseif ogGlove == "Boxer" then boxingslap(v) end
-							task.wait(0.52)
+								task.wait(0.52)
+							end
 						end
 					end
 				end
-			end
-		end)
+			end)
 
-	local tool = Instance.new("Tool")
-	tool.Name = "Tp Tool"
-	tool.RequiresHandle = false
-	tool.CanBeDropped = false
-	tool.Parent = lplr.Backpack
-	tool.Activated:Connect(function()
-		local mouse = lplr:GetMouse()
-		if mouse.Hit then
-			char:PivotTo(mouse.Hit + Vector3.new(0,2,0))
-		end
-	end)
-	local walking, prevWalking = false, false
-	hum:GetPropertyChangedSignal("MoveDirection"):Connect(function()
-		walking = hum.MoveDirection.Magnitude > 0.1
-		if walking ~= prevWalking then
-			if not walking then
-				walk:Stop()
-				idle:Play(0.1,1.1,1)
-			else
-				idle:Stop(0.1)
-				walk:Play(0.1,1.1,1)
-			end
-		end
-		prevWalking = walking
-	end)
-	lplr.leaderstats.Glove.Value = "Edgelord"
-	-- Speed + wait until dead loop
-	while char and hum and hrp and hum.Health > 0 do
-		task.wait(0.015)
-		local hum = char and char:FindFirstChildOfClass("Humanoid")
-		if not hum then return end
-		if hum and hum.MoveDirection.Magnitude > 0.2 then
-			char:TranslateBy(hum.MoveDirection * 0.8)
-		end
-	end
-	lplr.leaderstats.Glove.Value = ogGlove
-	equip(ogGlove)
-	if conn then
-		conn:Disconnect()
-	end
-	musicc:Destroy()
-end    
-})
-
-local LagSection = Tab2:AddSection({
-	Name = "LAG / CRASH Section (boxer lag lags other people way more than you)"
-})
-
-LagSection:AddButton({
-	Name = "LVL 1 - Boxer Lag | (no requirements :D)",
-	Callback = function()
-		local level = 0.3
-		game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
-				if b.Name == "BoxingGlove" then
-					b:Destroy()
+			local tool = Instance.new("Tool")
+			tool.Name = "Tp Tool"
+			tool.RequiresHandle = false
+			tool.CanBeDropped = false
+			tool.Parent = lplr.Backpack
+			tool.Activated:Connect(function()
+				local mouse = lplr:GetMouse()
+				if mouse.Hit then
+					char:PivotTo(mouse.Hit + Vector3.new(0,2,0))
 				end
-			end end)
-		for i=1,level * 20 do
-			for i=1,30 do
-				game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
-
-			end
-			task.wait()
-		end
-	end,
-})
-LagSection:AddButton({
-	Name = "LVL 2 - Boxer Lag | (no requirements :D)",
-	Callback = function()
-		local level = 0.6
-		game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
-				if b.Name == "BoxingGlove" then
-					b:Destroy()
-				end
-			end end)
-		for i=1,level * 20 do
-			for i=1,30 do
-				game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
-
-			end
-			task.wait()
-		end
-	end,
-})
-LagSection:AddButton({
-	Name = "LVL 3 - Boxer Lag | (no requirements :D)",
-	Callback = function()
-		local level = 1.25
-		game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
-				if b.Name == "BoxingGlove" then
-					b:Destroy()
-				end
-			end end)
-		for i=1,level * 20 do
-			for i=1,30 do
-				game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
-
-			end
-			task.wait()
-		end
-	end,
-})
-LagSection:AddButton({
-	Name = "LVL 4 - Boxer Lag | DISCONNECTS PEOPLE (no requirements :D)",
-	Callback = function()
-		local level = 2.75
-		game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
-				if b.Name == "BoxingGlove" then
-					b:Destroy()
-				end
-			end end)
-		for i=1,level * 20 do
-			for i=1,30 do
-				game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
-
-			end
-			task.wait()
-		end
-	end,
-})
-LagSection:AddButton({
-	Name = "LVL 5 - Boxer Lag | CRASH SERVER (no requirements :D)",
-	Callback = function()
-		local level = 4.5
-		game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
-				if b.Name == "BoxingGlove" then
-					b:Destroy()
-				end
-			end end)
-		for i=1,level * 20 do
-			for i=1,30 do
-				game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
-
-			end
-			task.wait()
-		end
-	end,
-})
-local AlchemistSection = Tab2:AddSection({
-	Name = "Alchemist Section [Needs alchemist glove]"
-})
-
-AlchemistSection:AddButton({
-	Name = "Equip Alchemist [Lobby]",
-	Callback = function()
-		equip("Alchemist")
-	end    
-})
-AlchemistSection:AddButton({
-	Name = "Give 100 of all Ingredients",
-	Callback = function()
-		game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
-
-		Give100IngredientsAlchemist()
-	end    
-})
-
-AlchemistSection:AddButton({
-	Name = "Give all potions [small lag]",
-	Callback = function()
-		game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
-
-		givePotions()
-	end    
-})
-task.wait()
-AlchemistSection:AddButton({
-	Name = "Give all potions X10 [LAG]",
-	Callback = function()
-		game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
-
-		for i=1,10 do
-			givePotions()
-			task.wait(0.1)
-		end
-	end    
-})
---[[ ANTIS - Credits to Hub That Exists ]]--
-
-
-if game.Workspace:FindFirstChild("ToggleAllAntisCORPSECMD_SB") == nil then
-	local ToggleAllAntisCORPSECMD_SB = Instance.new("BoolValue", workspace)
-	ToggleAllAntisCORPSECMD_SB.Name = "ToggleAllAntisCORPSECMD_SB"
-end
-Tab3:AddToggle({
-	Name = "Toggle All Antis",
-	Default = false,
-	Callback = function(Value)
-		game.Workspace.ToggleAllAntisCORPSECMD_SB.Value = Value
-	end
-})
-
-AA = Tab3:AddToggle({
-	Name = "Anti Admins (Notifies you of admins)",
-	Default = false,
-	Callback = function(Value)
-		local AntiAdmins = Value
-		while AntiAdmins do
-			for i,v in pairs(Players:GetPlayers()) do
-				if v:GetRankInGroup(9950771) >= 2 then
-					OrionLib:MakeNotification({
-						Name = "High rank player detected!",
-						Content = "Player " .. v.Name .. " Has a higher rank in the Slap battles Group",
-						Image = "rbxassetid://14895383047",
-						Time = 6
-					})
-				end
-			end
-			task.wait()
-		end
-	end
-})
-
-AK = Tab3:AddToggle({
-	Name = "Anti Kick",
-	Default = false,
-	Callback = function(Value)
-		local AntiKick = Value
-		while AntiKick do
-			for i,v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetDescendants()) do
-				if v.Name == "ErrorPrompt" then
-					game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
-				end
-			end
-			task.wait()
-		end
-	end
-})
-
-APL = Tab3:AddToggle({
-	Name = "Anti Portal",
-	Default = false,
-	Callback = function(Value)
-		local AntiPortal = Value
-		if AntiPortal == true then
-			--workspace.Lobby.Teleport2.CanTouch = false
-			workspace.Lobby.Teleport3.CanTouch = false
-			workspace.Lobby.Teleport4.CanTouch = false
-			workspace.Lobby.Teleport6.CanTouch = false
-		else
-			--workspace.Lobby.Teleport2.CanTouch = true
-			workspace.Lobby.Teleport3.CanTouch = true
-			workspace.Lobby.Teleport4.CanTouch = true
-			workspace.Lobby.Teleport6.CanTouch = true
-		end
-	end
-})
-
-AR2 = Tab3:AddToggle({
-	Name = "Anti Ragdoll V2",
-	Default = false,
-	Callback = function(Value)
-		local AntiRagdoll = Value
-		if AntiRagdoll then
-			local function antiRagdollFunction()
-				plr.Character:WaitForChild("Ragdolled").Changed:Connect(function()
-					if plr.Character:WaitForChild("Ragdolled").Value == true and AntiRagdoll then
-						local ogCF = plr.Character:GetPivot()
-						repeat task.wait() plr.Character.Torso.Anchored = true plr.Character:PivotTo(ogCF)
-						until plr.Character:WaitForChild("Ragdolled").Value == false
-						plr.Character.Torso.Anchored = false
+			end)
+			local walking, prevWalking = false, false
+			hum:GetPropertyChangedSignal("MoveDirection"):Connect(function()
+				walking = hum.MoveDirection.Magnitude > 0.1
+				if walking ~= prevWalking then
+					if not walking then
+						walk:Stop()
+						idle:Play(0.1,1.1,1)
+					else
+						idle:Stop(0.1)
+						walk:Play(0.1,1.1,1)
 					end
-				end)
+				end
+				prevWalking = walking
+			end)
+			lplr.leaderstats.Glove.Value = "Edgelord"
+			-- Speed + wait until dead loop
+			while char and hum and hrp and hum.Health > 0 do
+				task.wait(0.015)
+				local hum = char and char:FindFirstChildOfClass("Humanoid")
+				if not hum then return end
+				if hum and hum.MoveDirection.Magnitude > 0.2 then
+					char:TranslateBy(hum.MoveDirection * 0.8)
+				end
 			end
-			plr.CharacterAdded:Connect(antiRagdollFunction)
-			if plr.Character then
-				antiRagdollFunction()
+			lplr.leaderstats.Glove.Value = ogGlove
+			equip(ogGlove)
+			if conn then
+				conn:Disconnect()
+			end
+			musicc:Destroy()
+		end    
+	})
+
+	local LagSection = Tab2:AddSection({
+		Name = "LAG / CRASH Section (boxer lag lags other people way more than you)"
+	})
+
+	LagSection:AddButton({
+		Name = "LVL 1 - Boxer Lag | (no requirements :D)",
+		Callback = function()
+			local level = 0.3
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+					if b.Name == "BoxingGlove" then
+						b:Destroy()
+					end
+				end end)
+			for i=1,level * 20 do
+				for i=1,30 do
+					game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+
+				end
+				task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 2 - Boxer Lag | (no requirements :D)",
+		Callback = function()
+			local level = 0.6
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+					if b.Name == "BoxingGlove" then
+						b:Destroy()
+					end
+				end end)
+			for i=1,level * 20 do
+				for i=1,30 do
+					game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+
+				end
+				task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 3 - Boxer Lag | (no requirements :D)",
+		Callback = function()
+			local level = 1.25
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+					if b.Name == "BoxingGlove" then
+						b:Destroy()
+					end
+				end end)
+			for i=1,level * 20 do
+				for i=1,30 do
+					game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+
+				end
+				task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 4 - Boxer Lag | DISCONNECTS PEOPLE (no requirements :D)",
+		Callback = function()
+			local level = 2.75
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+					if b.Name == "BoxingGlove" then
+						b:Destroy()
+					end
+				end end)
+			for i=1,level * 20 do
+				for i=1,30 do
+					game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+
+				end
+				task.wait()
+			end
+		end,
+	})
+	LagSection:AddButton({
+		Name = "LVL 5 - Boxer Lag | CRASH SERVER (no requirements :D)",
+		Callback = function()
+			local level = 4.5
+			game.Players.LocalPlayer.Character.ChildAdded:Connect(function() for i, b in game.Players.LocalPlayer.Character:GetChildren() do
+					if b.Name == "BoxingGlove" then
+						b:Destroy()
+					end
+				end end)
+			for i=1,level * 20 do
+				for i=1,30 do
+					game:GetService("ReplicatedStorage").Events.Boxing:FireServer("equip")
+
+				end
+				task.wait()
+			end
+		end,
+	})
+	local AlchemistSection = Tab2:AddSection({
+		Name = "Alchemist Section [Needs alchemist glove]"
+	})
+
+	AlchemistSection:AddButton({
+		Name = "Equip Alchemist [Lobby]",
+		Callback = function()
+			equip("Alchemist")
+		end    
+	})
+	AlchemistSection:AddButton({
+		Name = "Give 100 of all Ingredients",
+		Callback = function()
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+
+			Give100IngredientsAlchemist()
+		end    
+	})
+
+	AlchemistSection:AddButton({
+		Name = "Give all potions [small lag]",
+		Callback = function()
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+
+			givePotions()
+		end    
+	})
+	task.wait()
+	AlchemistSection:AddButton({
+		Name = "Give all potions X10 [LAG]",
+		Callback = function()
+			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+
+			for i=1,10 do
+				givePotions()
+				task.wait(0.1)
+			end
+		end    
+	})
+	--[[ ANTIS - Credits to Hub That Exists ]]--
+
+
+	if game.Workspace:FindFirstChild("ToggleAllAntisCORPSECMD_SB") == nil then
+		local ToggleAllAntisCORPSECMD_SB = Instance.new("BoolValue", workspace)
+		ToggleAllAntisCORPSECMD_SB.Name = "ToggleAllAntisCORPSECMD_SB"
+	end
+	Tab3:AddToggle({
+		Name = "Toggle All Antis",
+		Default = false,
+		Callback = function(Value)
+			game.Workspace.ToggleAllAntisCORPSECMD_SB.Value = Value
+		end
+	})
+
+	AA = Tab3:AddToggle({
+		Name = "Anti Admins (Notifies you of admins)",
+		Default = false,
+		Callback = function(Value)
+			local AntiAdmins = Value
+			while AntiAdmins do
+				for i,v in pairs(Players:GetPlayers()) do
+					if v:GetRankInGroup(9950771) >= 2 then
+						OrionLib:MakeNotification({
+							Name = "High rank player detected!",
+							Content = "Player " .. v.Name .. " Has a higher rank in the Slap battles Group",
+							Image = "rbxassetid://14895383047",
+							Time = 6
+						})
+					end
+				end
+				task.wait()
 			end
 		end
-	end    
-})
-if workspace:FindFirstChild("TAntiVoid") == nil then
-	local TournamentAntiVoid = Instance.new("Part", workspace)
-	TournamentAntiVoid.Name = "TAntiVoid"
-	TournamentAntiVoid.Size = Vector3.new(2048, 15, 2048)
-	TournamentAntiVoid.Position = Vector3.new(3420, 70, 3)
-	TournamentAntiVoid.CanCollide = false
-	TournamentAntiVoid.Transparency = 1
-	TournamentAntiVoid.Anchored = true
-end
+	})
 
-game.Workspace.dedBarrier.Position =  Vector3.new(15, -17, 41.5)
-AV = Tab3:AddToggle({
-	Name = "Anti Void (Works in tournament)",
-	Default = false,
-	Callback = function(Value)
-		game.Workspace.dedBarrier.CanCollide = Value
-		game.Workspace.TAntiVoid.CanCollide = Value
-	end    
-})
+	AK = Tab3:AddToggle({
+		Name = "Anti Kick",
+		Default = false,
+		Callback = function(Value)
+			local AntiKick = Value
+			while AntiKick do
+				for i,v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetDescendants()) do
+					if v.Name == "ErrorPrompt" then
+						game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
+					end
+				end
+				task.wait()
+			end
+		end
+	})
 
-ADB = Tab3:AddToggle({
-	Name = "Anti Death Barriers",
-	Default = false,
-	Callback = function(Value)
-		if Value == true then
-			for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
-				if v.ClassName == "Part" and v.Name == "BLOCK" then
+	APL = Tab3:AddToggle({
+		Name = "Anti Portal",
+		Default = false,
+		Callback = function(Value)
+			local AntiPortal = Value
+			if AntiPortal == true then
+				--workspace.Lobby.Teleport2.CanTouch = false
+				workspace.Lobby.Teleport3.CanTouch = false
+				workspace.Lobby.Teleport4.CanTouch = false
+				workspace.Lobby.Teleport6.CanTouch = false
+			else
+				--workspace.Lobby.Teleport2.CanTouch = true
+				workspace.Lobby.Teleport3.CanTouch = true
+				workspace.Lobby.Teleport4.CanTouch = true
+				workspace.Lobby.Teleport6.CanTouch = true
+			end
+		end
+	})
+
+	AR2 = Tab3:AddToggle({
+		Name = "Anti Ragdoll V2",
+		Default = false,
+		Callback = function(Value)
+			local AntiRagdoll = Value
+			if AntiRagdoll then
+				local function antiRagdollFunction()
+					plr.Character:WaitForChild("Ragdolled").Changed:Connect(function()
+						if plr.Character:WaitForChild("Ragdolled").Value == true and AntiRagdoll then
+							local ogCF = plr.Character:GetPivot()
+							repeat task.wait() plr.Character.Torso.Anchored = true plr.Character:PivotTo(ogCF)
+							until plr.Character:WaitForChild("Ragdolled").Value == false
+							plr.Character.Torso.Anchored = false
+						end
+					end)
+				end
+				plr.CharacterAdded:Connect(antiRagdollFunction)
+				if plr.Character then
+					antiRagdollFunction()
+				end
+			end
+		end    
+	})
+	if workspace:FindFirstChild("TAntiVoid") == nil then
+		local TournamentAntiVoid = Instance.new("Part", workspace)
+		TournamentAntiVoid.Name = "TAntiVoid"
+		TournamentAntiVoid.Size = Vector3.new(2048, 15, 2048)
+		TournamentAntiVoid.Position = Vector3.new(3420, 70, 3)
+		TournamentAntiVoid.CanCollide = false
+		TournamentAntiVoid.Transparency = 1
+		TournamentAntiVoid.Anchored = true
+	end
+
+	game.Workspace.dedBarrier.Position =  Vector3.new(15, -17, 41.5)
+	AV = Tab3:AddToggle({
+		Name = "Anti Void (Works in tournament)",
+		Default = false,
+		Callback = function(Value)
+			game.Workspace.dedBarrier.CanCollide = Value
+			game.Workspace.TAntiVoid.CanCollide = Value
+		end    
+	})
+
+	ADB = Tab3:AddToggle({
+		Name = "Anti Death Barriers",
+		Default = false,
+		Callback = function(Value)
+			if Value == true then
+				for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+					if v.ClassName == "Part" and v.Name == "BLOCK" then
+						v.CanTouch = false
+					end
+				end
+				workspace.DEATHBARRIER.CanTouch = false
+				workspace.DEATHBARRIER2.CanTouch = false
+				workspace.dedBarrier.CanTouch = false
+				workspace.ArenaBarrier.CanTouch = false
+				workspace.AntiDefaultArena.CanTouch = false
+			else
+				for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+					if v.ClassName == "Part" and v.Name == "BLOCK" then
+						v.CanTouch = true
+					end
+				end
+				workspace.DEATHBARRIER.CanTouch = true
+				workspace.DEATHBARRIER2.CanTouch = true
+				workspace.dedBarrier.CanTouch = true
+				workspace.ArenaBarrier.CanTouch = true
+				workspace.AntiDefaultArena.CanTouch = true
+			end
+		end    
+	})
+
+	AB = Tab3:AddToggle({
+		Name = "Anti Brazil",
+		Default = false,
+		Callback = function(Value)
+			if Value == true then
+				for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
 					v.CanTouch = false
 				end
-			end
-			workspace.DEATHBARRIER.CanTouch = false
-			workspace.DEATHBARRIER2.CanTouch = false
-			workspace.dedBarrier.CanTouch = false
-			workspace.ArenaBarrier.CanTouch = false
-			workspace.AntiDefaultArena.CanTouch = false
-		else
-			for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
-				if v.ClassName == "Part" and v.Name == "BLOCK" then
+			else
+				for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
 					v.CanTouch = true
 				end
 			end
-			workspace.DEATHBARRIER.CanTouch = true
-			workspace.DEATHBARRIER2.CanTouch = true
-			workspace.dedBarrier.CanTouch = true
-			workspace.ArenaBarrier.CanTouch = true
-			workspace.AntiDefaultArena.CanTouch = true
-		end
-	end    
-})
+		end    
+	})
 
-AB = Tab3:AddToggle({
-	Name = "Anti Brazil",
-	Default = false,
-	Callback = function(Value)
-		if Value == true then
-			for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
-				v.CanTouch = false
+	ACOD = Tab3:AddToggle({
+		Name = "Anti Cube of Death",
+		Default = false,
+		Callback = function(Value)
+			if Value == true then
+				workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = false
+			else
+				workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = true
 			end
-		else
-			for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
-				v.CanTouch = true
-			end
-		end
-	end    
-})
+		end    
+	})
 
-ACOD = Tab3:AddToggle({
-	Name = "Anti Cube of Death",
-	Default = false,
-	Callback = function(Value)
-		if Value == true then
-			workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = false
-		else
-			workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = true
-		end
-	end    
-})
-
-AT = Tab3:AddToggle({
-	Name = "Anti Timestop",
-	Default = false,
-	Callback = function(Value)
-		local AntiTimestop = Value
-		while AntiTimestop do
-			for i,v in pairs(plr.Character:GetChildren()) do
-				if v.ClassName == "Part" then
-					v.Anchored = false
+	AT = Tab3:AddToggle({
+		Name = "Anti Timestop",
+		Default = false,
+		Callback = function(Value)
+			local AntiTimestop = Value
+			while AntiTimestop do
+				for i,v in pairs(plr.Character:GetChildren()) do
+					if v.ClassName == "Part" then
+						v.Anchored = false
+					end
 				end
+				task.wait()
 			end
-			task.wait()
-		end
-	end    
-})
+		end    
+	})
 
-AS = Tab3:AddToggle({
-	Name = "Anti Squid",
-	Default = false,
-	Callback = function(Value)
-		local AntiSquid = Value
-		if AntiSquid == false then
-			plr.PlayerGui.SquidInk.Enabled = true
-		end
-		while AntiSquid do
-			if plr.PlayerGui:FindFirstChild("SquidInk") then
-				plr.PlayerGui.SquidInk.Enabled = false
+	AS = Tab3:AddToggle({
+		Name = "Anti Squid",
+		Default = false,
+		Callback = function(Value)
+			local AntiSquid = Value
+			if AntiSquid == false then
+				plr.PlayerGui.SquidInk.Enabled = true
 			end
-			task.wait()
-		end
-	end    
-})
-
-AHJ = Tab3:AddToggle({
-	Name = "Anti Hallow Jack",
-	Default = false,
-	Callback = function(Value)
-		plr.PlayerScripts.HallowJackAbilities.Disabled = Value
-	end    
-})
-
-AC = Tab3:AddToggle({
-	Name = "Anti Conveyor",
-	Default = false,
-	Callback = function(Value)
-		plr.PlayerScripts.ConveyorVictimized.Disabled = Value
-	end    
-})
-
-ABK = Tab3:AddToggle({
-	Name = "Anti Brick",
-	Default = false,
-	Callback = function(Value)
-		local AntiBrick = Value
-		while AntiBrick do
-			for i,v in pairs(game.Workspace:GetChildren()) do
-				if v.Name == "Union" then
-					v.CanTouch = false
+			while AntiSquid do
+				if plr.PlayerGui:FindFirstChild("SquidInk") then
+					plr.PlayerGui.SquidInk.Enabled = false
 				end
+				task.wait()
 			end
-			task.wait()
-		end
-	end    
-})
+		end    
+	})
 
-AN = Tab3:AddToggle({
-	Name = "Anti Null",
-	Default = false,
-	Callback = function(Value)
-		local AntiNull = Value
-		while AntiNull do
-			for i,v in pairs(game.Workspace:GetChildren()) do
-				if v.Name == "Imp" and v:FindFirstChild("Body") then
-					shared.gloveHits[plr.leaderstats.Glove.Value]:FireServer(v.Body,true)
+	AHJ = Tab3:AddToggle({
+		Name = "Anti Hallow Jack",
+		Default = false,
+		Callback = function(Value)
+			plr.PlayerScripts.HallowJackAbilities.Disabled = Value
+		end    
+	})
+
+	AC = Tab3:AddToggle({
+		Name = "Anti Conveyor",
+		Default = false,
+		Callback = function(Value)
+			plr.PlayerScripts.ConveyorVictimized.Disabled = Value
+		end    
+	})
+
+	ABK = Tab3:AddToggle({
+		Name = "Anti Brick",
+		Default = false,
+		Callback = function(Value)
+			local AntiBrick = Value
+			while AntiBrick do
+				for i,v in pairs(game.Workspace:GetChildren()) do
+					if v.Name == "Union" then
+						v.CanTouch = false
+					end
 				end
+				task.wait()
 			end
-			task.wait()
-		end
-	end    
-})
+		end    
+	})
 
-ARD = Tab3:AddToggle({
-	Name = "Anti [REDACTED]",
-	Default = false,
-	Callback = function(Value)
-		plr.PlayerScripts.Well.Disabled = Value
-	end    
-})
-
-AZ = Tab3:AddToggle({
-	Name = "Anti Za Hando",
-	Default = false,
-	Callback = function(Value)
-		local AntiZaHando = Value
-		while AntiZaHando do
-			for i,v in pairs(game.Workspace:GetChildren()) do
-				if v.ClassName == "Part" and v.Name == "Part" then
-					v:Destroy()
+	AN = Tab3:AddToggle({
+		Name = "Anti Null",
+		Default = false,
+		Callback = function(Value)
+			local AntiNull = Value
+			while AntiNull do
+				for i,v in pairs(game.Workspace:GetChildren()) do
+					if v.Name == "Imp" and v:FindFirstChild("Body") then
+						shared.gloveHits[plr.leaderstats.Glove.Value]:FireServer(v.Body,true)
+					end
 				end
+				task.wait()
 			end
-			task.wait()
-		end
-	end    
-})
+		end    
+	})
 
-ARR = Tab3:AddToggle({
-	Name = "Anti Reaper",
-	Default = false,
-	Callback = function(Value)
-		local AntiReaper = Value
-		while AntiReaper do
-			for i,v in pairs(plr.Character:GetDescendants()) do
-				if v.Name == "DeathMark" then
-					game:GetService("ReplicatedStorage").ReaperGone:FireServer(v)
-					game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy() 
+	ARD = Tab3:AddToggle({
+		Name = "Anti [REDACTED]",
+		Default = false,
+		Callback = function(Value)
+			plr.PlayerScripts.Well.Disabled = Value
+		end    
+	})
+
+	AZ = Tab3:AddToggle({
+		Name = "Anti Za Hando",
+		Default = false,
+		Callback = function(Value)
+			local AntiZaHando = Value
+			while AntiZaHando do
+				for i,v in pairs(game.Workspace:GetChildren()) do
+					if v.ClassName == "Part" and v.Name == "Part" then
+						v:Destroy()
+					end
 				end
+				task.wait()
 			end
-			task.wait(0.15)
-		end
-	end    
-})
+		end    
+	})
 
-AP = Tab3:AddToggle({
-	Name = "Anti Pusher",
-	Default = false,
-	Callback = function(Value)
-		local AntiPusher = Value
-		while AntiPusher do
-			for i,v in pairs(game.Workspace:GetChildren()) do
-				if v.Name == "wall" then
-					v.CanCollide = false
+	ARR = Tab3:AddToggle({
+		Name = "Anti Reaper",
+		Default = false,
+		Callback = function(Value)
+			local AntiReaper = Value
+			while AntiReaper do
+				for i,v in pairs(plr.Character:GetDescendants()) do
+					if v.Name == "DeathMark" then
+						game:GetService("ReplicatedStorage").ReaperGone:FireServer(v)
+						game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy() 
+					end
 				end
+				task.wait(0.15)
 			end
-			task.wait()
-		end
-	end    
-})
+		end    
+	})
 
-ABR = Tab3:AddToggle({
-	Name = "Anti Booster",
-	Default = false,
-	Callback = function(Value)
-		local AntiBooster = Value
-		while AntiBooster do
-			for i,v in pairs(plr.Character:GetDescendants()) do
-				if v.Name == "BoosterObject" then
-					v:Destroy()
+	AP = Tab3:AddToggle({
+		Name = "Anti Pusher",
+		Default = false,
+		Callback = function(Value)
+			local AntiPusher = Value
+			while AntiPusher do
+				for i,v in pairs(game.Workspace:GetChildren()) do
+					if v.Name == "wall" then
+						v.CanCollide = false
+					end
 				end
+				task.wait()
 			end
-			task.wait()
-		end
-	end    
-})
+		end    
+	})
 
-AM = Tab3:AddToggle({
-	Name = "Anti Mail",
-	Default = false,
-	Callback = function(Value)
-		plr.Character.YouHaveGotMail.Disabled = Value
-		local AntiMail = Value
-		while AntiMail do
-			if plr.Character and plr.Character:FindFirstChild("YouHaveGotMail") then
-				plr.Character.YouHaveGotMail.Disabled = true
-			end
-			task.wait()
-		end
-	end    
-})
-
-ASN = Tab3:AddToggle({
-	Name = "Anti Stun",
-	Default = false,
-	Callback = function(Value)
-		local AntiStun = Value
-		while AntiStun do
-			if plr.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace:FindFirstChild("Shockwave") and plr.Character.Ragdolled.Value == false then
-				plr.Character.Humanoid.PlatformStand = false
-			end
-			task.wait()
-		end
-	end    
-})
-
-AMC = Tab3:AddToggle({
-	Name = "Anti Megarock/Custom",
-	Default = false,
-	Callback = function(Value)
-		local AntiRock = Value
-		while AntiRock do
-			for i,v in pairs(game.Workspace:GetDescendants()) do
-				if v.Name == "rock" then
-					v.CanTouch = false
-					v.CanQuery = false
+	ABR = Tab3:AddToggle({
+		Name = "Anti Booster",
+		Default = false,
+		Callback = function(Value)
+			local AntiBooster = Value
+			while AntiBooster do
+				for i,v in pairs(plr.Character:GetDescendants()) do
+					if v.Name == "BoosterObject" then
+						v:Destroy()
+					end
 				end
+				task.wait()
 			end
-			task.wait()
-		end
-	end    
-})
+		end    
+	})
 
-AREC = Tab3:AddToggle({
-	Name = "Anti Record (Detects chat msgs)",
-	Default = false,
-	Callback = function(Value)
-		AntiRecord = Value
+	AM = Tab3:AddToggle({
+		Name = "Anti Mail",
+		Default = false,
+		Callback = function(Value)
+			plr.Character.YouHaveGotMail.Disabled = Value
+			local AntiMail = Value
+			while AntiMail do
+				if plr.Character and plr.Character:FindFirstChild("YouHaveGotMail") then
+					plr.Character.YouHaveGotMail.Disabled = true
+				end
+				task.wait()
+			end
+		end    
+	})
+
+	ASN = Tab3:AddToggle({
+		Name = "Anti Stun",
+		Default = false,
+		Callback = function(Value)
+			local AntiStun = Value
+			while AntiStun do
+				if plr.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace:FindFirstChild("Shockwave") and plr.Character.Ragdolled.Value == false then
+					plr.Character.Humanoid.PlatformStand = false
+				end
+				task.wait()
+			end
+		end    
+	})
+
+	AMC = Tab3:AddToggle({
+		Name = "Anti Megarock/Custom",
+		Default = false,
+		Callback = function(Value)
+			local AntiRock = Value
+			while AntiRock do
+				for i,v in pairs(game.Workspace:GetDescendants()) do
+					if v.Name == "rock" then
+						v.CanTouch = false
+						v.CanQuery = false
+					end
+				end
+				task.wait()
+			end
+		end    
+	})
+
+	AREC = Tab3:AddToggle({
+		Name = "Anti Record (Detects chat msgs)",
+		Default = false,
+		Callback = function(Value)
+			AntiRecord = Value
+		end
+	})
+	for i,p in pairs(Players:GetChildren()) do
+		if p ~= plr then
+			p.Chatted:Connect(function(message)
+				local Words = message:split(" ")
+				if AntiRecord == true then
+					for i, v in pairs(Words) do
+						if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
+							AK:Set(false)
+							plr:Kick("Possible player recording detected.".." ("..p.Name..")".." ("..message..")")
+						end
+					end
+				end
+			end)
+		end
 	end
-})
-for i,p in pairs(Players:GetChildren()) do
-	if p ~= plr then
-		p.Chatted:Connect(function(message)
+	Players.PlayerAdded:Connect(function(Player)
+		Player.Chatted:Connect(function(message)
 			local Words = message:split(" ")
 			if AntiRecord == true then
 				for i, v in pairs(Words) do
 					if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
 						AK:Set(false)
-						plr:Kick("Possible player recording detected.".." ("..p.Name..")".." ("..message..")")
+						plr:Kick("Possible player recording detected.".." ("..Player.Name..")".." ("..message..")")
 					end
 				end
 			end
 		end)
-	end
-end
-Players.PlayerAdded:Connect(function(Player)
-	Player.Chatted:Connect(function(message)
-		local Words = message:split(" ")
-		if AntiRecord == true then
-			for i, v in pairs(Words) do
-				if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
-					AK:Set(false)
-					plr:Kick("Possible player recording detected.".." ("..Player.Name..")".." ("..message..")")
-				end
-			end
-		end
 	end)
-end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	AA:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		AA:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.05)
-	AK:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.05)
+		AK:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.1)
-	APL:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.1)
+		APL:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.15)
-	AR2:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.15)
+		AR2:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.2)
-	AV:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.2)
+		AV:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.25)
-	ADB:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.25)
+		ADB:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.3)
-	AB:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.3)
+		AB:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.35)
-	ACOD:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.35)
+		ACOD:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.4)
-	AT:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.4)
+		AT:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.45)
-	AS:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.45)
+		AS:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.5)
-	AHJ:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.5)
+		AHJ:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.55)
-	AC:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.55)
+		AC:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.6)
-	ABK:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.6)
+		ABK:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.65)
-	AN:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.65)
+		AN:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.7)
-	ARD:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.7)
+		ARD:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.75)
-	AZ:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.75)
+		AZ:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.8)
-	ARR:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.8)
+		ARR:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.85)
-	AP:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.85)
+		AP:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.9)
-	ABR:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.9)
+		ABR:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(.95)
-	AM:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(.95)
+		AM:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(1)
-	ASN:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(1)
+		ASN:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(1.05)
-	AMC:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(1.05)
+		AMC:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
-game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
-	wait(1.1)
-	AREC:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
-end)
+	game.Workspace.ToggleAllAntisCORPSECMD_SB.Changed:Connect(function()
+		wait(1.1)
+		AREC:Set(game.Workspace.ToggleAllAntisCORPSECMD_SB.Value)
+	end)
 
---[[ Audial / Visual ]]--
+	--[[ Audial / Visual ]]--
 
-Tab4:AddToggle({
-	Name = "[LOUD, use Golem glove] Golem Ability Spam",
-	Default = false,
-	Callback = function(Value)
-		local loop = Value
-		while loop and plr.leaderstats.Glove.Value == "Golem" do
-			game:GetService("ReplicatedStorage").GeneralAbility:FireServer("release")
-			task.wait()
-		end
-	end    
-})
+	Tab4:AddToggle({
+		Name = "[LOUD, use Golem glove] Golem Ability Spam",
+		Default = false,
+		Callback = function(Value)
+			local loop = Value
+			while loop and plr.leaderstats.Glove.Value == "Golem" do
+				game:GetService("ReplicatedStorage").GeneralAbility:FireServer("release")
+				task.wait()
+			end
+		end    
+	})
 
-Tab4:AddToggle({
-	Name = "[Grab glove] Grab sound spam + size changing glove",
-	Default = false,
-	Callback = function(Value)
-		local loop = Value
-		while loop and plr.leaderstats.Glove.Value == "Grab" do
-			game:GetService("ReplicatedStorage").GeneralAbility:FireServer("grow")
-			task.wait()
-		end
-	end    
-})
+	Tab4:AddToggle({
+		Name = "[Grab glove] Grab sound spam + size changing glove",
+		Default = false,
+		Callback = function(Value)
+			local loop = Value
+			while loop and plr.leaderstats.Glove.Value == "Grab" do
+				game:GetService("ReplicatedStorage").GeneralAbility:FireServer("grow")
+				task.wait()
+			end
+		end    
+	})
 
-Tab4:AddToggle({
-	Name = "[Bonk Glove] Bonk spam (only effect is spammed, cooldown applies to functional part)",
-	Default = false,
-	Callback = function(Value)
-		local loop = Value
-		while loop and plr.leaderstats.Glove.Value == "Grab" do
-			task.wait()
-			game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
-		end
-	end    
-})
+	Tab4:AddToggle({
+		Name = "[Bonk Glove] Bonk spam (only effect is spammed, cooldown applies to functional part)",
+		Default = false,
+		Callback = function(Value)
+			local loop = Value
+			while loop and plr.leaderstats.Glove.Value == "Grab" do
+				task.wait()
+				game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+			end
+		end    
+	})
 
 
 
@@ -1915,24 +1910,3 @@ elseif game.PlaceId == 18550498098 or game:GetService("Workspace"):FindFirstChil
 end
 
 OrionLib:Init()
-
---[[
-
-
-
-if game.CoreGui:FindFirstChild("shrekmanfartcopyposition") then game.CoreGui:FindFirstChild("shrekmanfartcopyposition"):Destroy() end
-task.wait(0.05)
-local gui = Instance.new("ScreenGui")
-gui.Name = "shrekmanfartcopyposition"
-gui.Parent = game.CoreGui
-local button = Instance.new("TextButton")
-button.Parent = gui
-button.Size = UDim2.new(0.1,0,0.1,0)
-button.Position = UDim2.new(0.2,0,0.45,0)
-button.MouseButton1Click:Connect(function()
-	setclipboard(tostring(game.Players.LocalPlayer.Character:GetPivot()))
-end)
-
-
-
-]]
