@@ -568,6 +568,202 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 			equip("Slapstick")
 		end    
 	})
+	local EdgelordSection = Tab2:AddSection({
+		Name = "Edgelord section xd"
+	})
+	SlapSection:AddButton({
+		Name = "LOBBY | Turn into edgelord (effects are not FE)",
+		Callback = function()
+			if lplr.leaderstats.Glove.Value == "Edgelord" then return end
+			equip("Slapstick")
+			local lplr = game.Players.LocalPlayer
+			local char:Model = lplr.Character or lplr.CharacterAdded:Wait()
+			task.wait(0.4)
+			local hum = char:FindFirstChildOfClass("Humanoid")
+			local hrp = hum.RootPart
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+			local Events = ReplicatedStorage:WaitForChild("Events")
+			local BoxingEvent = Events:WaitForChild("Boxing")
+
+			local hum = lplr.Character:FindFirstChildOfClass("Humanoid")
+			if not hum then return end
+			
+			local SlapDebounce = false
+			local function slapstickSlap(target)
+				if lplr.leaderstats.Glove.Value ~= "Slapstick" then return end
+				if SlapDebounce then 
+					while SlapDebounce do
+						task.wait(math.random(10,15)/700)
+					end
+				end
+				local char = lplr.Character
+				local hum = char and char:FindFirstChildOfClass("Humanoid")
+				local hrp = hum and hum.RootPart
+				
+				SlapDebounce = true
+				
+				local targetChar:Model = target.Character
+				local isInArena = targetChar:FindFirstChild("isInArena")
+				local la = targetChar:FindFirstChild("Left Arm")
+				if hrp and la and isInArena and isInArena.Value then
+					local args = {
+						[1] = la
+					}
+			
+					game:GetService("ReplicatedStorage").GeneralHit:FireServer(unpack(args))
+			
+				end
+				task.wait(0.51)
+				SlapDebounce = false
+			end
+			
+			local function boxingslap(target)
+				local args = {
+					[1] = target,
+					[2] = true
+				}
+				ReplicatedStorage:FindFirstChild("BoxingEvent"):FireServer(unpack(args))
+			end
+			
+			local Glitcheffect = Instance.new("ParticleEmitter")
+			Glitcheffect.Name = "Glitcheffect"
+			Glitcheffect.Lifetime = NumberRange.new(0.10, 0.10)
+			Glitcheffect.Color = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.new(0.09, 0.16, 0.08)), ColorSequenceKeypoint.new(1.00, Color3.new(0.08, 0.20, 0.58))})
+			Glitcheffect.LightEmission = 0.800000011920929
+			Glitcheffect.SpreadAngle = Vector2.new(1.00, 1.00)
+			Glitcheffect.Speed = NumberRange.new(0.00, 0.00)
+			Glitcheffect.Texture = "rbxassetid://3876444567"
+			Glitcheffect.Rate = 86
+			Glitcheffect.Parent = hrp
+			
+			local ShadowEmitter = Instance.new("ParticleEmitter")
+			ShadowEmitter.Name = "ShadowEmitter"
+			ShadowEmitter.Lifetime = NumberRange.new(1.00, 1.00)
+			ShadowEmitter.Color = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.new(0.00, 0.00, 0.00)), ColorSequenceKeypoint.new(1.00, Color3.new(0.16, 0.16, 0.16))})
+			ShadowEmitter.Speed = NumberRange.new(0.00, 0.00)
+			ShadowEmitter.Texture = "rbxasset://textures/particles/fire_main.dds"
+			ShadowEmitter.Acceleration = Vector3.new(0.00, 1.00, 0.00)
+			ShadowEmitter.RotSpeed = NumberRange.new(5.00, 25.00)
+			ShadowEmitter.Rotation = NumberRange.new(0.00, 5.00)
+			ShadowEmitter.Rate = 45
+			ShadowEmitter.Size = NumberSequence.new({NumberSequenceKeypoint.new(0.00, 0.50, 0.00), NumberSequenceKeypoint.new(1.00, 0.50, 0.00)})
+			ShadowEmitter.Parent = hrp
+			
+			local hl = Instance.new('Highlight')
+			hl.FillColor = Color3.new(0,0,0)
+			hl.OutlineColor = Color3.new(1,1,1)
+			hl.FillTransparency = 0
+			hl.OutlineTransparency = 0
+			hl.DepthMode = Enum.HighlightDepthMode.Occluded
+			hl.Parent = char
+			
+			for i=1, 5 do
+				for i, v in char:GetChildren() do
+					if v:IsA("BasePart") then
+						ShadowEmitter:Clone().Parent = v
+						Glitcheffect:Clone().Parent = v
+					end
+				end
+			end
+			
+			local idleAnim = Instance.new("Animation")
+			idleAnim.AnimationId = "rbxassetid://16163355836"
+			idleAnim.Parent = ReplicatedStorage
+			idleAnim.Name = "EdgelordIdle"
+			
+			local walkAnim = Instance.new("Animation")
+			walkAnim.AnimationId = "rbxassetid://16163350920"
+			walkAnim.Parent = ReplicatedStorage
+			walkAnim.Name = "EdgelordWalk"
+			
+			local animator = hum:FindFirstChildOfClass("Animator")
+			
+			local idle = animator:LoadAnimation(idleAnim)
+			
+			local walk = animator:LoadAnimation(walkAnim)
+			
+			local forceAnim = animator:LoadAnimation(ReplicatedStorage:WaitForChild('TheForceAnim') or walkAnim)
+			local musicc = Instance.new("Sound")
+			musicc.SoundId = "rbxassetid://9133844756"
+			musicc.Parent = game.SoundService
+			musicc.Looped = true
+			musicc:Play()
+			
+			
+			local ogGlove = lplr.leaderstats.Glove.Value
+			char:PivotTo(CFrame.new(-13.537845611572266, 1.564839482307434, 0.1399119794368744))
+			local conn = nil
+			conn = game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
+				if input.KeyCode == Enum.KeyCode.E and not gameProcessedEvent then
+					forceAnim:Play(0.1,1.2,1)
+					for _, v in pairs(game.Players:GetPlayers()) do
+						if v ~= game.Players.LocalPlayer and v.Character~=nil and v.Character:FindFirstChild("Head") and not v.Character:FindFirstChild("Head"):FindFirstChild("UnoReverseCard") then
+			
+							local target_hrp = v.Character.HumanoidRootPart -- Target HumanoidRootPart
+			
+							local hrpToTarget = (target_hrp.Position - hrp.Position).Unit
+			
+							local hrpLookVector = hrp.CFrame.LookVector
+			
+							local dotProduct = hrpLookVector:Dot(hrpToTarget)
+			
+							
+							if (target_hrp.Position - hrp.Position).Magnitude <= 60 then
+								
+								if ogGlove == "slapstick" then slapstickSlap(v) else boxingslap(v) end
+								task.wait(0.52)
+							end
+						end
+					end
+				end
+			end)
+			
+			lplr.leaderstats.Glove.Value = "Edgelord"
+			
+			local tool = Instance.new("Tool")
+			tool.Name = "Tp Tool"
+			tool.RequiresHandle = false
+			tool.CanBeDropped = false
+			tool.Parent = lplr.Backpack
+			tool.Activated:Connect(function()
+				local mouse = lplr:GetMouse()
+				if mouse.Hit then
+					char:PivotTo(mouse.Hit + Vector3.new(0,2,0))
+				end
+			end)
+			local walking, prevWalking = false, false
+			hum:GetPropertyChangedSignal("MoveDirection"):Connect(function()
+				walking = hum.MoveDirection.Magnitude > 0.1
+				if walking ~= prevWalking then
+					if not walking then
+						walk:Stop()
+						idle:Play(0.1,1.1,1)
+					else
+						idle:Stop(0.1)
+						walk:Play(0.1,1.1,1)
+					end
+				end
+				prevWalking = walking
+			end)
+			-- Speed + wait until dead loop
+			while char and hum and hrp and hum.Health > 0 do
+				task.wait(0.015)
+				local hum = char and char:FindFirstChildOfClass("Humanoid")
+				if not hum then return end
+				if hum and hum.MoveDirection.Magnitude > 0.2 then
+					char:TranslateBy(hum.MoveDirection * 4)
+				end
+			end
+			lplr.leaderstats.Glove.Value = ogGlove
+			equip(ogGlove)
+			if conn then
+				conn:Disconnect()
+			end
+			musicc:Destroy()
+		end    
+	})
+	
 	local LagSection = Tab2:AddSection({
 		Name = "LAG / CRASH Section (boxer lag lags other people way more than you)"
 	})
