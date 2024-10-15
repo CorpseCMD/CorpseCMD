@@ -1,6 +1,6 @@
 --[[ LOADSTRING ]]--
 
---	loadstring(game:HttpGet('https://github.com/CorpseCMD/CorpseCMD/raw/main/SB.lua'))()
+--	loadstring(game:HttpGet('https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/main/SB.lua'))()
 
 --[[ CODE ]]--
 
