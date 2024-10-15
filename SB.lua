@@ -695,7 +695,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 			musicc.Parent = game.SoundService
 			musicc.Looped = true
 			musicc:Play()
-			
+
 			local musicc = Instance.new("Sound")
 			musicc.SoundId = "rbxassetid://858508159"
 			musicc.Parent = game.SoundService
@@ -723,7 +723,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 
 							if (target_hrp.Position - hrp.Position).Magnitude <= 40 and dotProduct > 0.6 then
 
-								if ogGlove == "slapstick" then slapstickSlap(v) elseif ogGlove == "Boxer" boxingslap(v) end
+								if ogGlove == "slapstick" then slapstickSlap(v) elseif ogGlove == "Boxer" then boxingslap(v) end
 							task.wait(0.52)
 						end
 					end
