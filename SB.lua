@@ -96,7 +96,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 		if plr.leaderstats.Glove.Value ~= "Slapstick" then return end
 		if SlapDebounce or DISABLE_SCRIPT then return end
 		local cf = CFrame.new(
-			-802.534302, 329.025208, -15.8892279, 0.826691329, 0.00422354275, 0.562639832, -1.31318484e-05, 0.999971986, -0.00748713268, -0.562655687, 0.00618215278, 0.826668262	)
+			-720.534058, 314.735168, 0.705005825, 0.178254008, -0.547166348, 0.817822993, 3.79947096e-08, 0.831134021, 0.556072116, -0.98398453, -0.0991220549, 0.148152992	)
 		local char = plr.Character
 		local hum = char and char:FindFirstChildOfClass("Humanoid")
 		local hrp = hum and hum.RootPart
