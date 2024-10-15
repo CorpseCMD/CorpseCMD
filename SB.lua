@@ -574,7 +574,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 	SlapSection:AddButton({
 		Name = "LOBBY | Turn into edgelord (effects are not FE)",
 		Callback = function()
-			if lplr.leaderstats.Glove.Value == "Edgelord" then return end
+			if plr.leaderstats.Glove.Value == "Edgelord" then return end
 			equip("Slapstick")
 			local lplr = game.Players.LocalPlayer
 			local char:Model = lplr.Character or lplr.CharacterAdded:Wait()
