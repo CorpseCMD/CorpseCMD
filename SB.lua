@@ -571,14 +571,20 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 	local EdgelordSection = Tab2:AddSection({
 		Name = "Edgelord section xd"
 	})
-	SlapSection:AddButton({
-		Name = "LOBBY | Turn into edgelord (effects are not FE)",
+	EdgelordSection:AddButton({
+		Name = "LOBBY | Turn into edgelord (effects are NOT fe)",
 		Callback = function()
-			if plr.leaderstats.Glove.Value == "Edgelord" then return end
-			equip("Slapstick")
+			OrionLib:MakeNotification({
+			Name = "Alert",
+			Content = "Equip slapstick for more knockback, DONT USE DEFAULT",
+			Image = "rbxassetid://4483345998",
+			Time = 5
+		})
 			local lplr = game.Players.LocalPlayer
+			if lplr.leaderstats.Glove.Value == "Edgelord" then return end
+			equip("Slapstick")
 			local char:Model = lplr.Character or lplr.CharacterAdded:Wait()
-			task.wait(0.4)
+			task.wait(0.15)
 			local hum = char:FindFirstChildOfClass("Humanoid")
 			local hrp = hum.RootPart
 			local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -719,8 +725,6 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 				end
 			end)
 			
-			lplr.leaderstats.Glove.Value = "Edgelord"
-			
 			local tool = Instance.new("Tool")
 			tool.Name = "Tp Tool"
 			tool.RequiresHandle = false
@@ -746,6 +750,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 				end
 				prevWalking = walking
 			end)
+			lplr.leaderstats.Glove.Value = "Edgelord"
 			-- Speed + wait until dead loop
 			while char and hum and hrp and hum.Health > 0 do
 				task.wait(0.015)
@@ -1592,7 +1597,7 @@ local Window = OrionLib:MakeWindow({Name = "CorpseCMD | SB Guide bossfight!", Hi
 	})
 	
 	Section21:AddButton({
-		Name = "Activate / teleprot to end of chase in starting room.",
+		Name = "Activate / teleport to end of chase in starting room.",
 		Callback = function()
 			local g1l = game.Workspace:WaitForChild("Gate1Lever")
 			local cd = g1l:FindFirstChildOfClass("ClickDetector")
