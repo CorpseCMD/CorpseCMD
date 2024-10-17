@@ -5,18 +5,19 @@ local TARGET = nil
 fireclickdetector(workspace.Lobby["Boxer"].ClickDetector)
 repeat wait() until lplr:WaitForChild("leaderstats").Glove.Value == "Boxer"
 for i, v in game.Players:GetChildren() do
-   if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") then
+   if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") and (not v.Character:FindFirstChild("isInArena") or v.Character:FindFirstChild("isInArena").Value == false) then
      TARGET = v
      break
    end
 end
 local args = {[1] = TARGET,[2] = true}
 lplr.Character:PivotTo(TARGET.Character:GetPivot())
-task.wait(0.5)
-for i=1,350 do
+task.wait(0.2)
+for i=1,290 do
+lplr.Character:PivotTo(TARGET.Character:GetPivot())
 game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
 end
-task.wait(1)
+task.wait(1.25)
 local PlaceID = game.PlaceId
 local AllIDs = {}
 local foundAnything = ""
