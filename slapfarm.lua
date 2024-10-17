@@ -1,4 +1,5 @@
 repeat wait() until game:IsLoaded()
+task.wait(6)
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
 local TARGET = nil
@@ -8,6 +9,14 @@ for i, v in game.Players:GetChildren() do
    if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") and (not v.Character:FindFirstChild("isInArena") or v.Character:FindFirstChild("isInArena").Value == false) then
      TARGET = v
      break
+   end
+end
+if TARGET == nil then
+   for i, v in game.Players:GetChildren() do
+      if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") then
+        TARGET = v
+        break
+      end
    end
 end
 local args = {[1] = TARGET,[2] = true}
