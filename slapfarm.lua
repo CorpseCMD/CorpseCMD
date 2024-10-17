@@ -1,19 +1,21 @@
+repeat wait() until game:IsLoaded()
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
 local TARGET = nil
+fireclickdetector(workspace.Lobby["Boxer"].ClickDetector)
+repeat wait() until lplr:WaitForChild("leaderstats").Glove.Value == "Boxer"
 for i, v in game.Players:GetChildren() do
    if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") then
      TARGET = v
      break
    end
 end
-local args = {[1] = TARGET,[2] = false}
+local args = {[1] = TARGET,[2] = true}
 lplr.Character:PivotTo(TARGET.Character:GetPivot())
+task.wait(0.5)
 for i=1,350 do
 game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
 end
-
-repeat wait() until game:IsLoaded()
 local PlaceID = game.PlaceId
 local AllIDs = {}
 local foundAnything = ""
@@ -75,5 +77,5 @@ function Teleport()
        end)
    end
 end
-task.wait(1.5)
+task.wait(1)
 Teleport()
