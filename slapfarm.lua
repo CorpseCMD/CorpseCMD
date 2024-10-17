@@ -21,8 +21,9 @@ if TARGET == nil then
 end
 if TARGET ~= nil then
    local args = {[1] = TARGET,[2] = true}
-   firetouchinterest(lchar:WaitForChild("Head"), workspace.Lobby.Teleport1, 0)
-	firetouchinterest(lchar:WaitForChild("Head"), workspace.Lobby.Teleport1, 1)
+	if lplr:WaitForChild("leaderstats").Glove.Value == "Dual" then
+		lchar:PivotTo(workspace.Lobby.Teleport1.CFrame)
+	end
    lchar:PivotTo(TARGET.Character:GetPivot())
    task.wait(0.3)
    lchar:PivotTo(TARGET.Character:GetPivot())
