@@ -1,6 +1,19 @@
-Time = 0.1 -- seconds
+local Players = game:GetService("Players")
+local lplr = Players.LocalPlayer
+local TARGET = nil
+for i, v in game.Players:GetChildren() do
+   if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") then
+     TARGET = v
+     break
+   end
+end
+local args = {[1] = TARGET,[2] = false}
+lplr.Character:PivotTo(TARGET.Character:GetPivot())
+for i=1,350 do
+game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
+end
+
 repeat wait() until game:IsLoaded()
-wait(Time)
 local PlaceID = game.PlaceId
 local AllIDs = {}
 local foundAnything = ""
@@ -62,19 +75,5 @@ function Teleport()
        end)
    end
 end
-    local Players = game:GetService("Players")
-    local lplr = Players.LocalPlayer
-    local TARGET = nil
-    for i, v in game.Players:GetChildren() do
-      if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("isInArena")~=nil and v.Character:FindFirstChild("isInArena").Value == true then
-        TARGET = v
-        return
-      end
-    end
-    local args = {[1] = TARGET,[2] = false}
-    lplr.Character:PivotTo(TARGET.Character:GetPivot())
-    for i=1,350 do
-      game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
-    end
 task.wait(1.5)
 Teleport()
