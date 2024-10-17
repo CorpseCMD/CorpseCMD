@@ -3,6 +3,9 @@ if time() < 6 then task.wait(3) end
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
 local lchar = lplr.Character or lplr.CharacterAdded:Wait()
+if lplr:WaitForChild("leaderstats").Glove.Value == "Dual" then
+	lchar:PivotTo(workspace.Lobby.Teleport1.CFrame)
+end
 local TARGET = nil
 repeat wait() until lplr:WaitForChild("leaderstats").Glove.Value == "Boxer" or lplr:WaitForChild("leaderstats").Glove.Value == "Dual"
 for i, v in game.Players:GetChildren() do
@@ -21,9 +24,6 @@ if TARGET == nil then
 end
 if TARGET ~= nil then
    local args = {[1] = TARGET,[2] = true}
-	if lplr:WaitForChild("leaderstats").Glove.Value == "Dual" then
-		lchar:PivotTo(workspace.Lobby.Teleport1.CFrame)
-	end
    lchar:PivotTo(TARGET.Character:GetPivot())
    task.wait(0.3)
    lchar:PivotTo(TARGET.Character:GetPivot())
