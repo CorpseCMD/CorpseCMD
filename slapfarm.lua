@@ -78,5 +78,5 @@ pcall(function()
       game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
     end
 end)
-
+task.wait(1.5)
 Teleport()
