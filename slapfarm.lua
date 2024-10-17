@@ -16,6 +16,7 @@ task.wait(0.5)
 for i=1,350 do
 game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
 end
+task.wait(1)
 local PlaceID = game.PlaceId
 local AllIDs = {}
 local foundAnything = ""
@@ -77,5 +78,4 @@ function Teleport()
        end)
    end
 end
-task.wait(1)
 Teleport()
