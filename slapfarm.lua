@@ -1,5 +1,5 @@
 repeat wait() until game:IsLoaded()
-task.wait(6)
+if time() < 6 then task.wait(3) end
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
 local TARGET = nil
@@ -19,14 +19,16 @@ if TARGET == nil then
       end
    end
 end
-local args = {[1] = TARGET,[2] = true}
-lplr.Character:PivotTo(TARGET.Character:GetPivot())
-task.wait(0.3)
-lplr.Character:PivotTo(TARGET.Character:GetPivot())
-for i=1,290 do
-game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
+if TARGET ~= nil then
+   local args = {[1] = TARGET,[2] = true}
+   lplr.Character:PivotTo(TARGET.Character:GetPivot())
+   task.wait(0.3)
+   lplr.Character:PivotTo(TARGET.Character:GetPivot())
+   for i=1,290 do
+   game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
+   end
+   task.wait(1.25)
 end
-task.wait(1.25)
 local PlaceID = game.PlaceId
 local AllIDs = {}
 local foundAnything = ""
