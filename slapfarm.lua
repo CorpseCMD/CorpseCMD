@@ -27,7 +27,7 @@ if TARGET ~= nil then
    for i=1,400 do
    game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
    end
-   task.wait(1.25)
+   task.wait(1.65)
 end
 local PlaceID = game.PlaceId
 local AllIDs = {}
