@@ -12,9 +12,9 @@ for i, v in game.Players:GetChildren() do
 end
 local args = {[1] = TARGET,[2] = true}
 lplr.Character:PivotTo(TARGET.Character:GetPivot())
-task.wait(0.2)
-for i=1,290 do
+task.wait(0.3)
 lplr.Character:PivotTo(TARGET.Character:GetPivot())
+for i=1,290 do
 game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
 end
 task.wait(1.25)
