@@ -20,8 +20,8 @@ if TARGET == nil then
 end
 if TARGET ~= nil then
    local args = {[1] = TARGET,[2] = true}
-   firetouchinterest(plr.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 0)
-	firetouchinterest(plr.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 1)
+   firetouchinterest(lplr.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 0)
+	firetouchinterest(lplr.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 1)
    lplr.Character:PivotTo(TARGET.Character:GetPivot())
    task.wait(0.3)
    lplr.Character:PivotTo(TARGET.Character:GetPivot())
