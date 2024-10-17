@@ -2,6 +2,7 @@ repeat wait() until game:IsLoaded()
 if time() < 6 then task.wait(3) end
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
+local lchar = lplr.Character or lplr.CharacterAdded:Wait()
 local TARGET = nil
 repeat wait() until lplr:WaitForChild("leaderstats").Glove.Value == "Boxer" or lplr:WaitForChild("leaderstats").Glove.Value == "Dual"
 for i, v in game.Players:GetChildren() do
@@ -20,11 +21,11 @@ if TARGET == nil then
 end
 if TARGET ~= nil then
    local args = {[1] = TARGET,[2] = true}
-   firetouchinterest(lplr.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 0)
-	firetouchinterest(lplr.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 1)
-   lplr.Character:PivotTo(TARGET.Character:GetPivot())
+   firetouchinterest(lchar:WaitForChild("Head"), workspace.Lobby.Teleport1, 0)
+	firetouchinterest(lchar:WaitForChild("Head"), workspace.Lobby.Teleport1, 1)
+   lchar:PivotTo(TARGET.Character:GetPivot())
    task.wait(0.3)
-   lplr.Character:PivotTo(TARGET.Character:GetPivot())
+   lchar:PivotTo(TARGET.Character:GetPivot())
    if lplr:WaitForChild("leaderstats").Glove.Value == "Boxer" then
       for i=1,400 do
          game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
