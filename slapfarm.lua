@@ -62,7 +62,6 @@ function Teleport()
        end)
    end
 end
-pcall(function()
     local Players = game:GetService("Players")
     local lplr = Players.LocalPlayer
     local TARGET = nil
@@ -77,6 +76,5 @@ pcall(function()
     for i=1,350 do
       game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
     end
-end)
 task.wait(1.5)
 Teleport()
