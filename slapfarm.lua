@@ -24,7 +24,7 @@ if TARGET ~= nil then
    lplr.Character:PivotTo(TARGET.Character:GetPivot())
    task.wait(0.3)
    lplr.Character:PivotTo(TARGET.Character:GetPivot())
-   for i=1,1500 do
+   for i=1,400 do
    game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
    end
    task.wait(1.25)
