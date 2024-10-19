@@ -98,10 +98,16 @@ if TARGET == nil then
 end
 if TARGET ~= nil then
    local args = {[1] = TARGET,[2] = true}
+   task.spawn(function() 
+      while TARGET.Character ~= nil and TARGET.Character:GetPivot() do
+	 lastPiv = TARGET.Character:GetPivot()
+         task.wait()
+	 if TARGET.Character == nil or not TARGET.Character:GetPivot() then return end
+         lchar:PivotTo(TARGET.Character:GetPivot() + (lastPiv - TARGET.Character:GetPivot) * 1.5)
+      end
+   end)
    task.wait(0.3)
-   lchar:PivotTo(TARGET.Character:GetPivot() + TARGET.Character:GetPivot().LookVector * 1.5)
-   task.wait(0.3)
-		lchar:PivotTo(TARGET.Character:GetPivot() + TARGET.Character:GetPivot().LookVector * 1.5)
+		
 		for i=1,400 do
 			game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
 		end
