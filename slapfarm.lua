@@ -1,13 +1,19 @@
+-- [[ LOADSTRING ]] --
+
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()
+
 repeat wait() until game:IsLoaded()
-if time() < 6 then task.wait(3) end
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
 local lchar = lplr.Character or lplr.CharacterAdded:Wait()
 local TARGET = nil
-repeat wait() until lplr:WaitForChild("leaderstats").Glove.Value == "Boxer" or lplr:WaitForChild("leaderstats").Glove.Value == "Dual"
-if lplr:WaitForChild("leaderstats").Glove.Value == "Dual" then
-	lchar:PivotTo(workspace.Lobby.Teleport1.CFrame)
-end
+pcall(function() 
+	queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()')
+end)
+pcall(function() 
+	syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()')
+end)
+repeat wait() until lplr:WaitForChild("leaderstats").Glove.Value == "Boxer"
 for i, v in game.Players:GetChildren() do
    if v ~= lplr and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") and (not v.Character:FindFirstChild("isInArena") or v.Character:FindFirstChild("isInArena").Value == false) then
      TARGET = v
@@ -25,19 +31,15 @@ end
 if TARGET ~= nil then
    local args = {[1] = TARGET,[2] = true}
    task.wait(0.3)
-   lchar:PivotTo(TARGET.Character:GetPivot())
+   lchar:PivotTo(TARGET.Character:GetPivot() + TARGET.Character:GetPivot().LookVector * 1.5)
    task.wait(0.3)
-   lchar:PivotTo(TARGET.Character:GetPivot())
-   if lplr:WaitForChild("leaderstats").Glove.Value == "Boxer" then
-      for i=1,400 do
-         game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
-      end
-   else
-      for i=1,400 do
-         game:GetService("ReplicatedStorage").GeneralHit:FireServer(TARGET.Character.Head)
-      end
-   end
-   task.wait(1.65)
+		lchar:PivotTo(TARGET.Character:GetPivot() + TARGET.Character:GetPivot().LookVector * 1.5)
+		for i=1,400 do
+			game:GetService("ReplicatedStorage").Events.Boxing:FireServer(unpack(args))
+		end
+lchar:PivotTo(TARGET.Character:GetPivot() + TARGET.Character:GetPivot().LookVector * 1.5)
+   task.wait(1.2)
+	lchar:PivotTo(TARGET.Character:GetPivot() + TARGET.Character:GetPivot().LookVector * 1.5)
 end
 local PlaceID = game.PlaceId
 local AllIDs = {}
