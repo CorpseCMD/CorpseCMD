@@ -577,7 +577,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 			})
 			local lplr = game.Players.LocalPlayer
 			if lplr.leaderstats.Glove.Value == "Edgelord" then return end
-			equip("Slapstick")
+			equip("Boxer")
 			local char:Model = lplr.Character or lplr.CharacterAdded:Wait()
 			task.wait(0.15)
 			local hum = char:FindFirstChildOfClass("Humanoid")
