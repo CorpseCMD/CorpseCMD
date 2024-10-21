@@ -691,9 +691,9 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 			musicc.Looped = true
 			musicc:Play()
 
-			local musicc = Instance.new("Sound")
-			musicc.SoundId = "rbxassetid://858508159"
-			musicc.Parent = game.SoundService
+			local musicc2 = Instance.new("Sound")
+			musicc2.SoundId = "rbxassetid://858508159"
+			musicc2.Parent = game.SoundService
 
 
 
@@ -703,7 +703,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 			conn = game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
 				if input.KeyCode == Enum.KeyCode.E and not gameProcessedEvent then
 					forceAnim:Play(0.1,1.2,1)
-					musicc:Play()
+					musicc2:Play()
 					for _, v in pairs(game.Players:GetPlayers()) do
 						if v ~= game.Players.LocalPlayer and v.Character~=nil and v.Character:FindFirstChild("Head") and not v.Character:FindFirstChild("Head"):FindFirstChild("UnoReverseCard") then
 
@@ -718,7 +718,7 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 
 							if (target_hrp.Position - hrp.Position).Magnitude <= 40 and dotProduct > 0.6 then
 
-								if ogGlove == "slapstick" then slapstickSlap(v) elseif ogGlove == "Boxer" then boxingslap(v) end
+								if ogGlove == "Boxer" then boxingslap(v) end
 								task.wait(0.52)
 							end
 						end
@@ -751,22 +751,19 @@ if game:GetService("ReplicatedStorage"):FindFirstChild("AlchemistEvent") and gam
 				end
 				prevWalking = walking
 			end)
-			lplr.leaderstats.Glove.Value = "Edgelord"
-			-- Speed + wait until dead loop
 			while char and hum and hrp and hum.Health > 0 do
 				task.wait(0.015)
 				local hum = char and char:FindFirstChildOfClass("Humanoid")
 				if not hum then return end
 				if hum and hum.MoveDirection.Magnitude > 0.2 then
-					char:TranslateBy(hum.MoveDirection * 0.8)
+					char:TranslateBy(hum.MoveDirection * 0.45)
 				end
 			end
-			lplr.leaderstats.Glove.Value = ogGlove
-			equip(ogGlove)
 			if conn then
 				conn:Disconnect()
 			end
 			musicc:Destroy()
+			musicc2:Destroy()
 		end    
 	})
 
