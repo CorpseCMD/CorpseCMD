@@ -1,4 +1,7 @@
-repeat wait() until game:IsLoaded()
+task.wait(0.2)
+if not game:IsLoaded() then
+    game.Loaded:Wait()  -- Wait for the game to load completely
+end
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()
