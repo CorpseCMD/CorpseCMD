@@ -1,11 +1,7 @@
--- [[ LOADSTRING ]] --
-
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()
-
 repeat wait() until game:IsLoaded()
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
-
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()
 local PlaceID = game.PlaceId
 local AllIDs = {}
 local foundAnything = ""
