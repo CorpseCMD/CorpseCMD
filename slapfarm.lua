@@ -4,7 +4,10 @@ if not game:IsLoaded() then
 end
 local Players = game:GetService("Players")
 local lplr = Players.LocalPlayer
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()
+--      loadstring(game:HttpGet("https://pastefy.app/VP1z0cKO/raw"))()
+
+local loadstringz = 'loadstring(game:HttpGet("https://pastefy.app/VP1z0cKO/raw"))()'
+
 local PlaceID = game.PlaceId
 local AllIDs = {}
 local foundAnything = ""
@@ -75,10 +78,10 @@ end)
 local lchar = lplr.Character or lplr.CharacterAdded:Wait()
 local TARGET = nil
 pcall(function() 
-	queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()')
+	queue_on_teleport(loadstringz)
 end)
 pcall(function() 
-	syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/CorpseCMD/CorpseCMD/refs/heads/main/slapfarm.lua"))()')
+	syn.queue_on_teleport(loadstringz)
 end)
 repeat wait() until lplr:WaitForChild("leaderstats").Glove.Value == "Boxer"
 for i, v in game.Players:GetChildren() do
