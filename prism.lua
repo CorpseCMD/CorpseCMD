@@ -136,8 +136,10 @@ local prismAnimationKey = "rbxassetid://6943"
 local LocalCharacterAdded = function(char:Model)
 	local hum = char:FindFirstChildOfClass("Humanoid")
 	local anim = Instance.new("Animation")
-	anim.AnimationId = prismAnimationKey
-	hum:LoadAnimation(anim):Play(0,0,0)
+	pcall(function()
+		anim.AnimationId = prismAnimationKey
+		hum:LoadAnimation(anim):Play(0,0,0.001)
+	end)
 end
 if plr.Character then
 	LocalCharacterAdded(plr.Character)
@@ -173,7 +175,7 @@ local checkPrismHubUsers = Players.PlayerAdded:Connect(function(tplr)
 			IMGLB.Size = UDim2.new(0.25,0,1,0)
 			IMGLB.BackgroundTransparency = 1
 			IMGLB.Image = Prism_Icon
-			
+
 			local TL = Nametag:WaitForChild("TextLabel")
 			TL.LayoutOrder = 2
 			TL.Size = UDim2.new(0.75,0,1,0)
