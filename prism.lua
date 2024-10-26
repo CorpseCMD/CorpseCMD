@@ -128,17 +128,22 @@ local Lighting = game:GetService("Lighting")
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Prism_Icon = "rbxassetid://10653375651"
+
 local plr = Players.LocalPlayer
-local prismAnimationKey = "rbxassetid://6943"
+
 -- Get other users with Prism Hub loaded
+local Prism_Icon = "rbxassetid://10653375651"
+local prismAnimationKey = "rbxassetid://6943"
+local prismKeyAnim = Instance.new("Animation")
+pcall(function()
+	prismKeyAnim.AnimationId = prismAnimationKey
+end)
+
 
 local LocalCharacterAdded = function(char:Model)
 	local hum = char:FindFirstChildOfClass("Humanoid")
-	local anim = Instance.new("Animation")
 	pcall(function()
-		anim.AnimationId = prismAnimationKey
-		hum:LoadAnimation(anim):Play(0,0,0.001)
+		hum:LoadAnimation(prismKeyAnim):Play(0,0,0.001)
 	end)
 end
 if plr.Character then
@@ -147,8 +152,9 @@ end
 plr.CharacterAdded:Connect(LocalCharacterAdded)
 local PlayerHasPrismHub = function(tplr:Player)
 	if tplr then
-		local tchar = tplr.Character
+		local tchar = tplr.Character or tplr.CharacterAdded:Wait()
 		if tchar then
+			task.wait(0.1)
 			local tHum = tchar:FindFirstChildOfClass("Humanoid")
 			if tHum then
 				for i,v in tHum:GetPlayingAnimationTracks() do
@@ -161,25 +167,36 @@ local PlayerHasPrismHub = function(tplr:Player)
 	end
 end
 
-local checkPrismHubUsers = Players.PlayerAdded:Connect(function(tplr)
+local function checkPrismHubUser(tplr)
 	local userHasPrism = PlayerHasPrismHub(tplr)
 	if userHasPrism then
 		tplr.CharacterAdded:Connect(function(tchar)
 			local head = tchar:WaitForChild("Head")
-			local Nametag = head:WaitForChild("Nametag")
-			Nametag.Size = UDim2.new(6,0,1,0)
-			local IMGLB = Instance.new("ImageLabel")
-			IMGLB.Parent = Nametag
-			IMGLB.ScaleType = Enum.ScaleType.Fit
-			IMGLB.LayoutOrder = 1
-			IMGLB.Size = UDim2.new(0.25,0,1,0)
-			IMGLB.BackgroundTransparency = 1
-			IMGLB.Image = Prism_Icon
+			if head then
+				task.wait(0.5)
+				local Nametag = head:WaitForChild("Nametag")
+				if Nametag and Nametag:FindFirstChild("TextLabel") then
+					Nametag.Size = UDim2.new(6,0,1,0)
+					local IMGLB = Instance.new("ImageLabel")
+					IMGLB.Parent = Nametag
+					IMGLB.ScaleType = Enum.ScaleType.Fit
+					IMGLB.LayoutOrder = 1
+					IMGLB.Size = UDim2.new(0.25,0,1,0)
+					IMGLB.BackgroundTransparency = 1
+					IMGLB.Image = Prism_Icon
 
-			local TL = Nametag:WaitForChild("TextLabel")
-			TL.LayoutOrder = 2
-			TL.Size = UDim2.new(0.75,0,1,0)
-			TL.TextColor3 = Color3.new(0,0.85,1)
+					local TL = Nametag:WaitForChild("TextLabel")
+					TL.LayoutOrder = 2
+					TL.Size = UDim2.new(0.75,0,1,0)
+					TL.TextColor3 = Color3.new(0,0.85,1)
+				end
+			end
 		end)
 	end
-end)
+end
+for i, v in Players:GetPlayers() do
+	checkPrismHubUser(v)
+end
+local checkPrismHubUsers_connection = Players.PlayerAdded:Connect(checkPrismHubUser)
+
+-- Main Gui
