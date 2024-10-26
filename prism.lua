@@ -88,6 +88,7 @@ local Checkkey = Tabs.KeySys:AddButton({
 			writefile(Directory, InputKey.Value)
 			Fluent:Destroy()
 			KEYVALIDATED = true
+			EndKeySystem = true
 		end
 	end
 })
@@ -96,6 +97,12 @@ local Getkey = Tabs.KeySys:AddButton({
 	Description = "Get Key here",
 	Callback = function()
 		setclipboard(kgLib.getLink())
+		Fluent:Notify({
+		        Title = "Link Copied",
+		        Content = "Copied to clipboard",
+		        SubContent = "Paste the link in your browser to continue!", -- Optional
+		        Duration = 8 -- Set to nil to make the notification not disappear
+		})
 	end
 })
 Window:SelectTab(1)
