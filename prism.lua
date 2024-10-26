@@ -55,6 +55,7 @@ local function keySystem()
 		if ValidateSaved() then
 			KEYVALIDATED = true
 			EndKeySystem = true
+			return KEYVALIDATED
 		end
 	end
 	local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
@@ -86,7 +87,6 @@ local function keySystem()
 			local response = kgLib.validateDefaultKey(InputKey.Value)
 			if response == trueData then
 				writefile(Directory, InputKey.Value)
-				Fluent:Destroy()
 				KEYVALIDATED = true
 				EndKeySystem = true
 				return KEYVALIDATED
@@ -108,12 +108,13 @@ local function keySystem()
 	})
 	Window:SelectTab(1)
 	repeat wait(0.1) until EndKeySystem == true or KEYVALIDATED == true
+	if Window then Window:Destroy() end
 	return KEYVALIDATED
 end
 print("keysystem bru")
 local t,keySuccess = keySystem()
 print("YAY")
-for i=1,5 do
-	print("Key success: "..keySuccess)
-	print("Other thing: "..t)
+for i=1,3 do
+	warn("Key success: ", keySuccess)
+	print("Other thing: ", t)
 end
