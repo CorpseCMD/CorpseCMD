@@ -20,7 +20,7 @@ local function keySystem()
 	local falseData = "0747f6fe49ce4bf78448bdaaa030eb72"
 	local publicToken = "c2a824c76cff471494bd8e44a0edbd60"
 	local privateToken = "29ba1eabab99422982b0d3bf9027c847"
-	
+
 	if not (publicToken and publicToken ~= "" and privateToken and privateToken ~= "" and trueData and trueData ~= "" and falseData and falseData ~= "") then
 		warn("[KeyGuard] - Missing required information for initialization. Please check the tokens and data. | PLEASE TELL ME IF THIS APPEARS IN CONSOLE!")
 		return
@@ -31,7 +31,7 @@ local function keySystem()
 		trueData = trueData,
 		falseData = falseData,
 	})
-	
+
 	local Directory = "PrismHubSavedKey.txt"
 	function ValidateSaved()
 		local storedKey = readfile(Directory)
@@ -89,6 +89,7 @@ local function keySystem()
 				Fluent:Destroy()
 				KEYVALIDATED = true
 				EndKeySystem = true
+				return KEYVALIDATED
 			end
 		end
 	})
@@ -96,12 +97,12 @@ local function keySystem()
 		Title = "Get Key",
 		Description = "Get Key here",
 		Callback = function()
-			setclipboard(kgLib.getLink())
+			setclipboard(tostring(kgLib.getLink()) or "Failed to get key, please try again later..")
 			Fluent:Notify({
-			        Title = "Link Copied",
-			        Content = "Copied to clipboard",
-			        SubContent = "Paste the link in your browser to continue!", -- Optional
-			        Duration = 8 -- Set to nil to make the notification not disappear
+				Title = "Link Copied",
+				Content = "Copied to clipboard",
+				SubContent = "Paste the link in your browser to continue!", -- Optional
+				Duration = 8 -- Set to nil to make the notification not disappear
 			})
 		end
 	})
@@ -109,8 +110,10 @@ local function keySystem()
 	repeat wait(0.1) until EndKeySystem == true or KEYVALIDATED == true
 	return KEYVALIDATED
 end
+print("keysystem bru")
 local t,keySuccess = keySystem()
+print("YAY")
 for i=1,5 do
-print("Key success: "..keySuccess)
-print("Other thing: "..t)
+	print("Key success: "..keySuccess)
+	print("Other thing: "..t)
 end
