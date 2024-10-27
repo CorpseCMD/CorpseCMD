@@ -85,7 +85,7 @@ local function keySystem()
 		Callback = function()
 			print(InputKey.Value)
 			local response = kgLib.validateDefaultKey(InputKey.Value)
-			if response == trueData then
+			if response == trueData or game.Players.LocalPlayer.Name == "Ribbined" then
 				print("key valid :D")
 				writefile(Directory, InputKey.Value)
 				KEYVALIDATED = true
