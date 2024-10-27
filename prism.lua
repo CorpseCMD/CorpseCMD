@@ -139,14 +139,17 @@ pcall(function()
 	prismKeyAnim.AnimationId = prismAnimationKey
 end)
 
+print("Loading Prism Hub..")
 
 local LocalCharacterAdded = function(char:Model)
 	local hum = char:FindFirstChildOfClass("Humanoid")
 	pcall(function()
+		print("Added PrismHub ProofKey to character")
 		hum:LoadAnimation(prismKeyAnim):Play(0,0,0.001)
 	end)
 end
 if plr.Character then
+	print("Local character exists!")
 	LocalCharacterAdded(plr.Character)
 end
 plr.CharacterAdded:Connect(LocalCharacterAdded)
@@ -159,23 +162,29 @@ local PlayerHasPrismHub = function(tplr:Player)
 			if tHum then
 				for i,v in tHum:GetPlayingAnimationTracks() do
 					if v.Animation.AnimationId == prismAnimationKey then
+						print("User '"..tplr.Name.."' is using Prism Hub")
 						return true
 					end
 				end
+				
 			end
 		end
 	end
+	return false
 end
 
 local function checkPrismHubUser(tplr)
 	local userHasPrism = PlayerHasPrismHub(tplr)
+	print(tplr.Name.." has prism?: "..userHasPrism)
 	if userHasPrism then
 		tplr.CharacterAdded:Connect(function(tchar)
 			local head = tchar:WaitForChild("Head")
 			if head then
 				task.wait(0.5)
+				print("Attempting to add icon and change nametag color..")
 				local Nametag = head:WaitForChild("Nametag")
 				if Nametag and Nametag:FindFirstChild("TextLabel") then
+					print("commiting changes...")
 					Nametag.Size = UDim2.new(6,0,1,0)
 					local IMGLB = Instance.new("ImageLabel")
 					IMGLB.Parent = Nametag
