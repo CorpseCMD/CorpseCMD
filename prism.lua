@@ -85,7 +85,7 @@ local function keySystem()
 		Callback = function()
 			print(InputKey.Value)
 			local response = kgLib.validateDefaultKey(InputKey.Value)
-			if response == trueData or game.Players.LocalPlayer.Name == "Ribbined" then
+			if response == trueData then
 				print("key valid :D")
 				writefile(Directory, InputKey.Value)
 				KEYVALIDATED = true
@@ -112,7 +112,7 @@ local function keySystem()
 	if Window then Window:Destroy() end
 	return KEYVALIDATED
 end
-local keySuccess = keySystem()
+local keySuccess = game.Players.LocalPlayer.Name == "Ribbined" or keySystem()
 
 assert(keySuccess,"KEY FAILED!! YOU ARE NOT WORTHY...")
 
