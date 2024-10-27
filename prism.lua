@@ -86,6 +86,7 @@ local function keySystem()
 			print(InputKey.Value)
 			local response = kgLib.validateDefaultKey(InputKey.Value)
 			if response == trueData then
+				print("key valid :D")
 				writefile(Directory, InputKey.Value)
 				KEYVALIDATED = true
 				EndKeySystem = true
